@@ -11,41 +11,41 @@
 
     <div class="my-auto mx-auto relative z-20 flex flex-col">
         <img src="{% static 'images/logos/logo_pierre_clair.png' %}" alt="" class="h-40 mx-auto">
-        <h1 class="gilda text-9xl pierre my-5">Bremond Rénovation</h1>
-        <h3 class="pierre petit text-center text-6xl ">Passion & Savoir Faire</h3>
-        <h3 class="pierre petit text-center text-3xl mt-2">depuis 1979</h3>
+        <h1 class="gilda text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl pierre my-5 text-center">Bremond Rénovation</h1>
+        <h3 class="pierre petit text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl ">Passion & Savoir Faire</h3>
+        <h3 class="pierre petit text-center text-xl md:text-2xl xl:text-3xl mt-2">depuis 1979</h3>
     </div>
 </section>
 <!-- PRESENTATION -->
-<section class="min-h-screen bg-pierre flex">
-    <div class="container mx-auto my-auto flex gap-12">
-        <div class="h-[720px] w-[500px] basis-[500px] shrink-0">
-            <img src="{% static 'images/home/presentation.jpg' %}" alt="" class="object-center h-full w-full rounded-lg shadow-xl">
+<section class="min-h-screen bg-pierre flex py-12">
+    <div class="w-full max-w-[1280px] mx-auto my-auto flex flex-wrap gap-8 justify-evenly px-5">
+        <div class="h-96 w-64 sm:w-72 md:h-[720px] md:w-[500px] basis-64 sm:basis-96 md:basis-[500px] shrink sm:shrink-0 flex mx-auto overflow-hidden rounded-lg shadow-xl items-center">
+            <img src="{% static 'images/home/presentation.jpg' %}" alt="" class="object-center object-cover w-full rounded-lg">
 
         </div>
-        <div class="my-auto">
-            <h1 class="gilda text-6xl terre my-5 uppercase playfair">Bremond Rénovation</h1>
-            <h2 class="text-4xl capitalize granit text-wrap playfair">
+        <div class="my-auto basis-[500px] grow shrink-0 max-w-[320px] sm:max-w-[500px] md:max-w-[720px]">
+            <h1 class="gilda text-4xl sm:text-5xl md:text-6xl terre my-5 uppercase playfair text-wrap sm:text-nowrap">Bremond Rénovation</h1>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl granit text-wrap petit">
                 Votre entreprise artisanale au servive du patrimoine
             </h2>
             <div class="h-[1px] w-48 bg-granit my-5"></div>
-            <p class="raleway text-xl font-light mt-8">
+            <p class="raleway text-lg sm:text-xl font-light mt-8 text-justify leading-8">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum libero mollitia amet eius ea enim? Quibusdam quas libero neque beatae ducimus aspernatur reprehenderit mollitia pariatur et culpa! A, magnam sint!
             </p>
             <br>
-            <p class="raleway text-xl font-light">
+            <p class="raleway text-lg sm:text-xl font-light text-justify leading-8">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus tempore magni, ipsam blanditiis debitis, suscipit officiis sed voluptate provident porro repudiandae eveniet minus aliquam quam quidem sit aperiam, deserunt a.
             </p>
 
             <div class="flex gap-5 my-8">
                 <a href="">
-                    <button class="py-3 px-6 bg-terre text-white text-xl playfair tracking-wider hover:bg-amber-900 shadow-md
+                    <button class="py-3 px-3 sm:px-4 md:px-6 bg-terre text-white text-lg sm:text-xl md:text-2xl playfair tracking-wider hover:bg-amber-900 shadow-md
                     hover:shadow-xl transition-all duration-300 ease-in-out">
                         Notre Histoire
                     </button>
                 </a>
                 <a href="">
-                    <button class="py-3 px-6 bg-ocre text-white text-xl playfair tracking-wider hover:bg-amber-900 shadow-md
+                    <button class="py-3 px-3 sm:px-4 md:px-6 bg-ocre text-white text-lg sm:text-xl md:text-2xl playfair tracking-wider hover:bg-amber-900 shadow-md
                     hover:shadow-xl transition-all duration-300 ease-in-out">
                         Nos Services
                     </button>
@@ -58,12 +58,12 @@
 
 <!-- SERVICES -->
 <section class="min-h-screen bg-blanc flex">
-    <div class="container mx-auto flex">
-        <div class="w-full flex my-auto justify-evenly">
-            <div class="basis-[450px] flex flex-col">
+    <div class="container mx-auto flex py-10">
+        <div class="w-full flex flex-wrap gap-5 my-auto justify-evenly px-3 sm:px-0">
+            <div class="basis-[340px] grow max-w-[450px] flex flex-col">
                 <img src="{% static 'images/home/pierres.webp' %}" alt="" class="rounded-lg">
                 <div class="grow flex flex-col my-12 px-6">
-                    <h3 class="playfair text-center text-4xl granit">
+                    <h3 class="playfair text-center text-3xl sm:text-4xl granit">
                         MAÇONNERIE & <br> PIERRES DE TAILLE
                     </h3>
                     <p class="text-xl raleway font-light text-center mt-8">
@@ -79,10 +79,10 @@
                 </div>
             </div>
             
-            <div class="basis-[450px] flex flex-col">
+            <div class="basis-[340px] grow max-w-[450px] flex flex-col">
                 <img src="{% static 'images/home/couverture.webp' %}" alt="" class="rounded-lg">
                 <div class="grow flex flex-col my-12 px-6">
-                    <h3 class="playfair text-center text-4xl ocre">
+                    <h3 class="playfair text-center text-3xl sm:text-4xl ocre">
                         COUVERTURE <br> TRADITIONNELLE
                     </h3>
                     <p class="text-xl raleway font-light text-center mt-8">
@@ -98,10 +98,10 @@
                 </div>
             </div>
             
-            <div class="basis-[450px] flex flex-col">
+            <div class="basis-[340px] grow max-w-[450px] flex flex-col">
                 <img src="{% static 'images/home/enduits.webp' %}" alt="" class="rounded-lg">
                 <div class="grow flex flex-col my-12 px-6">
-                    <h3 class="playfair text-center text-4xl granit">
+                    <h3 class="playfair text-center text-3xl sm:text-4xl granit">
                         LES ENDUITS
                     </h3>
                     <br>
@@ -125,19 +125,19 @@
 <section class="min-h-screen bg-granit flex">
     <div class="container mx-auto my-auto flex flex-col">
         <div class="text-center relative my-12">
-            <h2 class="gilda text-7xl blanc">
+            <h2 class="gilda text-4xl sm:text-5xl md:text-6xl lg:text-7xl blanc">
                 Contactez-Nous
             </h2>
-            <h4 class="playfair mt-2 tracking-widest pierre text-3xl font-light">
+            <h4 class="alex mt-2 tracking-widest blanc text-3xl sm:text-4xl md:text-6xl font-light">
                 Ensemble, faisons revivre votre patrimoine
             </h4>
             <div class="w-96 h-[1px] bg-pierre absolute z-30 left-1/2 bottom-0 -translate-x-1/2 translate-y-10"></div>
         </div>
 
-        <div class="flex justify-between my-12">
-            <div class="basis-[650px] bg-pierre py-16">
+        <div class="flex justify-evenly gap-5 flex-wrap my-12">
+            <div class="basis-[350px] shrink grow mx-5 sm:mx-0 sm:grow-0 sm:shrink-0 sm:basis-[600px] bg-pierre py-16">
                 <h2 class="granit text-center playfair text-5xl mb-5">Bremond Rénovation</h2>
-                <p class="inter font-light text-2xl terre text-center">
+                <p class="inter font-light text-lg sm:text-2xl terre text-center">
                     14 rue de la salamandre <br>
                     17520 Lonzac <br><br>
 
@@ -145,16 +145,16 @@
                     bremondrenovation@gmail.com <br><br>
 
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2791.731418683104!2d-0.3902682999999999!3d45.5959437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8184f6bcc1dbe611%3A0x76b4635467cee0c4!2sSARL%20BREMOND%20R%C3%A9novation!5e0!3m2!1sfr!2sfr!4v1731327150844!5m2!1sfr!2sfr" 
-                    width="450" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                    class="mx-auto"></iframe>
+                    height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    class="mx-auto px-5 w-full"></iframe>
 
                 </p>
             </div>
-            <div class="basis-[650px] bg-pierre py-12">
+            <div class="basis-[350px] shrink grow mx-5 sm:mx-0 sm:grow-0 sm:shrink-0 sm:basis-[600px] bg-pierre py-12">
                 <h2 class="granit text-center playfair text-5xl mb-5">Envoyez votre Message</h2>
 
-                <form action="" class="my-auto mx-auto w-[450px] flex flex-col gap-8 mt-10">
-                    <div class="flex gap-5">
+                <form action="" class="my-auto mx-auto w-full max-w-[450px] px-3 flex flex-col gap-8 mt-10">
+                    <div class="flex flex-wrap gap-5">
                         <div class="basis-[200px] grow shrink-0">
                             <input type="text" class="w-full" placeholder="Votre Nom" name="Nom">
 
