@@ -1,0 +1,87 @@
+:root {
+    --pierre: #E5E0DC;
+    --granit: #766F64;
+    --terre: #8B7355;
+    --blanc: #F5F2ED;
+    --ocre: #C17F59;
+}
+
+.pierre {
+    color: var(--pierre);
+}
+
+.granit {
+    color: var(--granit);
+}
+
+.terre {
+    color: var(--terre);
+}
+
+.blanc {
+    color: var(--blanc);
+}
+
+.ocre {
+    color: var(--ocre);
+}
+
+
+.bg-pierre {
+    background-color: var(--pierre);
+}
+
+.bg-granit {
+    background-color: var(--granit);
+}
+
+.bg-terre {
+    background-color: var(--terre);
+}
+
+.bg-blanc {
+    background-color: var(--blanc);
+}
+
+.bg-ocre {
+    background-color: var(--ocre);
+}
+
+.pinyon {
+    font-family: "Pinyon Script", cursive;
+}
+.petit {
+    font-family: "Petit Formal Script", cursive;
+}
+.alex {
+    font-family: "Alex Brush", cursive;
+}
+.inter {
+    font-family: "Inter", sans-serif;
+}
+.raleway {
+    font-family: "Raleway", sans-serif;
+}
+.source {
+    font-family: "Source Sans 3", sans-serif;
+}
+.cormorant {
+    font-family: "Cormorant Garamond", serif;
+}
+.gilda {
+    font-family: "Gilda Display", serif;
+}
+.playfair {
+    font-family: "Playfair Display", serif;
+}
+.marcellus {
+    font-family: "Marcellus", serif;
+}
+
+
+section.fixed {
+    transition: background-color 0.3s ease;
+}
+section.fixed * {
+    transition: color 0.3s ease, fill 0.3s ease;
+}
