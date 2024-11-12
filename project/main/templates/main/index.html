@@ -1,7 +1,7 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
-{% block title %}Accueil - CodeMaster Shop{% endblock %}
+{% block title %}Accueil - Bremond Rénovation{% endblock %}
 
 {% block content %}
 <!-- HERO SECTION -->
@@ -10,7 +10,7 @@
     <div class="absolute w-full h-full bg-stone-800 bg-opacity-50 z-10"></div>
 
     <div class="my-auto mx-auto relative z-20 flex flex-col">
-        <img src="{% static 'images/logos/logo_pierre_clair.png' %}" alt="" class="h-40 mx-auto">
+        <img src="{% static 'images/logos/logo_pierre_clair.png' %}" alt="" class="h-40 mx-auto nav-logo">
         <h1 class="gilda text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl pierre my-5 text-center">Bremond Rénovation</h1>
         <h3 class="pierre petit text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl ">Passion & Savoir Faire</h3>
         <h3 class="pierre petit text-center text-xl md:text-2xl xl:text-3xl mt-2">depuis 1979</h3>
@@ -189,10 +189,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     const navbar = document.querySelector('#navbar');
     const heroSection = document.querySelector('section.min-h-screen.bg-cover');
-    const logo = navbar.querySelector('img[src*="logo_contour"]');
+    const logo = navbar.getElementsByTagName('img')[0];
     
     const lightLogo = logo.src;
-    const darkLogo = lightLogo.replace('logo_contour_clair.png', 'logo_contour_dark.png');
+    const darkLogo = lightLogo.replace('logo_pierre_clair.png', 'logo_pierre_dark.png');
     
     function initializeNavbar() {
         const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
