@@ -4,6 +4,7 @@
     --terre: #8B7355;
     --blanc: #F5F2ED;
     --ocre: #C17F59;
+    --charbon: #3b3b3b;
 }
 
 .pierre {
@@ -25,6 +26,9 @@
 .ocre {
     color: var(--ocre);
 }
+.charbon {
+    color: var(--charbon);
+}
 
 
 .bg-pierre {
@@ -45,6 +49,10 @@
 
 .bg-ocre {
     background-color: var(--ocre);
+}
+
+.bg-charbon {
+    background-color: var(--charbon);
 }
 
 .pinyon {

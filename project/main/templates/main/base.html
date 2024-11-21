@@ -13,148 +13,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Gilda+Display&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Marcellus&family=Petit+Formal+Script&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     {% tailwind_css %}
 </head>
 
 <body class="overflow-x-hidden">
     <header>
         <!-- NAVBAR -->
-<!-- NAVBAR -->
-<section class="w-full py-3 flex bg-granit fixed z-40 shadow-md" id="navbar">
-    <!-- NAV CONTAINER -->
-    <div class="w-full max-w-[1280px] mx-auto flex flex-col px-4 md:px-8 relative">
-        <!-- NAV TOP -->
-        <div class="w-full flex items-center justify-between relative">
-            <!-- SEPARATEUR -->
-            <div class="absolute bottom-0 left-0 h-[1px] w-full bg-pierre translate-y-2 lg:translate-y-4 bg-opacity-40 opacity-50"></div>
-            <!-- MOBILE MENU BUTTON - Visible uniquement sur mobile -->
-            <button class="lg:hidden fill-slate-200 p-2" id="menuButton" aria-label="Menu">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
-                    <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/>
-                </svg>
-            </button>
-
-            <!-- RESEAUX SOCIAUX - Cachés sur mobile -->
-            <div class="hidden lg:flex items-center gap-4 p-2">
-                <a href="#" 
-                   class="fill-slate-200 hover:fill-slate-400 transition-colors hover:scale-110 duration-300" 
-                   aria-label="Suivez-nous sur Facebook"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="w-5 h-5" role="img">
-                        <path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"/>
-                    </svg>
-                </a>
-                <a href="#" 
-                   class="fill-slate-200 hover:fill-slate-400 transition-colors hover:scale-110 duration-300" 
-                   aria-label="Suivez-nous sur LinkedIn"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-5 h-5" role="img">
-                        <path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"/>
-                    </svg>
-                </a>
-                <a href="#" 
-                   class="fill-slate-200 hover:fill-slate-400 transition-colors hover:scale-110 duration-300" 
-                   aria-label="Suivez-nous sur Instagram"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-5 h-5" role="img">
-                        <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
-                    </svg>
-                </a>
-            </div>
-
-            <!-- BRAND -->
-            <div class="flex gap-3 md:gap-6 items-center">
-                <img src="{% static 'images/logos/logo_pierre_clair.png' %}" alt="" class="h-8 md:h-10">
-                <h2 class="text-xl md:text-3xl pierre playfair">Bremond Rénovation</h2>
-            </div>
-
-            <!-- PHONE -->
-            <div class="flex items-center gap-2 md:gap-5">
-                <a href="tel:0643414587" 
-                   class="fill-slate-200 hover:fill-slate-400 transition-colors hover:scale-110 duration-300" 
-                   aria-label="Contactez-nous par téléphone"
-                >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4" role="img">
-                        <path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/>
-                    </svg>
-                </a>
-                <h4 class="source text-base md:text-xl pierre text-nowrap">06 43 41 45 87</h4>
-            </div>
-        </div>
-
-
-
-        <!-- MOBILE MENU -->
-        <div class="lg:hidden">
-            <div class="hidden" id="mobileMenu">
-                <!-- Navigation Mobile -->
-                <nav class="flex flex-col items-center gap-4 mt-6 pierre uppercase text-lg tracking-widest">
-                    <a href="{% url 'index' %}" class="w-full text-center py-2 hover:bg-white/10">Accueil</a>
-                    <a href="{% url 'index' %}" class="w-full text-center py-2 hover:bg-white/10">Histoire</a>
-                    <a href="{% url 'index' %}" class="w-full text-center py-2 hover:bg-white/10">Services</a>
-                    <a href="{% url 'index' %}" class="w-full text-center py-2 hover:bg-white/10">Réalisations</a>
-                    <a href="{% url 'index' %}" class="w-full text-center py-2 hover:bg-white/10">Contact</a>
-                </nav>
-                
-                <!-- Réseaux sociaux Mobile -->
-                <div class="flex justify-center items-center gap-4 mt-6 mb-4">
-                    <div class="flex items-center gap-4 p-2">
-                        <a href="#" 
-                           class="fill-slate-200 hover:fill-slate-400 transition-colors hover:scale-110 duration-300" 
-                           aria-label="Suivez-nous sur Facebook"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="w-5 h-5" role="img">
-                                <path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"/>
-                            </svg>
-                        </a>
-                        <a href="#" 
-                           class="fill-slate-200 hover:fill-slate-400 transition-colors hover:scale-110 duration-300" 
-                           aria-label="Suivez-nous sur LinkedIn"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-5 h-5" role="img">
-                                <path d="M100.3 448H7.4V148.9h92.9zM53.8 108.1C24.1 108.1 0 83.5 0 53.8a53.8 53.8 0 0 1 107.6 0c0 29.7-24.1 54.3-53.8 54.3zM447.9 448h-92.7V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7V448h-92.8V148.9h89.1v40.8h1.3c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3V448z"/>
-                            </svg>
-                        </a>
-                        <a href="#" 
-                           class="fill-slate-200 hover:fill-slate-400 transition-colors hover:scale-110 duration-300" 
-                           aria-label="Suivez-nous sur Instagram"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-5 h-5" role="img">
-                                <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- DESKTOP MENU - Exactement comme l'original -->
-        <nav class="hidden lg:flex w-fit mx-auto pierre gap-10 uppercase text-xl font-light tracking-widest mt-7">
-            <a href="{% url 'index' %}"><p>Accueil</p></a>
-            <a href="{% url 'index' %}"><p>Histoire</p></a>
-            <a href="{% url 'index' %}"><p>Services</p></a>
-            <a href="{% url 'index' %}"><p>Réalisations</p></a>
-            <a href="{% url 'index' %}"><p>Contact</p></a>
-        </nav>
-    </div>
-</section>
+        {% include 'main/navbar.html' %}
     </header>
     {% block content %}
     {% endblock %}
 
-
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
     const menuButton = document.getElementById('menuButton');
