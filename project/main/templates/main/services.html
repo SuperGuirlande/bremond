@@ -5,12 +5,26 @@
 
 {% block content %}
 <!-- HERO SECTION -->
-<section class="min-h-screen flex flex-col justify-center items-center relative z-20 shadow-md">
-    <h1 class="granit uppercase text-5xl gilda mt-20">Nos services</h1>
+<section class="min-h-screen bg-cover bg-center bg-fixed bg-no-repeat relative flex overflow-hidden" style="background-image: url({% static 'images/services/services-hero.jpg' %});">
+    <div class="absolute w-full h-full bg-stone-800 bg-opacity-75 z-10"></div>
 
+    <div class="my-auto mx-auto relative z-20 flex flex-col">
+        <img src="{% static 'images/logos/logo_pierre_clair.png' %}" alt="" class="h-40 mx-auto nav-logo"
+        data-aos="fade-in" data-aos-duration="2500" data-aos-delay="1200">
+        <h1 class="gilda text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl pierre my-5 text-center"
+        data-aos="fade-in" data-aos-duration="2500">Bremond Rénovation</h1>
+        <h3 class="pierre petit text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
+        data-aos="fade-in" data-aos-duration="2500" data-aos-delay="1000">Découvrez nos Services</h3>
+
+        <a href="#maconnerie" class="text-center mt-10 text-2xl text-white hover:text-[var(--pierre)] tracking-wider hover:tracking-widest transition-all duration-300 group">
+            <p class="gilda font-light">Tout Savoir</p>
+            <p class="rotate-90 scale-y-150 group-hover:translate-y-1 group-hover:scale-y-[160%] duration-300 transition-all">&gt;</p>
+        </a>
+    </div>
 </section>
 <!-- MACONNERIE -->
 <section class="relative z-10 flex flex-col bg-pierre py-20 shadow-md">
+    <span class="-translate-y-16 absolute left-0 top-0" id="maconnerie"></span>
     <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center">
         <div class="basis-[450px] h-[500px] overflow-hidden rounded-md shadow-lg">
             <div class="carousel-container flex transition-transform duration-500 h-full w-full">

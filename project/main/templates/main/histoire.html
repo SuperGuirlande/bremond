@@ -1,0 +1,219 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Notre Histoire - Bremond Rénovation{% endblock %}
+
+{% block extra_head %}
+<style>
+    :root {
+        --pierre: #E5E0DC;
+        --granit: #766F64;
+        --terre: #8B7355;
+        --blanc: #F5F2ED;
+        --ocre: #C17F59;
+        --charbon: #3b3b3b;
+    }
+
+    .timeline-section {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        position: relative;
+    }
+
+    .timeline-line {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2px;
+        height: calc(100% - 8rem);
+        background-color: var(--terre);
+        top: 4rem;
+    }
+
+    .timeline-entry {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin: 4rem 0;
+        position: relative;
+        min-height: 150px;
+    }
+
+    .timeline-point {
+        width: 16px;
+        height: 16px;
+        background-color: var(--ocre);
+        border-radius: 50%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+    }
+
+    .timeline-content {
+        padding: 1rem;
+        transition: transform 0.3s ease;
+    }
+
+    .timeline-content h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: var(--granit);
+        font-family: 'Playfair Display';
+    }
+
+    .timeline-content p {
+        color: var(--charbon);
+        line-height: 1.6;
+        font-size: 1.2rem;
+        font-family: 'Raleway'
+    }
+
+    .timeline-entry:nth-child(odd) .timeline-content {
+        grid-column: 1;
+        text-align: right;
+        margin-right: 2rem;
+    }
+
+    .timeline-entry:nth-child(even) .timeline-content {
+        grid-column: 2;
+        text-align: left;
+        margin-left: 2rem;
+    }
+
+    .timeline-entry:hover .timeline-content {
+        transform: scale(1.02);
+    }
+
+    .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 6rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .cta-button {
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        color: var(--blanc);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .bg-terre { background-color: var(--terre); }
+    .bg-charbon { background-color: var(--charbon); }
+
+    @media (max-width: 768px) {
+        .timeline-entry {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .timeline-line {
+            left: 2rem;
+        }
+
+        .timeline-point {
+            left: 2rem;
+        }
+
+        .timeline-entry:nth-child(odd) .timeline-content,
+        .timeline-entry:nth-child(even) .timeline-content {
+            grid-column: 1;
+            text-align: left;
+            margin-left: 4rem;
+            margin-right: 1rem;
+        }
+
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cta-button {
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="min-h-[85vh]">
+
+</section>
+<section class="timeline-section">
+    <div class="timeline-line"></div>
+    
+    <div class="timeline-entry">
+        <div class="timeline-point"></div>
+        <div class="timeline-content">
+            <h2>De Pompier à Artisan</h2>
+            <p>Après 8 années comme Pompier de Paris, Alexis Bremond se lance dans le bâtiment en 2020. Une passion naissante pour le bâti ancien qui ne le quittera plus.</p>
+        </div>
+    </div>
+
+    <div class="timeline-entry">
+        <div class="timeline-point"></div>
+        <div class="timeline-content">
+            <h2>Une Rencontre Décisive</h2>
+            <p>En 2021, Alexis rencontre Gérard Mouledoux, artisan couvreur-maçon depuis 1979. Cette rencontre marque le début d'une précieuse transmission de savoir-faire ancestral.</p>
+        </div>
+    </div>
+
+    <div class="timeline-entry">
+        <div class="timeline-point"></div>
+        <div class="timeline-content">
+            <h2>L'Aventure Familiale</h2>
+            <p>En 2023, Alexis et Émilie Bremond fondent BREMOND RENOVATION. Une entreprise familiale portée par des valeurs fortes : tradition, qualité et respect du patrimoine.</p>
+        </div>
+    </div>
+
+    <div class="timeline-entry">
+        <div class="timeline-point"></div>
+        <div class="timeline-content">
+            <h2>La Transmission</h2>
+            <p>Pendant 6 mois, Gérard Mouledoux accompagne l'équipe, transmettant ses techniques et son expertise. Un passage de témoin essentiel pour perpétuer l'excellence artisanale.</p>
+        </div>
+    </div>
+
+    <div class="timeline-entry">
+        <div class="timeline-point"></div>
+        <div class="timeline-content">
+            <h2>Notre Équipe Aujourd'hui</h2>
+            <p>Basés à Lonzac, nous intervenons sur Cognac, Jonzac, Pons et leurs environs. Notre équipe grandit, formée en interne aux techniques traditionnelles.</p>
+        </div>
+    </div>
+
+    <div class="timeline-entry">
+        <div class="timeline-point"></div>
+        <div class="timeline-content">
+            <h2>Notre Engagement</h2>
+            <p>Nous utilisons exclusivement des matériaux naturels et locaux : chaux Saint Astier, pierre de Paussac, tuiles françaises. Notre mission : préserver l'authenticité de votre patrimoine.</p>
+        </div>
+    </div>
+
+    <div class="cta-buttons">
+        <a href="{% url 'services' %}" class="cta-button bg-terre">Découvrez nos services</a>
+        <a href="" class="cta-button bg-charbon">Contactez-nous</a>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_script %}
+<script>
+
+</script>
+{% endblock %}

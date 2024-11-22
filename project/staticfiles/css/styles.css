@@ -1,6 +1,7 @@
 :root {
     --pierre: #E5E0DC;
     --granit: #766F64;
+    
     --terre: #8B7355;
     --blanc: #F5F2ED;
     --ocre: #C17F59;
@@ -92,4 +93,8 @@ section.fixed {
 }
 section.fixed * {
     transition: color 0.3s ease, fill 0.3s ease;
+}
+
+.smooth-scroll {
+    scroll-behavior: smooth;
 }

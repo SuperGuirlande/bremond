@@ -25,54 +25,87 @@
     {% block content %}
     {% endblock %}
 
+    <!-- AOS -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
       AOS.init();
     </script>
+    <!-- SMOOTH SCROLL -->
+    <script>
+
+        function initSmoothScroll() {
+            // Ajouter la classe au HTML pour activer le smooth scroll global
+            document.documentElement.classList.add('smooth-scroll');
+            
+            // Sélectionner tous les boutons de scroll
+            const scrollButtons = document.querySelectorAll('.scroll-btn');
+            
+            scrollButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Récupérer l'ID de la cible depuis l'attribut data-target
+                    const targetId = button.getAttribute('data-target');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    }
+    
+    // Initialiser au chargement
+    document.addEventListener('DOMContentLoaded', initSmoothScroll);
+    </script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    const menuButton = document.getElementById('menuButton');
-    const mobileMenu = document.getElementById('mobileMenu');
-    let isMenuOpen = false;
+            const menuButton = document.getElementById('menuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            let isMenuOpen = false;
 
-    // Toggle du menu mobile
-    menuButton.addEventListener('click', function() {
-        isMenuOpen = !isMenuOpen;
-        
-        if (isMenuOpen) {
-            mobileMenu.classList.remove('hidden');
-            mobileMenu.classList.add('animate-fade-in');
-            // Change l'icône en X
-            menuButton.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
-                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-                </svg>
-            `;
-        } else {
-            mobileMenu.classList.add('hidden');
-            mobileMenu.classList.remove('animate-fade-in');
-            // Remet l'icône du hamburger
-            menuButton.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
-                    <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/>
-                </svg>
-            `;
-        }
-    });
+            // Toggle du menu mobile
+            menuButton.addEventListener('click', function() {
+                isMenuOpen = !isMenuOpen;
+                
+                if (isMenuOpen) {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('animate-fade-in');
+                    // Change l'icône en X
+                    menuButton.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                    `;
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('animate-fade-in');
+                    // Remet l'icône du hamburger
+                    menuButton.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
+                            <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/>
+                        </svg>
+                    `;
+                }
+            });
 
-    // Ferme le menu mobile si la fenêtre est redimensionnée au-dessus de lg
-    window.addEventListener('resize', function() {
-        if (window.innerWidth >= 1024 && isMenuOpen) { // 1024px est le breakpoint lg de Tailwind
-            mobileMenu.classList.add('hidden');
-            isMenuOpen = false;
-            menuButton.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
-                    <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/>
-                </svg>
-            `;
-        }
-    });
-});
+            // Ferme le menu mobile si la fenêtre est redimensionnée au-dessus de lg
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 1024 && isMenuOpen) { // 1024px est le breakpoint lg de Tailwind
+                    mobileMenu.classList.add('hidden');
+                    isMenuOpen = false;
+                    menuButton.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24">
+                            <path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/>
+                        </svg>
+                    `;
+                }
+            });
+        });
     </script>
     {% block extra_script %}
     {% endblock %}

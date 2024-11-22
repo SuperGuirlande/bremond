@@ -20,10 +20,16 @@
         data-aos="fade-in" data-aos-duration="2500" data-aos-delay="1000">Passion & Savoir Faire</h3>
         <h3 class="pierre petit text-center text-xl md:text-2xl xl:text-3xl mt-2"
         data-aos="fade-in" data-aos-duration="2500" data-aos-delay="1500">depuis 1979</h3>
+
+        <a href="#presentation" class="text-center mt-10 text-2xl text-white hover:text-[var(--pierre)] tracking-wider hover:tracking-widest transition-all duration-300 group">
+            <p class="gilda font-light">Nous Découvrir</p>
+            <p class="rotate-90 scale-y-150 group-hover:translate-y-1 group-hover:scale-y-[160%] duration-300 transition-all">&gt;</p>
+        </a>
     </div>
 </section>
 <!-- PRESENTATION -->
-<section class="min-h-screen bg-pierre flex py-12">
+<section class="min-h-screen bg-pierre flex py-12 relative">
+    <span class="-translate-y-16 absolute left-0 top-0" id="presentation"></span>
     <div class="w-full max-w-[1480px] mx-auto my-auto flex flex-wrap gap-8 justify-center px-5">
         <div class="h-96 w-64 sm:w-72 md:h-[720px] md:w-[500px] basis-64 sm:basis-96 md:basis-[600px] shrink 
         sm:shrink-0 flex mx-auto overflow-hidden rounded-lg shadow-xl items-center"
@@ -56,13 +62,13 @@
             </p>
 
             <div class="flex gap-5 my-8">
-                <a href="">
+                <a href="{% url 'histoire' %}">
                     <button class="py-3 px-3 sm:px-4 md:px-6 bg-terre text-white text-lg sm:text-xl md:text-2xl playfair tracking-wider hover:bg-amber-900 shadow-md
                     hover:shadow-xl transition-all duration-300 ease-in-out">
                         Notre Histoire
                     </button>
                 </a>
-                <a href="">
+                <a href="{% url 'services' %}">
                     <button class="py-3 px-3 sm:px-4 md:px-6 bg-ocre text-white text-lg sm:text-xl md:text-2xl playfair tracking-wider hover:bg-amber-900 shadow-md
                     hover:shadow-xl transition-all duration-300 ease-in-out">
                         Nos Services

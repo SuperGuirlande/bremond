@@ -15,3 +15,11 @@ def services(request):
         'user': user,
     }
     return render(request, 'main/services.html', context)
+
+
+def histoire(request):
+    user = request.user
+    context = {
+        'user': user,
+    }
+    return render(request, 'main/histoire.html', context)
