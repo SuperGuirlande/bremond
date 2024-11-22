@@ -125,7 +125,7 @@
         }
 
         .timeline-point {
-            left: 2rem;
+            left: 1rem;
         }
 
         .timeline-entry:nth-child(odd) .timeline-content,
@@ -134,6 +134,10 @@
             text-align: left;
             margin-left: 4rem;
             margin-right: 1rem;
+        }
+
+        .timeline-content {
+            padding: 0.1rem;
         }
 
         .cta-buttons {
@@ -151,10 +155,65 @@
 {% endblock %}
 
 {% block content %}
-<section class="min-h-[85vh]">
-
+<section class="section min-h-screen bg-cover bg-center bg-fixed bg-no-repeat relative flex overflow-hidden"
+    style="background-image: url({% static 'images/histoire/hero.jpg' %})">
+   
+   <!-- Overlay gradient -->
+   <div class="absolute w-full h-full bg-charbon opacity-60 z-10"></div>
+   
+   <!-- Contenu principal -->
+   <div class="container mx-auto my-auto relative z-20 px-5">
+       <div class="flex flex-col items-center justify-center text-center max-w-[1080px] mx-auto pt-24">
+           <!-- Logo -->
+           <img src="{% static 'images/logos/logo_pierre_clair.png' %}" 
+                class="h-24 sm:h-28 md:h-32 lg:h-40 mx-auto nav-logo mt-20"
+                data-aos="fade-in" 
+                data-aos-duration="2500" 
+                data-aos-delay="1200">
+           
+           <!-- Titre principal -->
+           <h1 class="gilda text-5xl sm:text-6xl md:text-7xl lg:text-8xl pierre my-5"
+               data-aos="fade-in" 
+               data-aos-duration="2500">
+               Notre Histoire
+           </h1>
+           
+           <!-- Sous-titre -->
+           <h2 class="pierre petit text-2xl sm:text-3xl md:text-4xl font-light"
+               data-aos="fade-in" 
+               data-aos-duration="2500" 
+               data-aos-delay="1000">
+               Une tradition familiale depuis 1979
+           </h2>
+           
+           <!-- Ligne décorative -->
+           <div class="w-96 h-[1px] bg-pierre mt-12 relative"
+                data-aos="fade-in" 
+                data-aos-duration="2000" 
+                data-aos-delay="1500">
+           </div>
+           
+           <!-- Description -->
+           <p class="pierre text-xl md:text-2xl mt-12 max-w-3xl mx-auto font-light leading-relaxed raleway"
+              data-aos="fade-in" 
+              data-aos-duration="2000" 
+              data-aos-delay="1800">
+               Découvrez l'histoire de Bremond Rénovation, une entreprise familiale portée par la passion du patrimoine et l'excellence artisanale.
+           </p>
+           
+           <!-- Bouton scroll -->
+           <a href="#timeline" class="text-center mt-16 text-2xl text-white hover:text-[var(--pierre)] tracking-wider hover:tracking-widest transition-all duration-300 group playfair mb-10"
+              data-aos="fade-in" 
+              data-aos-duration="2000" 
+              data-aos-delay="2000">
+               Découvrir notre parcours
+               <div class="mt-4 text-3xl animate-bounce">↓</div>
+           </a>
+       </div>
+   </div>
 </section>
-<section class="timeline-section">
+<section class="timeline-section relative">
+    <span class="absolute -translate-y-20" id="timeline"></span>
     <div class="timeline-line"></div>
     
     <div class="timeline-entry">
@@ -204,11 +263,20 @@
             <p>Nous utilisons exclusivement des matériaux naturels et locaux : chaux Saint Astier, pierre de Paussac, tuiles françaises. Notre mission : préserver l'authenticité de votre patrimoine.</p>
         </div>
     </div>
-
-    <div class="cta-buttons">
-        <a href="{% url 'services' %}" class="cta-button bg-terre">Découvrez nos services</a>
-        <a href="" class="cta-button bg-charbon">Contactez-nous</a>
-    </div>
+</section>
+<section>
+    <div class="flex flex-wrap gap-6 mb-12 mx-auto justify-center">
+        <a href="{% url 'services' %}" 
+            class="py-3 px-6 playfair text-white text-xl rounded-md bg-granit flex items-center shadow-lg
+            hover:shadow-xl hover:bg-amber-800 hover:-translate-y-1 transition-all duration-500 ease-in-out">
+                Découvrez nos services
+        </a>
+        <a href="" 
+            class="py-3 px-10 playfair text-white text-xl rounded-md bg-terre flex items-center shadow-lg
+            hover:shadow-xl hover:bg-amber-800 hover:-translate-y-1 transition-all duration-500 ease-in-out">
+                Contactez-nous
+            </a>
+    </div>  
 </section>
 {% endblock %}
 

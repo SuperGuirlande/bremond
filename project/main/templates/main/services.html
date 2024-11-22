@@ -16,7 +16,8 @@
         <h3 class="pierre petit text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
         data-aos="fade-in" data-aos-duration="2500" data-aos-delay="1000">Découvrez nos Services</h3>
 
-        <a href="#maconnerie" class="text-center mt-10 text-2xl text-white hover:text-[var(--pierre)] tracking-wider hover:tracking-widest transition-all duration-300 group">
+        <a href="#maconnerie" class="text-center mt-10 text-2xl text-white hover:text-[var(--pierre)] tracking-wider hover:tracking-widest transition-all duration-300 group"
+        data-aos="fade-in" data-aos-duration="2000" data-aos-delay="1500">
             <p class="gilda font-light">Tout Savoir</p>
             <p class="rotate-90 scale-y-150 group-hover:translate-y-1 group-hover:scale-y-[160%] duration-300 transition-all">&gt;</p>
         </a>
@@ -25,7 +26,7 @@
 <!-- MACONNERIE -->
 <section class="relative z-10 flex flex-col bg-pierre py-20 shadow-md">
     <span class="-translate-y-16 absolute left-0 top-0" id="maconnerie"></span>
-    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center">
+    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center justify-center">
         <div class="basis-[450px] h-[500px] overflow-hidden rounded-md shadow-lg">
             <div class="carousel-container flex transition-transform duration-500 h-full w-full">
                 <img src="{% static 'images/services/maconnerie-1.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
@@ -33,7 +34,7 @@
                 <img src="{% static 'images/services/maconnerie-3.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
             </div>
         </div>
-        <div class="basis-[650px] grow shrink-0 flex flex-col gap-6">
+        <div class="basis-[650px] grow shrink flex flex-col gap-6">
             <h2 class="playfair text-6xl uppercase granit">Maçonnerie</h2>
             <p class="raleway text-xl font-light charbon">
                 Spécialistes du bâti ancien, nous réalisons tous travaux de maçonnerie traditionnelle. 
@@ -60,8 +61,8 @@
 
 <!-- PIERRES DE TAILLE -->
 <section class="relative z-[9] flex flex-col bg-blanc py-20">
-    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center">
-        <div class="basis-[650px] grow shrink-0 flex flex-col gap-6">
+    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center justify-center">
+        <div class="basis-[650px] grow shrink flex flex-col gap-6">
             <h2 class="playfair text-6xl uppercase granit">Pierres de Taille</h2>
             <p class="raleway text-xl font-light charbon">
                 Nous collaborons avec des tailleurs de pierre locaux pour la restauration et la réparation de vos éléments en pierre.
@@ -94,7 +95,7 @@
 
 <!-- Enduits à la chaux -->
 <section class="relative z-[8] flex flex-col bg-pierre py-20 shadow-md">
-    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center">
+    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center justify-center">
         <div class="basis-[450px] h-[500px] overflow-hidden rounded-md shadow-lg">
             <div class="carousel-container flex transition-transform duration-500 h-full w-full">
                 <img src="{% static 'images/services/enduits-1.webp' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
@@ -102,7 +103,7 @@
                 <img src="{% static 'images/services/enduits-3.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
             </div>
         </div>
-        <div class="basis-[650px] grow shrink-0 flex flex-col gap-6">
+        <div class="basis-[650px] grow shrink flex flex-col gap-6">
             <h2 class="playfair text-6xl uppercase granit">Enduits à la chaux</h2>
             <p class="raleway text-xl font-light charbon">
                 Nous utilisons exclusivement la chaux naturelle Saint Astier, garantissant une parfaite respiration de vos murs anciens. 
@@ -116,7 +117,7 @@
                     <li class="">Ravalements de façades</li>
                 </ul>
             </p>
-            <div class="flex gap-6 mt-5">
+            <div class="flex flex-wrap gap-6 mt-5">
                 <a href="">
                     <button class="py-2 px-7 bg-terre text-white playfair text-2xl hover:bg-amber-800 transition-all
                             duration-300 ease-in-out shadow-md hover:shadow-xl">
@@ -176,7 +177,7 @@
 
 <!-- Rénovation Intérieure -->
 <section class="relative z-[6] flex flex-col bg-pierre py-20 shadow-md">
-    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center">
+    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center justify-center">
         <div class="basis-[450px] h-[500px] overflow-hidden rounded-md shadow-lg">
             <div class="carousel-container flex transition-transform duration-500 h-full w-full">
                 <img src="{% static 'images/services/interieur-1.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
@@ -185,7 +186,7 @@
                 <img src="{% static 'images/services/interieur-4.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
             </div>
         </div>
-        <div class="basis-[650px] grow shrink-0 flex flex-col gap-6">
+        <div class="basis-[650px] grow shrink flex flex-col gap-6">
             <h2 class="playfair text-6xl uppercase granit">Rénovation Intérieure</h2>
             <p class="raleway text-xl font-light charbon">
                 Redonnez vie à vos espaces intérieurs grâce à notre expertise en :
@@ -217,8 +218,8 @@
 
 <!-- Rénovation Extérieure -->
 <section class="relative z-[5] flex flex-col bg-blanc py-20">
-    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-10 items-center">
-        <div class="basis-[650px] grow shrink-0 flex flex-col gap-6">
+    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-10 items-center justify-center">
+        <div class="basis-[650px] grow shrink flex flex-col gap-6">
             <h2 class="playfair text-6xl uppercase granit">Rénovation Extérieure</h2>
             <p class="raleway text-xl font-light charbon">
                 Sublimez vos façades avec nos interventions de :                
@@ -256,7 +257,7 @@
 
 <!-- Création d'ouvertures -->
 <section class="relative z-[4] flex flex-col bg-pierre py-20 shadow-md">
-    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center">
+    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center justify-center">
         <div class="basis-[450px] h-[500px] overflow-hidden rounded-md shadow-lg">
             <div class="carousel-container flex transition-transform duration-500 h-full w-full">
                 <img src="{% static 'images/services/ouverture-1.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
@@ -264,7 +265,7 @@
                 <img src="{% static 'images/services/ouverture-3.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
             </div>
         </div>
-        <div class="basis-[650px] grow shrink-0 flex flex-col gap-6">
+        <div class="basis-[650px] grow shrink flex flex-col gap-6">
             <h2 class="playfair text-6xl uppercase granit">Création d'ouvertures</h2>
             <p class="raleway text-xl font-light charbon">
                 Experts dans la modification d'ouvertures sur bâti ancien, nous réalisons :

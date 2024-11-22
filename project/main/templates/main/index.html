@@ -12,16 +12,20 @@
     <div class="absolute w-full h-full bg-stone-800 bg-opacity-50 z-10"></div>
 
     <div class="my-auto mx-auto relative z-20 flex flex-col">
-        <img src="{% static 'images/logos/logo_pierre_clair.png' %}" alt="" class="h-40 mx-auto nav-logo"
+        <!-- Logo -->
+        <img src="{% static 'images/logos/logo_pierre_clair.png' %}" alt="" class="h-24 sm:h-28 md:h-32 lg:h-40 mx-auto nav-logo mt-16"
         data-aos="fade-in" data-aos-duration="2500" data-aos-delay="1200">
+        <!-- Name -->
         <h1 class="gilda text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl pierre my-5 text-center"
         data-aos="fade-in" data-aos-duration="2500">Bremond Rénovation</h1>
+        <!-- Signature -->
         <h3 class="pierre petit text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
         data-aos="fade-in" data-aos-duration="2500" data-aos-delay="1000">Passion & Savoir Faire</h3>
         <h3 class="pierre petit text-center text-xl md:text-2xl xl:text-3xl mt-2"
         data-aos="fade-in" data-aos-duration="2500" data-aos-delay="1500">depuis 1979</h3>
 
-        <a href="#presentation" class="text-center mt-10 text-2xl text-white hover:text-[var(--pierre)] tracking-wider hover:tracking-widest transition-all duration-300 group">
+        <a href="#presentation" class="text-center mt-10 text-2xl text-white hover:text-[var(--pierre)] tracking-wider hover:tracking-widest transition-all duration-300 group"
+        data-aos="fade-in" data-aos-duration="2000" data-aos-delay="1500">
             <p class="gilda font-light">Nous Découvrir</p>
             <p class="rotate-90 scale-y-150 group-hover:translate-y-1 group-hover:scale-y-[160%] duration-300 transition-all">&gt;</p>
         </a>
@@ -42,7 +46,7 @@
         data-aos="fade-in" data-aos-duration="1500" data-anchor-placement="top-center">
             <h1 class="gilda text-4xl sm:text-5xl md:text-6xl terre my-5 uppercase playfair text-wrap sm:text-nowrap">Bremond Rénovation</h1>
             <h2 class="text-2xl sm:text-3xl md:text-4xl granit text-wrap petit">
-                Votre entreprise artisanale au servive du patrimoine
+                Votre entreprise artisanale au service du patrimoine
             </h2>
             <div class="h-[1px] w-48 bg-granit my-5"></div>
             <p class="raleway text-lg sm:text-xl font-light mt-8 text-justify leading-8">
@@ -95,7 +99,7 @@
         </div>
         <div class="w-full flex flex-wrap gap-5 my-auto justify-evenly px-3 sm:px-0">
             <!-- MACONNERIE -->
-            <div class="basis-[400px] grow shrink-0 max-w-[450px] flex flex-col"
+            <div class="basis-[330px] sm:basis-[400px] grow shrink-0 max-w-[450px] flex flex-col"
             data-aos="fade-in" data-aos-duration="1500" data-aos-delay="000" data-anchor-placement="top-center">
                 <div class="w-full h-72 overflow-hidden">
                     <img src="{% static 'images/home/pierres.webp' %}" alt="" class="h-full w-full object-cover hover:scale-105 transition-all duration-300">
@@ -117,7 +121,7 @@
                 </div>
             </div>
             <!-- PIERRE DE TAILLE -->
-            <div class="basis-[400px] grow shrink-0 max-w-[450px] flex flex-col"
+            <div class="basis-[330px] sm:basis-[400px] grow shrink-0 max-w-[450px] flex flex-col"
             data-aos="fade-in" data-aos-duration="1500" data-aos-delay="100" data-anchor-placement="top-center">
                 <div class="w-full h-72 overflow-hidden">
                     <img src="{% static 'images/home/pierres-de-taille.jpg' %}" alt="" class="h-full w-full object-cover hover:scale-105 transition-all duration-300">
@@ -139,7 +143,7 @@
                 </div>
             </div>
             <!-- ENDUITS+ -->
-            <div class="basis-[400px] grow shrink-0 max-w-[450px] flex flex-col"
+            <div class="basis-[330px] sm:basis-[400px] grow shrink-0 max-w-[450px] flex flex-col"
                 data-aos="fade-in" data-aos-duration="1500" data-aos-delay="200" data-anchor-placement="top-center">
                 <div class="w-full h-72 overflow-hidden">
                     <img src="{% static 'images/home/enduits.jpg' %}" alt="" class="h-full w-full object-cover hover:scale-105 transition-all duration-300">
@@ -161,7 +165,7 @@
                 </div>
             </div>
             <!-- COUVERTURE -->
-            <div class="basis-[400px] grow shrink-0 max-w-[450px] flex flex-col"
+            <div class="basis-[330px] sm:basis-[400px] grow shrink-0 max-w-[450px] flex flex-col"
                 data-aos="fade-in" data-aos-duration="1500" data-aos-delay="00" data-anchor-placement="top-center">
                 <div class="w-full h-72 overflow-hidden">
                     <img src="{% static 'images/home/couverture.jpg' %}" alt="" class="h-full w-full object-cover hover:scale-105 transition-all duration-300">
@@ -183,7 +187,7 @@
                 </div>
             </div>
             <!-- RENOVATION -->
-            <div class="basis-[400px] grow shrink-0 max-w-[450px] flex flex-col"
+            <div class="basis-[330px] sm:basis-[400px] grow shrink-0 max-w-[450px] flex flex-col"
                 data-aos="fade-in" data-aos-duration="1500" data-aos-delay="100" data-anchor-placement="top-center">
                 <div class="w-full h-72 overflow-hidden">
                     <img src="{% static 'images/home/renovation.jpg' %}" alt="" class="h-full w-full object-cover hover:scale-105 transition-all duration-300">
@@ -205,7 +209,7 @@
                 </div>
             </div>
             <!-- OUVERTURES -->
-            <div class="basis-[400px] grow shrink-0 max-w-[450px] flex flex-col"
+            <div class="basis-[330px] sm:basis-[400px] grow shrink-0 max-w-[450px] flex flex-col"
                 data-aos="fade-in" data-aos-duration="1500" data-aos-delay="200" data-anchor-placement="top-center">
                 <div class="w-full h-72 overflow-hidden">
                     <img src="{% static 'images/home/ouvertures.jpg' %}" alt="" class="h-full w-full object-cover hover:scale-105 transition-all duration-300">
