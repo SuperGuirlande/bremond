@@ -17,13 +17,19 @@
     {% tailwind_css %}
 </head>
 
-<body class="overflow-x-hidden">
+<body class="overflow-x-hidden min-h-screen flex flex-col">
     <header>
         <!-- NAVBAR -->
         {% include 'main/navbar.html' %}
     </header>
+    <main class="flex-1 flex flex-col">
     {% block content %}
     {% endblock %}
+    </main>
+    <footer class="mt-auto">
+        <!-- NAVBAR -->
+        {% include 'main/footer.html' %}
+    </footer>
 
     <!-- AOS -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>

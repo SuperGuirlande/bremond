@@ -1,0 +1,193 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load tz %}
+{% load custom_tags %}
+
+{% block extra_head %}
+<style>
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- HERO HEADER -->
+<section class="flex-1 w-full flex flex-col items-center justify-center pt-40 pb-12 relative z-[5] shadow-lg bg-blanc">
+    <div class="w-full max-w-1080px p-8 flex flex-col items-center space-y-6">
+        <h1 id="se-connecter" class="granit gilda text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-center">
+            Espace Administrateur
+        </h1>
+
+        <p class="text-lg raleway font-light charbon">
+            <b>Compte : </b>{{request.user.email}} <br>
+            <p class="text-blue-500 ">
+
+                <a href="{% url 'logout' %}" alt='Se Déconnecter' 
+                    class="hover:text-blue-400 transition-all duration-500 ease-in-out underline underline-offset-4 decoration-1">
+                Se Déconnecter → 
+                </a>
+                 | 
+                <a href="{% url 'change_password' %}" alt='AChangement du mot de passe' 
+                    class="hover:text-blue-400 transition-all duration-500 ease-in-out underline underline-offset-4 decoration-1">
+                    Changer de mot de passe →
+                </a>
+            </p>
+
+        </p>
+    </div>
+    {% if request.session.success %}
+        <!-- ALERT / SUCCESS -->
+        <div class="w-full max-w-[600px] mx-auto bg-green-100 border-l-4 border-green-500 rounded-md p-4 mb-6">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-green-700 font-medium text-lg">
+                        {{ request.session.success }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% clear_session_message 'success' %}
+    {% endif %}
+</section>
+
+<!-- MESSAGES RECUS -->
+<section class="flex-1 w-full flex flex-col items-center justify-center py-20 bg-pierre relative z-[4]">
+    <div class="flex flex-col">
+        <!-- TITLE -->
+        <h1 class="granit gilda text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+            Messages Reçus
+        </h1>
+        <p class="raleway text-xl font-light my-5">
+            Dans cette section vous pouvez consulter les message reçus via le formulaire de contact. <br>
+            Ils sont triés du plus récent au plus ancien
+        </p>
+        <!-- AUCUN MESSAGE -->
+        {% if not form_messages.exists %}
+            <p class="raleway text-2xl font-light my-5">
+                Aucun message reçu pour le moment
+            </p>
+        {% else %}
+        <!-- MESSAGES -->
+            <div class="flex flex-col gap-8 mt-10">
+                {% for message in form_messages %}
+                    <div class="w-full bg-blanc py-8 px-10 flex flex-col raleway text-lg gap-4 rounded-xl shadow-md relative">
+                        <p>
+                            Message de <b>{{ message.first_name }} {{ message.last_name }} </b> 
+                            - Reçu le : <b>{{ message.created_on|localtime|date:"d/m/Y à H:i" }}</b>
+                        </p>
+
+                        <p>Contact : 
+                            <a href="mailto:{{message.email}}" class="text-blue-600 underline underline-1">
+                                {{message.email}}
+                            </a>
+                             | 
+                            <a href="tel:{{message.phone}}" class="text-blue-600 underline underline-1">
+                                {{message.phone}}
+                            </a>    
+                        </p>
+
+                        <p>
+                            <u>Message :</u><br>
+                            {{message.message}}
+                        </p>
+
+                        <!-- Supprimer -->
+                        <a href="{% url 'confirm_delete_message' message.id %}" class="absolute right-0 top-0 translate-y-6 -translate-x-6">&#x274C;</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- REALISATIONS -->
+<section class="flex-1 w-full flex flex-col items-center justify-center py-20 bg-blanc relative z-[4]">
+    <div class="w-full max-w-[1280px] flex flex-col">
+        <h1 class="text-center gilda granit text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+            Les Réalisations
+        </h1>
+        <p class="text-xl raleway  charbon text-center my-6">
+            Dans cette section, vous pouvez en toute simplicité <b>créer, modifier, ou supprimer des réalisations</b>.
+            <br>
+            <b>Textes, photos,</b> tous les éléments seront <b>automatiquement ajoutés au contenu du site</b>
+        </p>
+
+        <!-- PAS DE REALISATIONS -->
+        {% if not realisations.exists %}
+            <p class="text-xl raleway  charbon text-center my-10">
+                Aucune réalisation pour le moment
+            </p>
+        {% else %}
+            <div class="flex flex-col gap-10 my-12 ">
+                {% for real in realisations %}
+                <div class="bg-white py-8 px-12 rounded-xl flex flex-col relative">
+                        <span class="absolute left-0 top-0 -translate-y-40" id="realisation_{{real.id}}"></span>
+                        <div class="flex justify-between">
+
+                            <!-- LEFT TEXTS -->
+                            <div class="flex flex-col">
+                                <h3 class="granit playfair text-2xl font-semibold">
+                                    {{real.title}}
+                                </h3>
+                                <p class="mt-5">
+                                    <b>Ajoutée le : </b>{{ real.created_on|date:"d/m/Y" }} |
+                                    <b>Dernière modification : </b>{{ real.last_updated|date:"d/m/Y" }}
+                                </p>
+                                <p class="mt-5">
+                                    <b>Catégories : </b>
+                                    {% for cat in real.categories.all %}
+                                    {{cat.title}} - 
+                                    {% endfor %}
+                                </p>
+                            
+                            </div>
+                        <!-- RIGHT PHOTOS -->
+                            <div class="flex flex-wrap basis-[480px] mt-auto gap-[20px]">
+                                {% for photo in real.photos.all %}
+                                <a href="{% url 'photo_detail' photo_id=photo.id %}">
+                                    <div class="h-[180px] w-[180px] overflow-hidden rounded-2xl">
+                                        <img src="{{photo.file.url}}" alt="" class="h-full w-full object-cover object-center hover:scale-110 transition-all duration-200">
+                                    </div>
+                                </a>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- BUTTONS -->
+                        <div class="flex gap-5 mx-auto">
+                            <a href="{% url 'edit_realisation' real.id %}" class="text-center mx-auto">
+                                <button class="raleways py-3 px-8 bg-blue-500 hover:bg-blue-400 text-white text-xl shadow-md rounded-xl my-6
+                                hover:-translate-y-1 hover:shadow-xl transition-all duration-500 ease-in-out">
+                                    Modifier
+                                </button>
+                            </a>
+                            <a href="{% url 'photo_form' real.id %}" class="text-center mx-auto">
+                                <button class="raleway py-3 px-8 bg-purple-500 hover:bg-purple-400 text-white text-xl shadow-md rounded-xl my-6
+                                hover:-translate-y-1 hover:shadow-xl transition-all duration-500 ease-in-out">
+                                    Ajouter des Photos
+                                </button>
+                            </a>
+                            <a href="{% url 'confirm_delete_real' real.id %}" class="text-center mx-auto">
+                                <button class="raleway py-3 px-8 bg-red-500 hover:bg-red-400 text-white text-xl shadow-md rounded-xl my-6
+                                hover:-translate-y-1 hover:shadow-xl transition-all duration-500 ease-in-out">
+                                    Supprimer
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <a href="{% url 'create_realisation' %}" class="text-center mx-auto">
+            <button class="playfair py-3 px-8 bg-terre hover:bg-[#766F64] text-white text-xl shadow-md rounded-xl my-6
+            hover:-translate-y-1 hover:shadow-xl transition-all duration-500 ease-in-out">
+                Nouvelle Réalisation
+            </button>
+        </a>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<style>
+    form p {
+        display: flex;
+        flex-direction: column;
+        gap: 10px
+    }
+
+    form p label {
+        font-family: 'Raleway';
+        font-size: 1.2rem;  
+    }
+
+    #imagePreview {
+        max-width: 100%;
+        max-height: 300px;
+        margin-top: 10px;
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="w-full min-h-[85vh] px-4 pb-8 pt-48 bg-blanc ">
+    <div class="max-w-[1080px] mx-auto">
+
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl granit gilda text-center font-bold mb-6">
+            Télécharger une photo
+        </h1>
+        <h3 class="text-center charbon text-2xl raleway">Réalisation : {{realisation.title}}</h3>
+        
+        <form method="POST" enctype="multipart/form-data" class="flex flex-col mx-auto w-full max-w-[500px] my-10 gap-8 p-10 bg-white shadow-md">
+            {% csrf_token %}
+            
+            {{form.as_p}}
+            <button type="submit" class="my-5 py-3 px-12 text-xl raleway text-white rounded-xl bg-terre hover:bg-amber-800 shadow-md
+            hover:shadow-xl hover:-translate-y-1 transition-all duration-500 ease-in-out mx-auto w-fit">
+                Poster
+            </button>
+        </form>
+
+        <p class="text-lg charbon text-left mx-auto max-w-[500px]">
+            <b>Note:</b><br>
+            Le titre de l'image ne sera pas visible de vos utilisateurs, mais il est utile pour le référencement. <br>
+            N'hésitez pas à mettre les mots clés importants (ex: Rénovation Intérieure, Cheminée en pierres de taille, ...)
+        </p>
+    
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block extra_script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.querySelector('input[type="file"]');
+        const preview = document.createElement('img');
+        preview.id = 'imagePreview';
+        fileInput.parentNode.appendChild(preview);
+
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>
+{% endblock %}

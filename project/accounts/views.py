@@ -2,22 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserLoginForm
+from .forms import UserLoginForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.urls import reverse_lazy
+from message_form.models import ContactMessage
+from realisations.models import Realisation
 
 
-# S'enregistrer
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
-    else:
-        form = UserRegisterForm()
-    return render(request, 'accounts/register.html', {'form': form})
-
+### ACCOUNT ###
 # Login
 def user_login(request):
     if request.method == 'POST':
@@ -45,16 +37,26 @@ def user_logout(request):
     return redirect('index')
 
 
-# Account detail
+### ESPACE ADMINISTRATEUR ###
+
+# Index Admin
 @login_required
-def my_account(request):
+def admin_index(request):
     user = request.user
+    form_messages = ContactMessage.objects.all().order_by('-created_on')
+    realisations = Realisation.objects.all().order_by('-id')
+
     context = {
         'user': user,
+        'form_messages': form_messages,
+        'realisations': realisations,
     }
-    return render(request, 'accounts/my_account.html', context)
+    return render(request, 'accounts/admin_index.html', context)
 
 
+
+
+### MOT DE PASSE ###
 # Change password
 @login_required
 def change_password(request):
@@ -62,7 +64,7 @@ def change_password(request):
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request, user)  # Important pour ne pas déconnecter l'utilisateur
+            update_session_auth_hash(request, user) 
             messages.success(request, 'Votre mot de passe a été changé avec succès.')
             return redirect(reverse_lazy('my_account'))
         else:

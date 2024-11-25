@@ -1,0 +1,187 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-[1080px] mx-auto px-4 py-8 mt-40">
+    <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl granit gilda font-bold mb-6">{{ title }}</h1>
+
+    <!-- Modal de création de catégorie -->
+    <div id="categoryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md">
+            <h2 class="text-xl font-semibold mb-4">Nouvelle catégorie</h2>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2">Nom de la catégorie</label>
+                <input type="text" id="categoryName" class="w-full p-2 border rounded-md focus:ring focus:ring-blue-200">
+                <p id="categoryError" class="text-red-500 text-sm mt-1 hidden"></p>
+            </div>
+            <div class="flex justify-end space-x-3">
+                <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300">
+                    Annuler
+                </button>
+                <button onclick="createCategory()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                    Créer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <form method="POST" class="space-y-6 flex flex-col">
+        {% csrf_token %}
+
+        <!-- Titre -->
+        <div class="flex flex-col gap-1 mt-8">
+            <label class="text-xl    font-medium playfair charbon">{{ form.title.label }}</label>
+            {{ form.title }}
+            {% if form.title.errors %}
+                {% for error in form.title.errors %}
+                    <p class="text-red-500 text-sm">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- Catégories avec bouton d'ajout -->
+        <div class="flex flex-col gap-1">
+            <div class="flex items-center justify-between mb-2">
+                <label class="text-lg font-medium">{{ form.categories.label }}</label>
+                <button type="button" 
+                        onclick="openModal()"
+                        class="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Nouvelle catégorie
+                </button>
+            </div>
+            <div class="flex flex-col gap-4" id="categoriesContainer">
+                {% for checkbox in form.categories %}
+                    <div class="flex items-center space-x-2">
+                        {{ checkbox.tag }}
+                        <label for="{{ checkbox.id_for_label }}" class="text-gray-700">
+                            {{ checkbox.choice_label }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+            {% if form.categories.errors %}
+                {% for error in form.categories.errors %}
+                    <p class="text-red-500 text-sm">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- Contenu -->
+        <div class="flex flex-col gap-1">
+            <label class="text-lg font-medium">{{ form.content.label }}</label>
+            {{ form.content }}
+            {% if form.content.errors %}
+                {% for error in form.content.errors %}
+                    <p class="text-red-500 text-sm">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- Boutons -->
+        <div class="flex justify-end mt-6 space-x-4">
+            {% if is_edit %}
+                <a href="{% url 'admin_index' %}" 
+                   class="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600">
+                    Annuler
+                </a>
+            {% endif %}
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">
+                {{ is_edit|yesno:"Enregistrer les modifications,Créer la réalisation" }}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_script %}
+    {{ form.media.js }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Récupérer le token CSRF pour les requêtes POST
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    
+    // Ajouter au global scope pour utilisation dans les fonctions
+    window.csrfToken = csrfToken;
+});
+
+function openModal() {
+    const modal = document.getElementById('categoryModal');
+    modal.classList.remove('hidden');
+    document.getElementById('categoryName').value = '';
+    document.getElementById('categoryError').classList.add('hidden');
+}
+
+function closeModal() {
+    const modal = document.getElementById('categoryModal');
+    modal.classList.add('hidden');
+}
+
+async function createCategory() {
+    const categoryName = document.getElementById('categoryName').value.trim();
+    const errorElement = document.getElementById('categoryError');
+    
+    if (!categoryName) {
+        errorElement.textContent = 'Le nom de la catégorie est requis';
+        errorElement.classList.remove('hidden');
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/categories/create/', {  // Ajustez l'URL selon votre configuration
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': window.csrfToken
+            },
+            body: JSON.stringify({ title: categoryName })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Ajouter la nouvelle catégorie à la liste
+            const container = document.getElementById('categoriesContainer');
+            const newCheckbox = createCategoryCheckbox(data.id, data.title);
+            container.appendChild(newCheckbox);
+            
+            // Sélectionner automatiquement la nouvelle catégorie
+            const checkbox = document.getElementById(`id_categories_${data.id}`);
+            if (checkbox) checkbox.checked = true;
+            
+            closeModal();
+        } else {
+            errorElement.textContent = data.error || 'Une erreur est survenue';
+            errorElement.classList.remove('hidden');
+        }
+    } catch (error) {
+        errorElement.textContent = 'Une erreur est survenue lors de la création de la catégorie';
+        errorElement.classList.remove('hidden');
+    }
+}
+
+function createCategoryCheckbox(id, title) {
+    const div = document.createElement('div');
+    div.className = 'flex items-center space-x-2';
+    
+    div.innerHTML = `
+        <input type="checkbox" 
+               name="categories" 
+               value="${id}" 
+               id="id_categories_${id}"
+               class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
+        <label for="id_categories_${id}" class="text-gray-700">
+            ${title}
+        </label>
+    `;
+    
+    return div;
+}
+</script>
+{% endblock %}

@@ -1,25 +1,59 @@
 {% extends 'main/base.html' %}
 {% load static %}
+
 {% block extra_head %}
-<link rel="stylesheet" href="{% static 'accounts/css/forms-style.css' %}">
+<style>
+</style>
 {% endblock %}
 
 {% block content %}
-<div class='form-container'>
+<div class="flex-1 w-full flex flex-col items-center justify-center py-40">
+    <div class="w-full max-w-1080px p-8 flex flex-col items-center space-y-6">
+        <h1 id="se-connecter" class="granit gilda text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-center">
+            Mon Compte
+        </h1>
+        <p class="text-lg raleway font-light charbon">
+            Vous ne faites pas partie de l'équipe Bremond Rénovation ? <br>
+            <a href="{% url 'index' %}" alt='Accueil - Bremond Rénovation' class="text-blue-500 hover:text-blue-400 transition-all duration-500 ease-in-out underline underline-offset-4 decoration-1">
+                Cliquez ici pour retourner à l'accueil →
+            </a>
+        </p>
+    </div>
 
-    <h1 class='classic-title'>Se Connecter</h1>
-    <form method='post'>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class='primary-button' type="submit">Se Connecter</button>
-        <p class="classic-p secondary">
-            Pas encore membre ? <br>
-            <a href="{% url 'register' %}">Créer un Compte ici →</a>
-        </p>
-        <p class="classic-p secondary">
-            Mot de passe perdu ? <br>
-            <a href="{% url 'password_reset' %}">Réinitialiser le mot de passe ici →</a>
-        </p>
-    </form>
+        <form method="POST" class="w-full px-3 max-w-[500px] space-y-4 flex flex-col gap-3">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="flex flex-col gap-1 raleway text-lg charbon">
+                    {{ field.label }}
+                    {{field}}
+                    {% if field.errors %}
+                        {% for error in field.errors %}
+                            <p class="text-red-500">{{error}}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="flex flex-col items-center space-y-4">
+                <button type="submit" class="bg-terre text-white py-3 px-8 rounded hover:bg-[#766F64] mt-5 mx-auto w-fit">
+                    Se Connecter
+                </button>
+
+                <div class="text-center">
+                    <p class="text-gray-600">Mot de passe perdu ?</p>
+                    <a href="{% url 'password_reset' %}" class="text-blue-600 hover:text-blue-800">
+                        Réinitialiser le mot de passe ici →
+                    </a>
+                </div>
+            </div>
+        </form>
 </div>
 {% endblock %}
