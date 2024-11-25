@@ -12,5 +12,6 @@ class ContactMessage(models.Model):
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="Message reçu le", null=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} | Réçu le : {localtime(self.created_on).strftime("%d/%m/%Y à %H:%M")} | {self.phone} | {self.email}"
+        date = localtime(self.created_on).strftime("%d/%m/%Y à %H:%M")
+        return f"{self.first_name} {self.last_name} | Réçu le : {date} | {self.phone} | {self.email}"
 
