@@ -88,7 +88,7 @@ USE_I18N = True
 USE_TZ = True
 
 # STATIC & MEDIA #
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIR = [
     BASE_DIR / 'static',
     BASE_DIR / 'main' / 'static',
@@ -96,7 +96,7 @@ STATICFILES_DIR = [
     ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # USER MODEL #
