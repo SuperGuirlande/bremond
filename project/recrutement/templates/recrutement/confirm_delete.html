@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load tz %}
+{% load custom_tags %}
+
+{% block title %}
+Confirmer la suppression de l'annonce
+{% endblock %}
+
+{% block extra_head %}{% endblock %}
+
+{% block content %}
+<section class="flex-1 w-full flex flex-col items-center justify-center py-20 bg-blanc relative z-[4] mt-28 min-h-[70vh]">
+    <div class="w-full max-w-[1080px] flex flex-col">
+        <h1 class="text-center playfair granit text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
+            Confirmer la suppression
+        </h1>
+        <p class="text-xl lg:text-2xl raleway  charbon text-center my-8">
+            Êtes vous bien sûr de vouloir supprimer l'annonce <b>{{annonce.title}}</b> ?
+            <br><br>
+            <b>Cette opération est irréversible</b>
+        </p>
+        <div class="flex gap-5 mt-auto mx-auto justify-end w-max">
+            <a href="{% url 'admin_recrutement' %}">
+                <button class="py-2 px-5 rounded-md uppercase text-white bg-blue-500 hover:bg-blue-400">
+                    Retour
+                </button>
+            </a>
+            <a href="{% url 'delete_annonce' annonce.id %}">
+                <button class="py-2 px-5 rounded-md uppercase text-white bg-red-500 hover:bg-red-400">
+                    Supprimer
+                </button>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+
+{% endblock %}

@@ -178,7 +178,7 @@
     </div>
 </section>
 
-<!-- Rénovation Intérieure -->
+<!-- Rénovation Extérieure -->
 <section class="relative z-[6] flex flex-col bg-pierre py-20 shadow-md">
     <span class="-translate-y-16 absolute left-0 top-0" id="renovation-interieure"></span>
     <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center justify-center">
@@ -191,15 +191,15 @@
             </div>
         </div>
         <div class="basis-[650px] grow shrink flex flex-col gap-6">
-            <h2 class="playfair text-6xl uppercase granit">Rénovation Intérieure</h2>
+            <h2 class="playfair text-6xl uppercase granit">Rénovation Extérieure</h2>
             <p class="raleway text-xl font-light charbon">
-                Redonnez vie à vos espaces intérieurs grâce à notre expertise en :
+                Sublimez vos façades avec nos interventions de :                
                 <br>
                 <ul class="space-y-2 list-disc pl-6 charbon text-xl raleway font-light">
-                    <li>Restauration de murs anciens</li>
-                    <li>Reprise d'enduits traditionnels</li>
-                    <li>Réfection des éléments en pierre</li>
-                    <li>Réparation de structures anciennes</li>
+                    <li>Ravalement traditionnel</li>
+                    <li>Restauration de façades en pierre</li>
+                    <li>Reprise de joints à la chaux</li>
+                    <li>Traitement des remontées capillaires</li>
                 </ul>
             </p>
             <div class="flex gap-6 mt-5">
@@ -220,20 +220,20 @@
     </div>
 </section>
 
-<!-- Rénovation Extérieure -->
+<!-- Création d'ouvertures -->
 <section class="relative z-[5] flex flex-col bg-blanc py-20">
     <span class="-translate-y-16 absolute left-0 top-0" id="renovation-exterieure"></span>
     <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-10 items-center justify-center">
         <div class="basis-[650px] grow shrink flex flex-col gap-6">
-            <h2 class="playfair text-6xl uppercase granit">Rénovation Extérieure</h2>
+            <h2 class="playfair text-6xl uppercase granit">Création d'ouvertures</h2>
             <p class="raleway text-xl font-light charbon">
-                Sublimez vos façades avec nos interventions de :                
+                Experts dans la modification d'ouvertures sur bâti ancien, nous réalisons :
                 <br>
                 <ul class="space-y-2 list-disc pl-6 charbon text-xl raleway font-light">
-                    <li>Ravalement traditionnel</li>
-                    <li>Restauration de façades en pierre</li>
-                    <li>Reprise de joints à la chaux</li>
-                    <li>Traitement des remontées capillaires</li>
+                    <li>Création de nouvelles fenêtres et portes</li>
+                    <li>Agrandissement d'ouvertures existantes</li>
+                    <li>Pose de linteaux en pierre</li>
+                    <li>Reprise des encadrements</li>
                 </ul>
             <div class="flex gap-6 mt-5">
                 <a href="{% url 'realisations' %}">
@@ -260,46 +260,6 @@
     </div>
 </section>
 
-<!-- Création d'ouvertures -->
-<section class="relative z-[4] flex flex-col bg-pierre py-20 shadow-md">
-    <span class="-translate-y-16 absolute left-0 top-0" id="creation-d-ouvertures"></span>
-    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center justify-center">
-        <div class="basis-[450px] h-[500px] overflow-hidden rounded-md shadow-lg">
-            <div class="carousel-container flex transition-transform duration-500 h-full w-full">
-                <img src="{% static 'images/services/ouverture-1.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/ouverture-2.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/ouverture-3.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-            </div>
-        </div>
-        <div class="basis-[650px] grow shrink flex flex-col gap-6">
-            <h2 class="playfair text-6xl uppercase granit">Création d'ouvertures</h2>
-            <p class="raleway text-xl font-light charbon">
-                Experts dans la modification d'ouvertures sur bâti ancien, nous réalisons :
-                <br>
-                <ul class="space-y-2 list-disc pl-6 charbon text-xl raleway font-light">
-                    <li>Création de nouvelles fenêtres et portes</li>
-                    <li>Agrandissement d'ouvertures existantes</li>
-                    <li>Pose de linteaux en pierre</li>
-                    <li>Reprise des encadrements</li>
-                </ul>
-            </p>
-            <div class="flex gap-6 mt-5">
-                <a href="{% url 'realisations' %}">
-                    <button class="py-2 px-7 bg-terre text-white playfair text-2xl hover:bg-amber-800 transition-all
-                            duration-300 ease-in-out shadow-md hover:shadow-xl">
-                        Nos Réalisations
-                    </button>
-                </a>
-                <a href="#contact">
-                    <button class="py-2 px-7 bg-ocre text-white playfair text-2xl hover:bg-amber-800 transition-all
-                            duration-300 ease-in-out shadow-md hover:shadow-xl">
-                        Nous Contacter
-                    </button>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
 
 {% include 'main/contact-section.html' %}
 {% endblock %}

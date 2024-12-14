@@ -7,6 +7,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.urls import reverse_lazy
 from message_form.models import ContactMessage
 from realisations.models import Realisation
+from blog.models import BlogArticle
+from recrutement.models import JobMessage
 
 
 ### ACCOUNT ###
@@ -20,7 +22,7 @@ def user_login(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('index')
+                return redirect('admin_index')
             else:
                 print("Authentication failed: user is None")
         else:
@@ -44,16 +46,46 @@ def user_logout(request):
 def admin_index(request):
     user = request.user
     form_messages = ContactMessage.objects.all().order_by('-created_on')
-    realisations = Realisation.objects.all().order_by('-id')
+    recrutement_messages = JobMessage.objects.all().order_by('-created_on')
 
     context = {
         'user': user,
         'form_messages': form_messages,
-        'realisations': realisations,
+        'recrutement_messages': recrutement_messages,
     }
     return render(request, 'accounts/admin_index.html', context)
 
+@login_required
+def admin_realisations(request):
+    user = request.user
+    realisations = Realisation.objects.all().order_by('-id')
 
+    context = {
+        'user': user,
+        'realisations': realisations,
+    }
+    return render(request, 'accounts/admin_realisations.html', context)
+
+@login_required
+def admin_blog(request):
+    user = request.user
+    articles = BlogArticle.objects.all()
+
+    context = {
+        'user': user,
+        'articles': articles,
+    }
+    return render(request, 'accounts/admin_blog.html', context)
+
+
+@login_required
+def admin_recrutement(request):
+    from recrutement.models import JobAnnonce
+    annonces = JobAnnonce.objects.all().order_by('-id')
+
+    return render(request, "accounts/admin_recrutement.html", context={
+        'annonces': annonces,
+    })
 
 
 ### MOT DE PASSE ###

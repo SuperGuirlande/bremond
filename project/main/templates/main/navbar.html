@@ -49,10 +49,12 @@
             </div>
 
             <!-- BRAND -->
-            <div class="flex gap-3 md:gap-6 items-center">
-                <img src="{% static 'images/logos/logo_pierre_clair.png' %}" alt="" class="h-8 md:h-10">
-                <h2 class="text-xl md:text-3xl pierre playfair">Bremond Rénovation</h2>
-            </div>
+            <a href="{% url 'index' %}">
+                <div class="flex gap-3 md:gap-6 items-center">
+                    <img src="{% static 'images/logos/logo_pierre_clair.png' %}" alt="" class="h-8 md:h-10">
+                    <h2 class="text-xl md:text-3xl pierre playfair">Bremond Rénovation</h2>
+                </div>
+            </a>
 
             <!-- PHONE -->
             <div class="flex flex-col">
@@ -116,7 +118,9 @@
                     <a href="{% url 'histoire' %}" class="w-full text-center py-2 hover:bg-white/10">Histoire</a>
                     <a href="{% url 'services' %}" class="w-full text-center py-2 hover:bg-white/10">Services</a>
                     <a href="{% url 'realisations' %}" class="w-full text-center py-2 hover:bg-white/10">Réalisations</a>
-                    <a href="{% url 'index' %}" class="w-full text-center py-2 hover:bg-white/10">Contact</a>
+                    <a href="{% url 'blog_index' %}" class="w-full text-center py-2 hover:bg-white/10">Blog</a>
+                    <a href="{% url 'contact' %}" class="w-full text-center py-2 hover:bg-white/10">Contact</a>
+                    <a href="{% url 'recrutement_index' %}" class="w-full text-center py-2 hover:bg-white/10">Recrutement</a>
                 </nav>
                 
                 
@@ -125,11 +129,13 @@
 
         <!-- DESKTOP MENU - Exactement comme l'original -->
         <nav class="hidden lg:flex w-fit mx-auto pierre gap-10 uppercase text-xl font-light tracking-widest mt-7">
-            <a href="{% url 'index' %}" class=""><p>Accueil</p></a>
-            <a href="{% url 'histoire' %}" class=""><p>Histoire</p></a>
-            <a href="{% url 'services' %}" class=""><p>Services</p></a>
-            <a href="{% url 'realisations' %}" class=""><p>Réalisations</p></a>
-            <a href="{% url 'index' %}" class=""><p>Contact</p></a>
+            <a href="{% url 'index' %}" class="hover:text-gray-400"><p>Accueil</p></a>
+            <a href="{% url 'histoire' %}" class="hover:text-gray-400"><p>Histoire</p></a>
+            <a href="{% url 'services' %}" class="hover:text-gray-400"><p>Services</p></a>
+            <a href="{% url 'realisations' %}" class="hover:text-gray-400"><p>Réalisations</p></a>
+            <a href="{% url 'blog_index' %}" class="hover:text-gray-400"><p>Blog</p></a>
+            <a href="{% url 'contact' %}" class="hover:text-gray-400"><p>Contact</p></a>
+            <a href="{% url 'recrutement_index' %}" class="hover:text-gray-400"><p>Recrutement</p></a>
         </nav>
         
     </div>

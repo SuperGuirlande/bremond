@@ -60,3 +60,26 @@ def histoire(request):
         'form': form,
     }
     return render(request, 'main/histoire.html', context)
+
+
+def contact(request):
+    user = request.user
+
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            request.session['success'] = "Votre message nous a bien été envoyé ! Vous serez contacté(e) dans les plus brefs délais."
+    else:
+        form = ContactForm()
+
+    context = {
+        'form': form,
+        'user': user,
+    }
+
+    return render(request, "main/contact.html", context)
+
+
+

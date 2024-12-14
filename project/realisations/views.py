@@ -90,9 +90,9 @@ def realisation_form(request, id=None):
         if form.is_valid():
             realisation = form.save()
             message = "La réalisation a été modifiée avec succès!" if id else "La réalisation a été créée avec succès!"
-            messages.success(request, message)
+            request.session['success'] = message
             
-            return redirect('admin_index')
+            return redirect('admin_realisations')
     else:
         form = RealisationForm(instance=realisation)
     

@@ -34,7 +34,7 @@
 
         <!-- Titre -->
         <div class="flex flex-col gap-1 mt-8">
-            <label class="text-xl    font-medium playfair charbon">{{ form.title.label }}</label>
+            <label class="text-xl font-medium charbon">{{ form.title.label }}</label>
             {{ form.title }}
             {% if form.title.errors %}
                 {% for error in form.title.errors %}
@@ -46,7 +46,7 @@
         <!-- Catégories avec bouton d'ajout -->
         <div class="flex flex-col gap-1">
             <div class="flex items-center justify-between mb-2">
-                <label class="text-lg font-medium">{{ form.categories.label }}</label>
+                <label class="text-xl font-medium charbon">{{ form.categories.label }}</label>
                 <button type="button" 
                         onclick="openModal()"
                         class="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm flex items-center gap-2">
@@ -75,7 +75,7 @@
 
         <!-- Contenu -->
         <div class="flex flex-col gap-1">
-            <label class="text-lg font-medium">{{ form.content.label }}</label>
+            <label class="text-xl font-medium charbon">{{ form.content.label }}</label>
             {{ form.content }}
             {% if form.content.errors %}
                 {% for error in form.content.errors %}

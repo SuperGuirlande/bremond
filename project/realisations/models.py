@@ -31,7 +31,7 @@ class Realisation(models.Model):
     categories = models.ManyToManyField(Category, related_name="realisations", verbose_name="Catégories associées")
 
     created_on = models.DateField(auto_now_add=True, verbose_name="Date de création", blank=True)
-    last_updated = models.DateField(auto_now_add=True, verbose_name="Date de deernière modification", blank=True)
+    last_updated = models.DateField(auto_now_add=True, verbose_name="Date de dernière modification", blank=True)
 
 
     def save(self, *args, **kwargs):

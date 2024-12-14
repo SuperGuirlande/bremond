@@ -1,0 +1,132 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+{{ form.media.css }}
+<link rel="stylesheet" href="{% static 'css/ck_styles.css' %}">
+
+{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-[1080px] mx-auto px-4 py-8 mt-40 flex flex-col raleway">
+    <h1 class=" text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl granit gilda font-bold mb-6">
+        Postuler à une offre d'emploi
+    </h1>
+    <p class="text-lg md:text-xl text-center my-5">{{annonce.job}} 
+        {% if annonce.contract_type %}| {{annonce.contract_type}} {% endif %}
+        {% if annonce.contract_length %}| {{annonce.contract_length}} mois {% endif %}
+    </p>
+
+    <form method="POST" class="space-y-6 flex flex-col w-full max-w-[720px] mx-auto gap-3" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- NOM & PRENOM -->
+        <div class="flex flex-wrap gap-5">
+            <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
+                <label class="text-xl font-medium charbon">{{ form.first_name.label }}*</label>
+                {{ form.first_name }}
+                {% if form.first_name.errors %}
+                    {% for error in form.first_name.errors %}
+                        <p class="text-red-500 text-sm">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
+                <label class="text-xl font-medium charbon">{{ form.last_name.label }}</label>
+                {{ form.last_name }}
+                {% if form.last_name.errors %}
+                    {% for error in form.last_name.errors %}
+                        <p class="text-red-500 text-sm">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>          
+        </div>
+        <!-- EMAIL & TELEPHONE -->
+        <div class="flex flex-wrap gap-5">
+            <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
+                <label class="text-xl font-medium charbon">{{ form.email.label }}*</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                        <p class="text-red-500 text-sm">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
+                <label class="text-xl font-medium charbon">{{ form.phone.label }}</label>
+                {{ form.phone }}
+                {% if form.phone.errors %}
+                    {% for error in form.phone.errors %}
+                        <p class="text-red-500 text-sm">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>          
+        </div>    
+        
+        <!-- CV -->
+        <div class="flex flex-col gap-1 mt-8">
+            <label class="text-xl font-medium charbon">{{ form.cv.label }}*</label>
+            <div class="relative">
+                <input type="file" 
+                    name="{{ form.cv.name }}"
+                    class="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none p-2"
+                    accept=".pdf">
+                <p class="mt-1 text-sm text-gray-500">{{ form.cv.help_text }}</p>
+            </div>
+            {% if form.cv.errors %}
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 mt-2">
+                {% for error in form.cv.errors %}
+                    <p class="text-red-700">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Lettre de motivation -->
+        <div class="flex flex-col gap-1 mt-8">
+            <label class="text-xl font-medium charbon">{{ form.lm.label }}*</label>
+            <div class="relative">
+                <input type="file" 
+                    name="{{ form.lm.name }}"
+                    class="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none p-2"
+                    accept=".pdf">
+                <p class="mt-1 text-sm text-gray-500">{{ form.lm.help_text }}</p>
+            </div>
+            {% if form.lm.errors %}
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 mt-2">
+                {% for error in form.lm.errors %}
+                    <p class="text-red-700">{{ error }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Contenu -->
+        <div class="flex flex-col gap-1">
+            <label class="text-xl font-medium charbon">Votre message* :</label>
+            {{ form.message }}
+            {% if form.message.errors %}
+                {% for error in form.message.errors %}
+                    <p class="text-red-500 text-sm">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- Boutons -->
+        <div class="flex justify-end mt-6 space-x-4">
+            {% if is_edit %}
+                <a href="{% url 'admin_index' %}" 
+                   class="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600">
+                    Annuler
+                </a>
+            {% endif %}
+            <button type="submit" class="bg-blue-600 text-white text-xl px-6 py-2 rounded-md hover:bg-blue-700">
+                Postuler à l'offre
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_script %}
+    {{ form.media.js }}
+{% endblock %}

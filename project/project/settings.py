@@ -22,11 +22,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'main',
+    'blog',
+    'realisations',
+    'message_form',
+    'recrutement',
     'tailwind',
     'theme',
     'django_ckeditor_5',
-    'realisations',
-    'message_form',
 ]
 
 MIDDLEWARE = [
@@ -93,6 +95,8 @@ STATICFILES_DIR = [
     BASE_DIR / 'static',
     BASE_DIR / 'main' / 'static',
     BASE_DIR / 'accounts' / 'static',
+    BASE_DIR / 'blog' / 'static',
+    BASE_DIR / 'recrutement' / 'static',
     ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
@@ -104,7 +108,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # LOGIN
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'my_account'
+LOGIN_REDIRECT_URL = 'admin_index'
 
 # EMAIL SETTINGS #
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -152,11 +156,11 @@ customColorPalette = [
 ]
 
 CKEDITOR_5_CONFIGS = {
-'default': {
-    'toolbar': ['heading', '|', 'bold', 'italic', 'link',
-                'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
+    'default': {
+        'toolbar': ['heading', '|', 'bold', 'italic', 'link',
+                    'bulletedList', 'numberedList', 'blockQuote', 'imageUpload', ],
 
-    },
+        },
     'extends': {
         'blockToolbar': [
             'paragraph', 'heading1', 'heading2', 'heading3',
@@ -196,10 +200,36 @@ CKEDITOR_5_CONFIGS = {
         },
         'heading' : {
             'options': [
-                { 'model': 'paragraph', 'title': 'Paragraph', 'class': 'ck-heading_paragraph' },
-                { 'model': 'heading1', 'view': 'h1', 'title': 'Heading 1', 'class': 'ck-heading_heading1' },
-                { 'model': 'heading2', 'view': 'h2', 'title': 'Heading 2', 'class': 'ck-heading_heading2' },
-                { 'model': 'heading3', 'view': 'h3', 'title': 'Heading 3', 'class': 'ck-heading_heading3' }
+                { 
+                    'model': 'paragraph', 
+                    'title': 'Paragraph', 
+                    'class': 'ck-heading_paragraph' 
+                },
+                { 
+                    'model': 'heading1', 
+                    'view': 'h1', 
+                    'title': 'Heading 1', 
+                    'class': 'ck-heading_heading1' 
+                },
+                { 
+                    'model': 'heading2', 
+                    'view': 'h2', 
+                    'title': 'Heading 2', 
+                    'class': 'ck-heading_heading2' 
+                },
+                { 
+                    'model': 'heading3', 
+                    'view': 'h3', 
+                    'title': 'Heading 3', 
+                    'class': 'ck-heading_heading3' 
+                }
+            ]
+        },
+        'fontFamily': {
+            'options': [
+                'Playfair Display, serif',
+                'Arial, sans-serif',
+                'Courier New, monospace',
             ]
         }
     },

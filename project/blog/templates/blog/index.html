@@ -1,0 +1,139 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Les Articles - Bremond Rénovation{% endblock %}
+
+{% block extra_head %}
+<style>
+    .category-select {
+        background-color: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.75rem;
+        padding: 1rem 1.5rem;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%234B5563'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1.5rem;
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    }
+
+    .category-select:focus {
+        outline: 2px solid var(--terre);
+        outline-offset: 2px;
+    }
+
+    .article-card {
+        isolation: isolate;
+        overflow: hidden;
+    }
+
+    .article-card:hover .article-image {
+        transform: scale(1.05);
+    }
+
+    .article-image {
+        transition: transform 0.6s ease;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="mt-32 w-full py-20 bg-blanc flex flex-col z-[2] shadow-lg">
+    <div class="w-full max-w-[1080px] mx-auto px-4 sm:px-6">
+        <!-- Title -->
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-center playfair terre drop-shadow-lg">
+            Les Articles de Blog
+        </h1>
+        
+        <!-- Description -->
+        <div class="py-10 raleway charbon text-lg sm:text-xl md:text-2xl font-light text-center space-y-6">
+            <p>Retrouvez toute l'actualité de Bremond Rénovation.</p>
+            <p>Dans cette section, vous pouvez consulter les derniers articles, et filtrer le contenu par catégorie.</p>
+            <p>
+                Vous avez des questions ? 
+                <a href="#contact" class="text-blue-500 underline decoration-1 underline-offset-4 hover:text-blue-600 transition-colors">
+                    Contactez-nous →
+                </a>
+            </p>
+        </div>
+
+        <!-- Category Filter -->
+        <form action="{% url 'blog_index' %}" method="get" class="w-full max-w-[500px] mx-auto">
+            <select name="categorie" onchange="window.location.href = this.value;" 
+                    class="category-select w-full raleway text-lg md:text-xl">
+                <option value="" class="text-lg">Filtrer par catégorie</option>
+                {% for categorie in categories %}
+                    <option value="{% url 'blog_category' slug=categorie.slug %}#articles" class="text-lg">
+                        {{ categorie.title }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+</section>
+
+<!-- Articles Section -->
+<section class="bg-pierre py-20 z-[3] relative">
+    <div class="absolute left-0 top-0 -translate-y-20" id="articles"></div>
+    <div class="w-full max-w-[1080px] mx-auto px-4 sm:px-6">
+        <!-- Section Title -->
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl xl:text-6xl text-center playfair terre drop-shadow-md mb-12">
+            {% if category_selected %}
+                Les Articles de la catégorie : {{category.title}}
+            {% else %}
+                Les Derniers Articles
+            {% endif %}
+        </h2>
+
+        <!-- Articles Grid -->
+        <div class="flex flex-col gap-8">
+            {% for article in articles %}
+            <a href="{% url 'article_detail' article.slug %}" class="article-card bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1">
+                <div class="flex flex-col md:flex-row gap-6 p-4 sm:p-6">
+                    <!-- Article Image -->
+                    <div class="md:basis-72 shrink-0 h-48 md:h-72 rounded-xl overflow-hidden">
+                        <img src="{{article.thumbnail.url}}" 
+                             alt="{{article.title}}" 
+                             class="article-image h-full w-full object-cover object-center">
+                    </div>
+
+                    <!-- Article Content -->
+                    <div class="flex flex-col flex-grow">
+                        <div class="flex flex-wrap items-center gap-4 text-sm text-slate-500">
+                            <div class="flex gap-2">
+                                {% for cat in article.categories.all %}
+                                    <span class="bg-slate-50 px-3 py-1 rounded-full">{{cat.title}}</span>
+                                    {% if not forloop.last %} {% endif %}
+                                {% endfor %}
+                            </div>
+                            <time class="text-slate-400">
+                                {{article.created_on|date:"d F Y"}}
+                            </time>
+                        </div>
+
+                        <h3 class="charbon playfair font-semibold text-xl sm:text-2xl md:text-3xl mt-4">
+                            {{article.title}}
+                        </h3>
+
+                        <p class="line-clamp-3 text-base sm:text-lg font-light raleway text-slate-600 mt-4">
+                            {{article.introduction}}
+                        </p>
+
+                        <span class="mt-6 text-blue-500 group-hover:text-blue-600 transition-colors text-lg inline-flex items-center gap-2">
+                            Lire l'article 
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% include 'main/contact-section.html' %}
+{% endblock %}
