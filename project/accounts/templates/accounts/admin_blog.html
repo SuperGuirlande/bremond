@@ -11,29 +11,29 @@ Espace Administrateur - Les Réalisations
 
 {% block content %}
 <!-- BLOG -->
-<section class="flex-1 w-full flex flex-col items-center justify-center py-20 bg-blanc relative z-[4] mt-28">
-    <div class="w-full max-w-[1280px] flex flex-col">
-        <a href="{% url 'admin_index' %}" class="text-blue-500 underline hover:text-blue-600 text-lg">← Retour espace administrateur</a>
+<section class="flex-1 w-full flex flex-col items-center justify-center py-12 sm:py-16 md:py-20 bg-blanc relative z-[4] mt-20 sm:mt-24 md:mt-28">
+    <div class="w-full max-w-[1280px] flex flex-col px-4 sm:px-6 md:px-8">
+        <a href="{% url 'admin_index' %}" class="text-blue-500 underline hover:text-blue-600 text-base sm:text-lg mb-6">← Retour espace administrateur</a>
         <h1 class="text-center playfair granit text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl">
             Les Articles de Blog
         </h1>
-        <p class="text-xl raleway  charbon text-center my-8">
+        <p class="text-lg sm:text-xl raleway charbon text-center my-6 sm:my-8 px-4">
             Dans cette section, vous pouvez en toute simplicité <b>créer, modifier, ou supprimer des articles de blog</b>.
-            <br>
+            <br class="hidden sm:block">
             <b>Tout le contenu sera automatiquement ajouté au site</b>
         </p>
 
         {% if request.session.success %}
         <!-- ALERT / SUCCESS -->
-            <div class="w-full max-w-[600px] mx-auto bg-green-100 border-l-4 border-green-500 rounded-md p-4 mb-6">
+            <div class="w-full max-w-[600px] mx-auto bg-green-100 border-l-4 border-green-500 rounded-md p-3 sm:p-4 mb-6">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <svg class="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                        <svg class="h-4 w-4 sm:h-5 sm:w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                         </svg>
                     </div>
                     <div class="ml-3">
-                        <p class="text-green-700 font-medium text-lg">
+                        <p class="text-green-700 font-medium text-base sm:text-lg">
                             {{ request.session.success }}
                         </p>
                     </div>
@@ -44,47 +44,47 @@ Espace Administrateur - Les Réalisations
     </div>
 </section>
 
-<section class="w-full flex flex-col">
-    
-    <div class="my-10 flex flex-col text-left w-full max-w-[1080px] mx-auto">
+<section class="w-full flex flex-col px-4 sm:px-6 md:px-8">
+    <div class="my-6 sm:my-8 md:my-10 flex flex-col text-left w-full max-w-[1080px] mx-auto">
         <a href="{% url 'create_article' %}" class="mx-auto">
-            <button class="bg-granit uppercase text-xl text-white py-3 px-8 rounded-md hover:bg-amber-900 hover:-translate-y-1 
-                hover:shadow-xl shadow-lg transition-all duration-300 ease-in-out">
+            <button class="bg-granit uppercase text-lg sm:text-xl text-white py-2 sm:py-3 px-6 sm:px-8 rounded-md hover:bg-amber-900 
+                hover:-translate-y-1 hover:shadow-xl shadow-lg transition-all duration-300 ease-in-out">
                 Rédiger un article
             </button>
         </a>
         {% if not articles.exists %}
-            <p class="text-xl md:text-2xl raleway font-light charbon my-10 text-center">
+            <p class="text-lg sm:text-xl md:text-2xl raleway font-light charbon my-8 sm:my-10 text-center">
                 Aucun article de blog pour le moment
             </p>
 
         {% else %}
-        <div class="my-10 flex flex-col gap-5">
+        <div class="my-6 sm:my-8 md:my-10 flex flex-col gap-4 sm:gap-5">
             {% for article in articles %}
-                <div class="bg-blanc rounded-2xl flex gap-5 sm:gap-10 p-3 sm:p-8 sm:px-12 items-center">
-                    <div class="h-40 basis-40 shrink-0 grow-0 overflow-hidden rounded-xl">
-                        <img src="{{article.thumbnail.url}}" alt="Miniture de l'article {{article.title}}" class="h-full w-full object-cover object-center hover:scale-105 transition-all duration-300">
+                <div class="bg-blanc rounded-xl sm:rounded-2xl flex flex-col sm:flex-row gap-3 sm:gap-5 md:gap-10 p-3 sm:p-6 md:p-8 md:px-12">
+                    <div class="h-32 sm:h-40 w-full sm:w-40 sm:basis-40 shrink-0 grow-0 overflow-hidden rounded-lg sm:rounded-xl">
+                        <img src="{{article.thumbnail.url}}" alt="Miniture de l'article {{article.title}}" 
+                             class="h-full w-full object-cover object-center hover:scale-105 transition-all duration-300">
                     </div>
-                    <div class="flex flex-col gap-3 h-full">
+                    <div class="flex flex-col gap-2 sm:gap-3 h-full flex-1">
                         <p class="text-xs sm:text-sm raleway text-slate-500">
                             Rédigé le {{article.created_on}} | Dernière modification le {{article.last_updated}}
                         </p>
-                        <h3 class="text-xl sm:text-2xl playfair charbon font-semibold">{{article.title}}</h3>
-                        <p class="line-clamp-2 text-lg font-light raleway charbon">{{article.introduction}}</p>
+                        <h3 class="text-lg sm:text-xl md:text-2xl playfair charbon font-semibold">{{article.title}}</h3>
+                        <p class="line-clamp-2 text-base sm:text-lg font-light raleway charbon">{{article.introduction}}</p>
 
-                        <div class="flex gap-5 mt-auto justify-end w-max">
-                            <a href="{% url 'edit_article' article.id %}">
-                                <button class="py-2 px-5 rounded-md uppercase text-white bg-blue-500 hover:bg-blue-400">
+                        <div class="flex flex-wrap gap-2 sm:gap-5 mt-3 sm:mt-auto justify-start sm:justify-end w-full sm:w-max">
+                            <a href="{% url 'edit_article' article.id %}" class="w-full sm:w-auto">
+                                <button class="w-full sm:w-auto py-2 px-4 sm:px-5 rounded-md uppercase text-sm sm:text-base text-white bg-blue-500 hover:bg-blue-400">
                                     Modifier l'article
                                 </button>
                             </a>
-                            <a href="{% url 'article_detail' article.slug %}">
-                                <button class="py-2 px-5 rounded-md uppercase text-white bg-gray-500 hover:bg-gray-400">
+                            <a href="{% url 'article_detail' article.slug %}" class="w-full sm:w-auto">
+                                <button class="w-full sm:w-auto py-2 px-4 sm:px-5 rounded-md uppercase text-sm sm:text-base text-white bg-gray-500 hover:bg-gray-400">
                                     Apercu
                                 </button>
                             </a>
-                            <a href="{% url 'confirm_delete_article' article.slug %}">
-                                <button class="py-2 px-5 rounded-md uppercase text-white bg-red-500 hover:bg-red-400">
+                            <a href="{% url 'confirm_delete_article' article.slug %}" class="w-full sm:w-auto">
+                                <button class="w-full sm:w-auto py-2 px-4 sm:px-5 rounded-md uppercase text-sm sm:text-base text-white bg-red-500 hover:bg-red-400">
                                     Supprimer
                                 </button>
                             </a>
@@ -96,5 +96,4 @@ Espace Administrateur - Les Réalisations
         {% endif %}
     </div>
 </section>
-
 {% endblock %}
