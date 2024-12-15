@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, services, histoire, contact
+from .views import index, services, histoire, contact, mentions, confident
 from realisations.views import realisations, realisation_detail
 
 
@@ -11,4 +11,6 @@ urlpatterns = [
     path('contact/', contact, name='contact'),
     path('realisations/categorie/<slug:category_slug>/', realisations, name='realisations_by_category'),
     path('realisations/<slug:slug>/', realisation_detail, name='realisation_detail'),
+    path('mentions-legales/', mentions, name='mentions'),
+    path('politique-de-confidentialite/', confident, name='confident'),
 ]

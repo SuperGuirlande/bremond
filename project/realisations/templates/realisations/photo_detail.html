@@ -7,8 +7,8 @@
 {% block content %}
 <section class="min-h-[85vh] bg-blanc py-48">
     <div class="text-center raleway flex flex-col justify-center">
-        <h1 class="text-6xl gilda granit">Détail de la photo</h1>
-        <p class="text-xl charbon my-10">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl gilda granit">Détail de la photo</h1>
+        <p class="text-base sm:text-lg md:text-xl charbon my-10">
             <b>Titre de l'image : </b>{{photo.title}}
             <br>
             <b>Réalisation : </b>{{photo.realisation.title}}
@@ -16,7 +16,7 @@
         <div class="w-full max-w-[600px] mx-auto">
             <img src="{{photo.file.url}}" alt="{{photo.title}}" class="w-full rounded-xl shadow-md">
         </div>
-        <div class="flex gap-8 my-5 mx-auto">
+        <div class="flex gap-8 my-5 mx-auto flex-wrap justify-center">
             <a href="{% url 'admin_index' %}#realisation_{{photo.realisation.id}}" alt="" class=" w-fit py-3 px-8 text-xl text-center bg-blue-500 hover:bg-blue-400
             text-white rounded-xl shadow:md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ease-in-out">
                 Retour

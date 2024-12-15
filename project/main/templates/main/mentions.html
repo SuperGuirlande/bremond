@@ -1,0 +1,112 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Mentions Légales - Bremond Rénovation{% endblock %}
+
+{% block content %}
+<!-- HERO SECTION -->
+<section class="min-h-[40vh] bg-granit flex relative pt-40 pb-28">
+    <div class="container mx-auto flex flex-col justify-center">
+        <div class="text-center my-12">
+            <h1 class="gilda text-4xl sm:text-5xl md:text-6xl lg:text-7xl blanc mb-4"
+            data-aos="fade-in" data-aos-duration="1500">
+                Mentions Légales
+            </h1>
+            <h2 class="alex blanc text-3xl sm:text-4xl md:text-5xl font-light max-w-3xl mx-auto"
+            data-aos="fade-in" data-aos-duration="1500" data-aos-delay="200">
+                Informations réglementaires
+            </h2>
+        </div>
+    </div>
+</section>
+
+<!-- MENTIONS SECTION -->
+<section class="py-16 bg-blanc">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            
+            <div class="space-y-8">
+                <!-- Éditeur du site -->
+                <div class="bg-pierre p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl granit playfair mb-4">Éditeur du site</h2>
+                    <div class="raleway terre space-y-2">
+                        <p><span class="font-medium">Raison sociale :</span> SARL BREMOND RENOVATION</p>
+                        <p><span class="font-medium">Capital social :</span> 10 000€</p>
+                        <p><span class="font-medium">Siège social :</span> 14 rue de la salamandre, 17520 Lonzac</p>
+                        <p><span class="font-medium">SIRET :</span> 978 382 349 00016</p>
+                        <p><span class="font-medium">TVA Intracommunautaire :</span> FR71978382349</p>
+                        <p><span class="font-medium">Téléphone :</span> 07 69 55 08 96</p>
+                        <p><span class="font-medium">Email :</span> bremondrenovation@gmail.com</p>
+                    </div>
+                </div>
+
+                <!-- Direction de la publication -->
+                <div class="bg-pierre p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl granit playfair mb-4">Direction de la publication</h2>
+                    <p class="raleway terre">
+                        Directeur de la publication : Alexis BREMOND, en qualité de gérant
+                    </p>
+                </div>
+
+                <!-- Hébergement -->
+                <div class="bg-pierre p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl granit playfair mb-4">Hébergement</h2>
+                    <div class="raleway terre space-y-2">
+                        <p><span class="font-medium">Hébergeur :</span> OVH SAS</p>
+                        <p><span class="font-medium">Siège social :</span> 2 rue Kellermann - 59100 Roubaix - France</p>
+                        <p><span class="font-medium">Téléphone :</span> 1007</p>
+                    </div>
+                </div>
+
+                <!-- Propriété intellectuelle -->
+                <div class="bg-pierre p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl granit playfair mb-4">Propriété intellectuelle</h2>
+                    <div class="raleway terre space-y-4">
+                        <p>L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Tous les droits de reproduction sont réservés, y compris pour les documents téléchargeables et les représentations iconographiques et photographiques.</p>
+                        <p>La reproduction de tout ou partie de ce site sur quelque support que ce soit est formellement interdite sauf autorisation expresse de BREMOND RENOVATION.</p>
+                    </div>
+                </div>
+
+                <!-- Protection des données -->
+                <div class="bg-pierre p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl granit playfair mb-4">Protection des données personnelles</h2>
+                    <div class="raleway terre space-y-4">
+                        <p>Les informations collectées via notre formulaire de contact sont destinées à BREMOND RENOVATION et ne sont en aucun cas cédées ou vendues à des tiers. Conformément à la loi "Informatique et Libertés" du 6 janvier 1978 modifiée, vous disposez d'un droit d'accès, de modification et de suppression des données vous concernant.</p>
+                        <p>Pour exercer ce droit, vous pouvez nous contacter :</p>
+                        <ul class="list-disc pl-6">
+                            <li>Par email : bremondrenovation@gmail.com</li>
+                            <li>Par courrier : BREMOND RENOVATION, 14 rue de la salamandre, 17520 Lonzac</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Cookies -->
+                <div class="bg-pierre p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl granit playfair mb-4">Cookies</h2>
+                    <div class="raleway terre space-y-4">
+                        <p>Notre site utilise des cookies techniques nécessaires à son bon fonctionnement. Ces cookies ne collectent aucune donnée personnelle et ne sont utilisés qu'à des fins de navigation.</p>
+                    </div>
+                </div>
+
+                <!-- Assurances -->
+                <div class="bg-pierre p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl granit playfair mb-4">Assurances professionnelles</h2>
+                    <div class="raleway terre space-y-4">
+                        <p>BREMOND RENOVATION est assurée pour sa responsabilité civile professionnelle et décennale auprès de la compagnie SMA BTP pour l'ensemble de ses activités.</p>
+                    </div>
+                </div>
+
+                <!-- Litiges -->
+                <div class="bg-pierre p-8 rounded-lg shadow-md">
+                    <h2 class="text-2xl granit playfair mb-4">Litiges</h2>
+                    <div class="raleway terre space-y-4">
+                        <p>Le présent site est régi par la loi française. En cas de litige, les tribunaux français seront seuls compétents.</p>
+                        <p>Pour toute réclamation, vous pouvez nous contacter aux coordonnées indiquées ci-dessus.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

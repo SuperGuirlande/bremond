@@ -102,14 +102,19 @@
                 <p class="text-sm opacity-75 text-center lg:text-left">
                     © 2024 Bremond Rénovation. Tous droits réservés.
                 </p>
-                <div class="flex gap-4 text-sm opacity-75">
-                    <a href="#" class="hover:terre transition-colors duration-300">Mentions Légales</a>
-                    <span>|</span>
-                    <a href="#" class="hover:terre transition-colors duration-300">Politique de Confidentialité</a>
-                    <span>|</span>
+                <div class="flex gap-4 text-sm opacity-75 flex-wrap justify-center">
+                    <a href="{% url 'mentions' %}" class="hover:terre transition-colors duration-300">Mentions Légales</a>
+                    <span class="hidden sm:block">|</span>
+                    <a href="{% url 'confident' %}" class="hover:terre transition-colors duration-300">Politique de Confidentialité</a>
+                    <span class="hidden sm:block">|</span>
                     <a href="{% url 'admin_index' %}" class="hover:terre transition-colors duration-300">Espace Administrateur</a>
                 </div>
             </div>
+            <a href="https://www.agencecodemaster.com/" target="_blank">
+                <p class="text-sm opacity-75 text-center lg:text-left mt-2">
+                    Site réalisé avec ♥ par Dylan Saint-Jalmes | Agence Web CodeMaster© 2024
+                </p>
+            </a>
         </div>
     </div>
 </footer>

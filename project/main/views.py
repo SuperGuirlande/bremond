@@ -82,4 +82,9 @@ def contact(request):
     return render(request, "main/contact.html", context)
 
 
+def mentions(request):
+    return render(request, 'main/mentions.html')
+
+def confident(request):
+    return render(request, 'main/confident.html')
 
