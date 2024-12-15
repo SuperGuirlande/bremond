@@ -29,6 +29,8 @@ def blog_index(request, slug=None):
     else:
         form = ContactForm()
 
+    articles.order_by('-id')
+
     return render(request, 'blog/index.html', context={
         'categories': categories,    
         'articles': articles,
