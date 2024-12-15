@@ -37,6 +37,37 @@
     }
 </style>
 <link rel="stylesheet" href="{% static 'css/ck_styles.css' %}">
+
+{% load static %}
+<!-- Balises meta principales pour le SEO -->
+<meta name="description" content="Expert en rénovation du bâti ancien depuis 1979. Maçonnerie traditionnelle, couverture, pierre de taille en Charente et Charente-Maritime. Savoir-faire artisanal & matériaux naturels.">
+<meta name="keywords" content="{% for category in realisation.categories.all %}{{category.title}}, {% endfor %}maçonnerie traditionnelle, bâti ancien, rénovation pierre, restauration patrimoine, maçon Charente Maritime, rénovation Cognac, artisan Jonzac, pierres de taille, moellons, jointoiement pierre, ravalement façade, enduit chaux naturelle, chaux Saint Astier, murs anciens, réfection façade, restauration monuments historiques, couverture tuiles, couvreur traditionnel, tuiles terre cuite, tuiles tiges de bottes, tuiles mécaniques, réparation toiture, zinguerie traditionnelle, gouttières zinc, rénovation charpente, détection fuite toiture, nettoyage toiture, démoussage, traitement toiture, création ouvertures, agrandissement fenêtre, pose linteau pierre, restauration corniche, réparation façade pierre, Charente 16, Charente-Maritime 17, Pons, Saintes, artisan RGE, rénovation écologique, matériaux naturels, savoir-faire traditionnel, patrimoine charentais, intervention bâtiments classés, mortier chaux, rénovation maison ancienne, renovation château, rénovation corps de ferme, expertise bâti ancien, artisan qualifié">
+
+<!-- Open Graph pour les réseaux sociaux -->
+<meta property="og:title" content="{{ realisation.title }}">
+<meta property="og:description" content="Spécialiste de la rénovation traditionnelle en Charente Maritime. Maçonnerie, couverture, pierre de taille & enduits à la chaux naturelle.">
+<meta property="og:image" content="{{ thumbnail_url }}">
+<meta property="og:url" content="[URL_DE_VOTRE_SITE]">
+<meta property="og:type" content="website">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bremond Rénovation - Artisan du patrimoine">
+<meta name="twitter:description" content="Expert en rénovation traditionnelle en Charente Maritime. Maçonnerie, couverture & restauration du patrimoine ancien.">
+<meta name="twitter:image" content="{{ thumbnail_url }}">
+
+<!-- Informations additionnelles -->
+<meta name="author" content="Bremond Rénovation">
+<meta name="geo.region" content="FR-17">
+<meta name="geo.placename" content="Lonzac">
+<meta name="geo.position" content="45.5833;-0.4167">
+<meta name="robots" content="index, follow">
+
+<!-- Balises spécifiques à l'entreprise -->
+<meta name="coverage" content="Charente, Charente-Maritime">
+<meta name="directory" content="submission">
+<meta name="category" content="Rénovation bâtiment, Artisanat">
+<meta name="revisit-after" content="7 days">
 {% endblock %}
 
 {% block content %}

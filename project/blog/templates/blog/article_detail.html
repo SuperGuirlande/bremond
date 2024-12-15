@@ -75,12 +75,12 @@
 </style>
 <!-- META -->
 <!-- Balises meta principales pour le SEO -->
-<meta name="description" content="Expert en rénovation du bâti ancien depuis 1979. Maçonnerie traditionnelle, couverture, pierre de taille en Charente et Charente-Maritime. Savoir-faire artisanal & matériaux naturels.">
+<meta name="description" content="{{ article.introduction|safe }}">
 <meta name="keywords" content="{{article.keywords}}, maçonnerie traditionnelle, bâti ancien, rénovation pierre, restauration patrimoine, maçon Charente Maritime, rénovation Cognac, artisan Jonzac, pierres de taille, moellons, jointoiement pierre, ravalement façade, enduit chaux naturelle, chaux Saint Astier, murs anciens, réfection façade, restauration monuments historiques, couverture tuiles, couvreur traditionnel, tuiles terre cuite, tuiles tiges de bottes, tuiles mécaniques, réparation toiture, zinguerie traditionnelle, gouttières zinc, rénovation charpente, détection fuite toiture, nettoyage toiture, démoussage, traitement toiture, création ouvertures, agrandissement fenêtre, pose linteau pierre, restauration corniche, réparation façade pierre, Charente 16, Charente-Maritime 17, Pons, Saintes, artisan RGE, rénovation écologique, matériaux naturels, savoir-faire traditionnel, patrimoine charentais, intervention bâtiments classés, mortier chaux, rénovation maison ancienne, renovation château, rénovation corps de ferme, expertise bâti ancien, artisan qualifié">
 
 <!-- Open Graph pour les réseaux sociaux -->
 <meta property="og:title" content="{{article.title}}">
-<meta property="og:description" content="{{article.introduction}}">
+<meta property="og:description" content="{{article.introduction|safe}}">
 <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ article.thumbnail.url|safe }}">
 <meta property="og:url" content="[URL_DE_VOTRE_SITE]">
 <meta property="og:type" content="article">

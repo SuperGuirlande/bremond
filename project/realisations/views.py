@@ -48,10 +48,14 @@ def realisations(request, category_slug=None):
 def realisation_detail(request, slug):
     realisation = get_object_or_404(Realisation, slug=slug)
     photos = realisation.photos.all()  # Récupère toutes les photos associées
-    
+
+    first = photos.first()
+    thumbnail_url = request.build_absolute_uri(first.file.url)
+
     context = {
         'realisation': realisation,
         'photos': photos,
+        'thumbnail_url': thumbnail_url,
     }
     
     return render(request, 'realisations/realisation_detail.html', context)
