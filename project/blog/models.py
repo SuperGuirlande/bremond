@@ -62,3 +62,6 @@ class BlogArticle(models.Model):
             self.slug = unique
         
         super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title

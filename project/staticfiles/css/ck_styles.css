@@ -28,11 +28,45 @@
     .ck-editor__editable {
         height: 500px;
     }
+    
 }
 
 @media screen and (min-width: 1270px) {
     .ck-editor__editable {
         height: 700px;
+    }
+}
+
+
+@media screen and (maw-width: 720px) {
+    .ck-content h1 {
+        font-size: 2rem;
+        color: var(--charbon);
+    }
+    .ck-content h2 {
+        font-size: 1.7rem;
+        color: var(--granit)!important;
+    }
+    
+    .ck-content h3 {
+        color: var(--granit);
+        font-size: 1.4rem;
+    }
+}
+
+@media screen and (maw-width: 720px) {
+    .ck-content h1 {
+        font-size: 2.2rem;
+        color: var(--charbon);
+    }
+    .ck-content h2 {
+        font-size: 1.8rem;
+        color: var(--granit)!important;
+    }
+
+    .ck-content h3 {
+        color: var(--granit);
+        font-size: 1.6rem;
     }
 }
 
