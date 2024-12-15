@@ -81,7 +81,7 @@
 <!-- Open Graph pour les réseaux sociaux -->
 <meta property="og:title" content="{{article.title}}">
 <meta property="og:description" content="{{article.introduction}}">
-<meta property="og:image" content="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{{ article.thumbnail.url|escapejs }}">
+<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ article.thumbnail.url|safe }}">
 <meta property="og:url" content="[URL_DE_VOTRE_SITE]">
 <meta property="og:type" content="article">
 
