@@ -1,5 +1,6 @@
 {# main/realisation_detail.html #}
 {% extends 'main/base.html' %}
+{% load static %}
 
 {% block extra_head %}
 {# Swiper CSS #}
@@ -8,24 +9,24 @@
     /* Personnalisation des flèches de navigation */
     .swiper-button-next,
     .swiper-button-prev {
-        color: #C8A977; /* Couleur terre */
+        color: #e5ddcf; /* Couleur terre */
         transition: all 0.3s ease;
     }
 
     .swiper-button-next:hover,
     .swiper-button-prev:hover {
-        color: #9A815A; /* Version plus foncée au survol */
+        color: #dbc5a2; /* Version plus foncée au survol */
     }
 
     /* Personnalisation de la pagination */
     .swiper-pagination-bullet {
-        background: #C8A977;
+        background: #ffffff;
         opacity: 0.5;
     }
 
     .swiper-pagination-bullet-active {
         opacity: 1;
-        background: #C8A977;
+        background: #dad2c5;
     }
 
     /* Optionnel : ajuster la taille des flèches */
@@ -35,74 +36,95 @@
         font-weight: bold;
     }
 </style>
+<link rel="stylesheet" href="{% static 'css/ck_styles.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="w-full max-w-[1080px] mx-auto px-4 py-8 mt-40">
-    {# Fil d'Ariane #}
-    <nav class="flex mb-6 text-sm" aria-label="Breadcrumb">
-        <ol class="flex items-center space-x-1">
-            <li>
-                <a href="{% url 'realisations' %}" class="text-gray-500 hover:text-gray-700">Réalisations</a>
-            </li>
-            <li class="flex items-center">
-                <span class="text-gray-400 mx-2">/</span>
-                <span class="text-gray-900">{{ realisation.title }}</span>
-            </li>
-        </ol>
-    </nav>
+<section class="bg-blanc mt-16 md:mt-20 py-16 sm:py-20 md:py-24 flex flex-col">
+    <div class="w-full max-w-[1080px] mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-8 bg-white shadow-xl">
+        {# Fil d'Ariane #}
+        <nav class="flex mb-6 text-sm" aria-label="Breadcrumb">
+            <ol class="flex items-center space-x-1">
+                <li>
+                    <a href="{% url 'realisations' %}" class="text-gray-500 hover:text-gray-700">Réalisations</a>
+                </li>
+                <li class="flex items-center">
+                    <span class="text-gray-400 mx-2">/</span>
+                    <span class="text-gray-900">{{ realisation.title }}</span>
+                </li>
+            </ol>
+        </nav>
 
-    {# Titre et Catégories #}
-    <div class="mb-8">
-        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl granit gilda font-bold mb-4">
-            {{ realisation.title }}
-        </h1>
-        <div class="flex flex-wrap gap-2">
-            {% for category in realisation.categories.all %}
-                <a href="{% url 'realisations_by_category' category.slug %}"
-                   class="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-gray-200">
-                    {{ category.title }}
-                </a>
-            {% endfor %}
-        </div>
-    </div>
-
-    {# Carrousel de photos #}
-    {% if photos %}
-    <div class="mb-12">
-        <div class="swiper mainSwiper">
-            <div class="swiper-wrapper">
-                {% for photo in photos %}
-                    <div class="swiper-slide">
-                        <div class="aspect-w-16 aspect-h-9">
-                            <img src="{{ photo.file.url }}" 
-                                 alt="{{ photo.title }}"
-                                 class="object-contain w-full h-full">
-                        </div>
-                    </div>
+        {# Titre et Catégories #}
+        <div class="mb-8">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl granit gilda font-bold mb-4">
+                {{ realisation.title }}
+            </h1>
+            <div class="flex flex-wrap gap-2">
+                {% for category in realisation.categories.all %}
+                    <a href="{% url 'realisations_by_category' category.slug %}"
+                    class="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-gray-200">
+                        {{ category.title }}
+                    </a>
                 {% endfor %}
             </div>
-            
-            {# Navigation #}
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            
-            {# Pagination #}
-            <div class="swiper-pagination"></div>
+        </div>
+
+        {# Carrousel de photos #}
+        {% if photos %}
+        <div class="mb-12">
+            <div class="swiper mainSwiper">
+                <div class="swiper-wrapper">
+                    {% for photo in photos %}
+                        <div class="swiper-slide">
+                            <div class="aspect-w-16 aspect-h-12">
+                                <img src="{{ photo.file.url }}" 
+                                    alt="{{ photo.title }}"
+                                    class="object-contain w-full h-full">
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                
+                {# Navigation #}
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                
+                {# Pagination #}
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        {% endif %}
+
+        {# Contenu CKEditor #}
+        <div class="ck-content">
+            {{ realisation.content|safe }}
+        </div>
+
+        {# Date de création #}
+        <div class="mt-8 text-sm text-gray-500">
+            Créé le {{ realisation.created_on|date:"d/m/Y" }}
         </div>
     </div>
-    {% endif %}
 
-    {# Contenu CKEditor #}
-    <div class="prose max-w-none">
-        {{ realisation.content|safe }}
-    </div>
+    <div class="flex mx-auto gap-8 flex-wrap my-12 justify-center">
 
-    {# Date de création #}
-    <div class="mt-8 text-sm text-gray-500">
-        Créé le {{ realisation.created_on|date:"d/m/Y" }}
+        <a href="{% url 'realisations' %}#realisations" class="text-center">
+            <button class="py-3 px-8 text-lg text-white rounded-sm bg-terre uppercase hover:bg-[var(--granit)]
+                hover:-translate-y-1 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out">
+                Voir d'autres projets
+            </button>
+        </a>
+
+
+        <a href="{% url 'contact' %}" class="text-center">
+            <button class="py-3 px-8 text-lg text-white rounded-sm bg-granit uppercase hover:bg-[var(--charbon)]
+                hover:-translate-y-1 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out">
+                Nous Contacter
+            </button>
+        </a>
     </div>
-</div>
+</section>
 {% endblock %}
 
 {% block extra_script %}

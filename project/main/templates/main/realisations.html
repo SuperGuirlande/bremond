@@ -7,7 +7,7 @@
     .realisation-card {
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
+
     .realisation-card:hover {
         transform: translateY(-8px) scale(1.02);
         box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
@@ -44,14 +44,45 @@
         background: linear-gradient(135deg, var(--terre) 0%, var(--ocre) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .stats-number.visible {
+        opacity: 1;
+        transform: translateY(0);
+        transition: all 0.6s ease;
+    }
+
+    .stat-icon {
+        transition: all 0.3s ease;
+    }
+
+    .stat-card:hover .stat-icon {
+        transform: scale(1.1);
+    }
+
+    @keyframes countUp {
+        from {
+            transform: translateY(10px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .counting-number {
+        animation: countUp 0.5s ease forwards;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<!-- Hero Section avec Image de Fond -->
-<section class="relative min-h-[60vh] bg-cover bg-center bg-fixed mt-16 sm:mt-20" 
-         style="background-image: url({% static 'images/services/services-hero.jpg' %});">
+<!-- Hero Section -->
+<section class="relative min-h-[60vh] bg-cover bg-center bg-fixed mt-16 sm:mt-20"
+    style="background-image: url({% static 'images/services/services-hero.jpg' %});">
     <div class="absolute inset-0 bg-black/50"></div>
     <div class="absolute inset-0 flex items-center justify-center">
         <div class="text-center text-white">
@@ -66,38 +97,77 @@
 </section>
 
 <!-- Stats Section -->
-<section class="bg-pierre py-16">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
-            <div class="p-6">
-                <div class="stats-number text-4xl md:text-5xl font-bold mb-2">{{ total_projects }}</div>
-                <div class="text-gray-600">Projets Réalisés</div>
+<section class="bg-pierre py-16 relative overflow-hidden">
+    <div class="absolute inset-0 bg-[url('{% static 'images/texture-bg.png' %}')] opacity-5"></div>
+    <div class="max-w-7xl mx-auto px-4 relative">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Projets Réalisés -->
+            <div class="stat-card bg-white p-8 rounded-xl shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="stat-icon text-terre w-12 h-12">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="var(--terre)">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="stats-number text-4xl md:text-5xl font-bold mb-2 text-center">
+                    {{ total_projects }}
+                </div>
+                <div class="text-gray-600 text-center text-lg">Projets Réalisés</div>
             </div>
-            <div class="p-6">
-                <div class="stats-number text-4xl md:text-5xl font-bold mb-2">{{ years_experience }}</div>
-                <div class="text-gray-600">Années d'Expérience</div>
+
+            <!-- Années d'Expérience -->
+            <div class="stat-card bg-white p-8 rounded-xl shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="stat-icon text-terre w-12 h-12">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="var(--terre)">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="stats-number text-4xl md:text-5xl font-bold mb-2 text-center">
+                    {{ years_experience }}
+                </div>
+                <div class="text-gray-600 text-center text-lg">Années d'Expérience</div>
             </div>
-            <div class="p-6">
-                <div class="stats-number text-4xl md:text-5xl font-bold mb-2">{{ satisfied_clients }}</div>
-                <div class="text-gray-600">Clients Satisfaits</div>
+
+            <!-- Clients Satisfaits -->
+            <div class="stat-card bg-white p-8 rounded-xl shadow-lg transform hover:-translate-y-1 transition-all duration-300">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="stat-icon text-terre w-12 h-12">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="var(--terre)">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="stats-number text-4xl md:text-5xl font-bold mb-2 text-center">
+                    {{ satisfied_clients }}
+                </div>
+                <div class="text-gray-600 text-center text-lg">Clients Satisfaits</div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Filtres Section -->
-<section class="py-16 bg-white">
+<section class="py-16 bg-white relative">
+    <!-- Ancre -->
+    <div class="absolute -translate-y-32" id="realisations"></div>
+    <!-- Filtres -->
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex flex-wrap items-center justify-center gap-4">
-            <a href="{% url 'realisations' %}" 
-               class="category-button px-6 py-3 text-lg transition-all {% if not selected_category %}active{% endif %}">
+            <a href="{% url 'realisations' %}#realisations"
+                class="category-button px-4 md:px-6 py-2 md:py-3 text-xs sm:text-sm md:text-lg transition-all {% if not selected_category %}active{% endif %}">
                 Tous les Projets
             </a>
             {% for category in categories %}
-            <a href="{% url 'realisations_by_category' category.slug %}" 
-               class="category-button px-6 py-3 text-lg transition-all {% if selected_category.slug == category.slug %}active{% endif %}">
+            <a href="{% url 'realisations_by_category' category.slug %}#realisations"
+                class="category-button px-6 py-3 text-xs sm:text-sm md:text-lg transition-all {% if selected_category.slug == category.slug %}active{% endif %}">
                 {{ category.title }}
-                <span class="ml-2 text-sm opacity-80">({{ category.real_count }})</span>
+                <span class="ml-2 text-xs sm:text-sm opacity-80">({{ category.real_count }})</span>
             </a>
             {% endfor %}
         </div>
@@ -109,53 +179,56 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for realisation in realisations %}
-            <a href="{% url 'realisation_detail' realisation.slug %}" class="block">
-                <article class="realisation-card relative rounded-xl overflow-hidden bg-white shadow-lg h-[450px]">
-                    {% if realisation.photos.first %}
-                    <div class="absolute inset-0">
-                        <img src="{{ realisation.photos.first.file.url }}" 
-                             alt="{{ realisation.photos.first.title }}"
-                             class="object-cover w-full h-full transform hover:scale-105 transition-transform duration-700">
-                    </div>
-                    {% endif %}
-                    
-                    <div class="content-overlay absolute inset-0 p-8 flex flex-col justify-end">
-                        <div class="transform translate-y-4 transition-transform duration-300 realisation-card-content">
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                {% for category in realisation.categories.all %}
-                                <span class="px-4 py-1.5 bg-white/90 text-terre rounded-full text-sm font-medium">
-                                    {{ category.title }}
-                                </span>
-                                {% endfor %}
-                            </div>
-                            
-                            <h2 class="text-2xl font-bold mb-4 text-white">{{ realisation.title }}</h2>
-                            
-                            <div class="text-gray-200 line-clamp-3 mb-4">
-                                {{ realisation.content|safe|truncatewords:25 }}
-                            </div>
-                            
-                            <div class="flex items-center text-gray-200">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                </svg>
-                                {{ realisation.created_on|date:"d/m/Y" }}
-                                
-                                <span class="ml-auto bg-terre/90 px-4 py-1.5 rounded-full text-white text-sm">
-                                    Voir le projet
-                                </span>
+            <div class="h-full"> <!-- Wrapper pour isoler chaque carte -->
+                <a href="{% url 'realisation_detail' realisation.slug %}" class="block h-full">
+                    <article class="realisation-card relative rounded-xl overflow-hidden bg-white shadow-lg h-[450px]">
+                        {% if realisation.photos.first %}
+                        <div class="absolute inset-0">
+                            <img src="{{ realisation.photos.first.file.url }}" 
+                                 alt="{{ realisation.photos.first.title }}"
+                                 class="object-cover w-full h-full transform hover:scale-105 transition-transform duration-700">
+                        </div>
+                        {% endif %}
+
+                        <div class="content-overlay absolute inset-0 p-8 flex flex-col justify-end">
+                            <div class="transform translate-y-4 transition-transform duration-300">
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    {% for category in realisation.categories.all %}
+                                    <span class="px-4 py-1.5 bg-white/90 text-terre rounded-full text-sm font-medium">
+                                        {{ category.title }}
+                                    </span>
+                                    {% endfor %}
+                                </div>
+
+                                <h2 class="text-2xl font-bold mb-4 text-white">{{ realisation.title }}</h2>
+
+                                <div class="text-gray-200 line-clamp-3 mb-4">
+                                    {{ realisation.content|safe|truncatewords:25 }}
+                                </div>
+
+                                <div class="flex items-center text-gray-200">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                    {{ realisation.created_on|date:"d/m/Y" }}
+
+                                    <span class="ml-auto bg-terre/90 px-4 py-1.5 rounded-full text-white text-sm">
+                                        Voir le projet
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </article>
-            </a>
+                    </article>
+                </a>
+            </div>
             {% empty %}
             <div class="col-span-full py-24 text-center bg-gray-50 rounded-xl">
                 <div class="max-w-md mx-auto">
-                    <svg class="w-20 h-20 mx-auto text-gray-400 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                              d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                    <svg class="w-20 h-20 mx-auto text-gray-400 mb-6" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                     </svg>
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">Aucun projet trouvé</h3>
                     <p class="text-gray-600">
@@ -179,11 +252,68 @@
         <p class="text-xl text-gray-600 mb-10">
             Contactez-nous pour discuter de votre projet et obtenir un devis personnalisé
         </p>
-        <a href="#contact" class="inline-block bg-terre hover:bg-amber-800 text-white px-8 py-4 rounded-lg text-xl transition-colors">
+        <a href="#contact"
+            class="inline-block bg-terre hover:bg-amber-800 text-white px-8 py-4 rounded-lg text-xl transition-colors">
             Parlons de votre projet
         </a>
     </div>
 </section>
 
 {% include 'main/contact-section.html' %}
+{% endblock %}
+
+{% block extra_script %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Animation des nombres
+    function animateValue(element, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const currentValue = Math.floor(progress * (end - start) + start);
+            element.innerHTML = currentValue;
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    // Observer pour déclencher les animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                
+                // Animation du nombre
+                const numberElement = entry.target;
+                const finalValue = parseInt(numberElement.textContent);
+                animateValue(numberElement, 0, finalValue, 2000);
+                
+                // Ne déclencher qu'une fois
+                observer.unobserve(numberElement);
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    // Observer tous les nombres
+    document.querySelectorAll('.stats-number').forEach(number => {
+        observer.observe(number);
+    });
+
+    // Animation au survol des cartes stats
+    document.querySelectorAll('.stat-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.querySelector('.stat-icon').classList.add('scale-110');
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.querySelector('.stat-icon').classList.remove('scale-110');
+        });
+    });
+});
+</script>
 {% endblock %}
