@@ -1,25 +1,22 @@
-{# main/realisations.html #}
 {% extends 'main/base.html' %}
-
-{% block title %}
-Nos Réalisations - Bremond Rénovation
-{% endblock %}
-
+{% load static %}
+{% block title %}Nos Réalisations - Bremond Rénovation{% endblock %}
 
 {% block extra_head %}
 <style>
     .realisation-card {
-        transition: all 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .realisation-card:hover {
-        transform: translateY(-8px);
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     }
 
     .realisation-card .content-overlay {
-        transition: all 0.3s ease;
+        transition: all 0.4s ease;
         opacity: 0;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%);
     }
 
     .realisation-card:hover .content-overlay {
@@ -29,102 +26,162 @@ Nos Réalisations - Bremond Rénovation
     .category-button {
         transition: all 0.3s ease;
         position: relative;
-        overflow: hidden;
     }
 
-    .category-button::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background-color: #C8A977;
-        transition: width 0.3s ease;
+    .category-button.active {
+        background-color: var(--terre);
+        color: white;
+        border-radius: 0.5rem;
     }
 
-    .category-button:hover::after {
-        width: 100%;
+    .category-button:not(.active):hover {
+        background-color: var(--terre);
+        color: white;
+        border-radius: 0.5rem;
+    }
+
+    .stats-number {
+        background: linear-gradient(135deg, var(--terre) 0%, var(--ocre) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<section class="w-full max-w-[1280px] mx-auto px-4 py-8 mt-40">
-    <h1 class="text-4xl md:text-6xl gilda font-bold mb-12 text-center granit">
-        <span class="terre">Nos</span> Réalisations
-    </h1>
+<!-- Hero Section avec Image de Fond -->
+<section class="relative min-h-[60vh] bg-cover bg-center bg-fixed mt-16 sm:mt-20" 
+         style="background-image: url({% static 'images/services/services-hero.jpg' %});">
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="absolute inset-0 flex items-center justify-center">
+        <div class="text-center text-white">
+            <h1 class="text-5xl md:text-7xl gilda mb-6">
+                Nos Réalisations
+            </h1>
+            <p class="text-xl md:text-2xl max-w-2xl mx-auto font-light">
+                Découvrez nos projets de rénovation et restauration du patrimoine
+            </p>
+        </div>
+    </div>
+</section>
 
-    {# Filtres de catégories #}
-    <div class="mb-16">
-        <div class="flex flex-wrap items-center justify-center gap-6">
+<!-- Stats Section -->
+<section class="bg-pierre py-16">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
+            <div class="p-6">
+                <div class="stats-number text-4xl md:text-5xl font-bold mb-2">{{ total_projects }}</div>
+                <div class="text-gray-600">Projets Réalisés</div>
+            </div>
+            <div class="p-6">
+                <div class="stats-number text-4xl md:text-5xl font-bold mb-2">{{ years_experience }}</div>
+                <div class="text-gray-600">Années d'Expérience</div>
+            </div>
+            <div class="p-6">
+                <div class="stats-number text-4xl md:text-5xl font-bold mb-2">{{ satisfied_clients }}</div>
+                <div class="text-gray-600">Clients Satisfaits</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Filtres Section -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex flex-wrap items-center justify-center gap-4">
             <a href="{% url 'realisations' %}" 
-               class="category-button px-6 py-3 text-lg {% if not selected_category %}terre font-bold{% else %}text-gray-600 hover:terre{% endif %}">
-                Toutes les réalisations
+               class="category-button px-6 py-3 text-lg transition-all {% if not selected_category %}active{% endif %}">
+                Tous les Projets
             </a>
             {% for category in categories %}
-                <a href="{% url 'realisations_by_category' category.slug %}" 
-                   class="category-button px-6 py-3 text-lg {% if selected_category.slug == category.slug %}terre font-bold{% else %}text-gray-600 hover:terre{% endif %}">
-                    {{ category.title }}
-                    <span class="ml-2 text-sm opacity-60">({{ category.real_count }})</span>
-                </a>
+            <a href="{% url 'realisations_by_category' category.slug %}" 
+               class="category-button px-6 py-3 text-lg transition-all {% if selected_category.slug == category.slug %}active{% endif %}">
+                {{ category.title }}
+                <span class="ml-2 text-sm opacity-80">({{ category.real_count }})</span>
+            </a>
             {% endfor %}
         </div>
     </div>
+</section>
 
-    {# Grille de réalisations #}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {% for realisation in realisations %}
-        <a href="{% url 'realisation_detail' realisation.slug %}" class="block">
-            <article class="realisation-card relative rounded-xl overflow-hidden bg-white shadow-lg h-[400px]">
-                {% if realisation.photos.first %}
+<!-- Grille de Réalisations -->
+<section class="pb-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for realisation in realisations %}
+            <a href="{% url 'realisation_detail' realisation.slug %}" class="block">
+                <article class="realisation-card relative rounded-xl overflow-hidden bg-white shadow-lg h-[450px]">
+                    {% if realisation.photos.first %}
                     <div class="absolute inset-0">
                         <img src="{{ realisation.photos.first.file.url }}" 
                              alt="{{ realisation.photos.first.title }}"
-                             class="object-cover w-full h-full">
+                             class="object-cover w-full h-full transform hover:scale-105 transition-transform duration-700">
                     </div>
-                {% endif %}
-                
-                <div class="content-overlay absolute inset-0 p-6 flex flex-col justify-end text-white">
-                    <h2 class="text-2xl font-bold mb-3">{{ realisation.title }}</h2>
-                    
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        {% for category in realisation.categories.all %}
-                            <span class="px-3 py-1 bg-terre/80 backdrop-blur-sm rounded-full text-sm">
-                                {{ category.title }}
-                            </span>
-                        {% endfor %}
-                    </div>
-                    
-                    <div class="text-sm text-gray-200 line-clamp-2">
-                        {{ realisation.content|safe|truncatewords:20 }}
-                    </div>
-                    
-                    <div class="mt-4 text-sm text-gray-300 flex items-center">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        {{ realisation.created_on|date:"d/m/Y" }}
-                    </div>
-                </div>
-            </article>
-        </a>
-        {% empty %}
-            <div class="col-span-full text-center py-16">
-                <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                          d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-                </svg>
-                <p class="text-xl text-gray-600">
-                    {% if selected_category %}
-                        Aucune réalisation trouvée pour la catégorie "{{ selected_category.title }}"
-                    {% else %}
-                        Aucune réalisation disponible pour le moment
                     {% endif %}
-                </p>
+                    
+                    <div class="content-overlay absolute inset-0 p-8 flex flex-col justify-end">
+                        <div class="transform translate-y-4 transition-transform duration-300 realisation-card-content">
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                {% for category in realisation.categories.all %}
+                                <span class="px-4 py-1.5 bg-white/90 text-terre rounded-full text-sm font-medium">
+                                    {{ category.title }}
+                                </span>
+                                {% endfor %}
+                            </div>
+                            
+                            <h2 class="text-2xl font-bold mb-4 text-white">{{ realisation.title }}</h2>
+                            
+                            <div class="text-gray-200 line-clamp-3 mb-4">
+                                {{ realisation.content|safe|truncatewords:25 }}
+                            </div>
+                            
+                            <div class="flex items-center text-gray-200">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                                {{ realisation.created_on|date:"d/m/Y" }}
+                                
+                                <span class="ml-auto bg-terre/90 px-4 py-1.5 rounded-full text-white text-sm">
+                                    Voir le projet
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </a>
+            {% empty %}
+            <div class="col-span-full py-24 text-center bg-gray-50 rounded-xl">
+                <div class="max-w-md mx-auto">
+                    <svg class="w-20 h-20 mx-auto text-gray-400 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                              d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                    </svg>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Aucun projet trouvé</h3>
+                    <p class="text-gray-600">
+                        {% if selected_category %}
+                        Aucune réalisation n'est disponible pour la catégorie "{{ selected_category.title }}"
+                        {% else %}
+                        Nos projets seront bientôt disponibles
+                        {% endif %}
+                    </p>
+                </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Section CTA -->
+<section class="bg-pierre py-24">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-4xl gilda mb-6">Vous avez un projet de rénovation ?</h2>
+        <p class="text-xl text-gray-600 mb-10">
+            Contactez-nous pour discuter de votre projet et obtenir un devis personnalisé
+        </p>
+        <a href="#contact" class="inline-block bg-terre hover:bg-amber-800 text-white px-8 py-4 rounded-lg text-xl transition-colors">
+            Parlons de votre projet
+        </a>
     </div>
 </section>
 

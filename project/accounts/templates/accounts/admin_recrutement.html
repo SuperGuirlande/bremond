@@ -11,10 +11,10 @@ Espace Administrateur - Les Annonces d'emploi
 {% endblock %}
 
 {% block content %}
-<section class="flex-1 w-full flex flex-col items-center justify-center py-20 bg-blanc relative z-[4] mt-28">
+<section class="flex-1 w-full flex flex-col items-center justify-center py-16  md:py-32 bg-blanc relative z-[4] mt-16">
     <div class="w-full max-w-[1280px] flex flex-col">
-        <a href="{% url 'admin_index' %}" class="text-blue-500 underline hover:text-blue-600 text-lg">← Retour espace administrateur</a>
-        <h1 class="text-center playfair granit text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl">
+        <a href="{% url 'admin_index' %}" class="text-gray-500 underline hover:text-gray-600 text-lg mb-8">← Retour espace administrateur</a>
+        <h1 class="text-center playfair granit text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl">
             Espace Offres d'Emploi
         </h1>
         <p class="text-xl raleway  charbon text-center my-8">
@@ -97,7 +97,7 @@ Espace Administrateur - Les Annonces d'emploi
 
                     <hr class="my-6">
 
-                    <h2 class="granit playfair text-xl sm:text-2xl md:text-3xl lg:text-4xl">{{annonce.title}}</h2>
+                    <h2 class="granit playfair text-2xl md:text-3xl lg:text-4xl">{{annonce.title}}</h2>
                     <div class="ck-content mt-6 line-clamp-5">
                         {{annonce.content|safe}}
                     </div>
@@ -106,24 +106,24 @@ Espace Administrateur - Les Annonces d'emploi
                     </a>
 
                     <!-- BUTTONS -->
-                    <div class="flex gap-5 ml-auto">
-                        <a href="{% url 'change_annonce' annonce.id %}" class="text-center mx-auto">
-                            <button class="py-2 px-6 bg-blue-500 hover:bg-blue-600 text-white text-xl shadow-md rounded-xl my-6
+                    <div class="flex flex-wrap gap-5 ml-auto my-6 justify-end">
+                        <a href="{% url 'change_annonce' annonce.id %}" class="">
+                            <button class="py-2 px-6 bg-blue-500 hover:bg-blue-600 text-white text-xl shadow-md rounded-xl
                             hover:-translate-y-1 hover:shadow-xl transition-all duration-500 ease-in-out">
                                 Modifier l'annonce
                             </button>
                         </a>
 
-                        <a href="{% url 'change_annonce_status' annonce.id %}" class="text-center mx-auto">
-                            <button class="py-2 px-6 bg-gray-50 hover:bg-gray-100 text-xl shadow-md rounded-xl my-6
+                        <a href="{% url 'change_annonce_status' annonce.id %}" class="">
+                            <button class="py-2 px-6 bg-gray-50 hover:bg-gray-100 text-xl shadow-md rounded-xl
                             hover:-translate-y-1 hover:shadow-xl transition-all duration-500 ease-in-out
                             {% if annonce.active %}text-red-500{% else %}text-green-500{% endif %}">
                                 {% if annonce.active %}Desactiver{% else %}Activer{% endif %}
                             </button>
                         </a>
 
-                        <a href="{% url 'confirm_delete_annonce' annonce.id %}" class="text-center mx-auto">
-                            <button class="py-2 px-6 bg-red-500 hover:bg-red-600 text-xl shadow-md rounded-xl my-6
+                        <a href="{% url 'confirm_delete_annonce' annonce.id %}" class="">
+                            <button class="py-2 px-6 bg-red-500 hover:bg-red-600 text-xl shadow-md rounded-xl
                             hover:-translate-y-1 hover:shadow-xl transition-all duration-500 ease-in-out
                             text-white">
                                 Supprimer

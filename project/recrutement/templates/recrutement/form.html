@@ -8,120 +8,126 @@
 {% endblock %}
 
 {% block content %}
-<div class="w-full max-w-[1080px] mx-auto px-4 py-8 mt-40 flex flex-col">
-    <h1 class=" text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl granit gilda font-bold mb-6">{{ title }}</h1>
+<section class="w-full flex flex-col bg-blanc mt-16 md:mt-20 pt-16 sm:pt-20 md:pt-24 pb-12 md:pb-16">
+    <div class="w-full max-w-[1080px] mx-auto px-4 py-8 md:py-16 lg:py-16 flex flex-col bg-white rounded-lg shadow-xl">
+        <h1 class=" text-center text-3xl md:text-4xl lg:text-5xl xl:text-6xl granit gilda font-bold mb-6">{{ title }}</h1>
+        {% if is_edit %}
+        <p class="raleway text-lg sm:text-xl md:text-2xl charbon text-center font-semibold mb-8">{{ annonce.title }}</p>
+        {% endif %}
 
-    <form method="POST" class="space-y-6 flex flex-col w-full max-w-[720px] mx-auto gap-3">
-        {% csrf_token %}
+        <form method="POST" class="space-y-6 flex flex-col w-full max-w-[720px] mx-auto gap-3">
+            {% csrf_token %}
 
-        <!-- Titre -->
-        <div class="flex flex-col gap-1 mt-8">
-            <label class="text-xl font-medium charbon">{{ form.title.label }}*</label>
-            {{ form.title }}
-            {% if form.title.errors %}
-                {% for error in form.title.errors %}
-                    <p class="text-red-500 text-sm">{{ error }}</p>
-                {% endfor %}
-            {% endif %}
-        </div>
-
-        <!-- POSTE & EXPERIENCE -->
-        <div class="flex flex-wrap gap-5">
-            <!-- Intitulé du poste -->
-            <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
-                <label class="text-xl font-medium charbon">{{ form.job.label }}*</label>
-                {{ form.job }}
-                {% if form.job.errors %}
-                    {% for error in form.job.errors %}
+            <!-- Titre -->
+            <div class="flex flex-col gap-1 mt-8">
+                <label class="text-xl font-medium charbon">{{ form.title.label }}*</label>
+                {{ form.title }}
+                {% if form.title.errors %}
+                    {% for error in form.title.errors %}
                         <p class="text-red-500 text-sm">{{ error }}</p>
                     {% endfor %}
                 {% endif %}
             </div>
-            <!-- Experience exigée -->
-            <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
-                <label class="text-xl font-medium charbon">{{ form.experience.label }}</label>
-                {{ form.experience }}
-                {% if form.experience.errors %}
-                    {% for error in form.experience.errors %}
-                        <p class="text-red-500 text-sm">{{ error }}</p>
-                    {% endfor %}
-                {% endif %}
-            </div>          
-        </div>
 
-        <!-- TYPE & DUREE DU CONTRAT -->
-        <div class="flex flex-wrap gap-5">
-            <!-- Type -->
-            <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
-                <label class="text-xl font-medium charbon">{{ form.contract_type.label }}*</label>
-                {{ form.contract_type }}
-                {% if form.contract_type.errors %}
-                    {% for error in form.contract_type.errors %}
+            <!-- POSTE & EXPERIENCE -->
+            <div class="flex flex-wrap gap-5">
+                <!-- Intitulé du poste -->
+                <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
+                    <label class="text-xl font-medium charbon">{{ form.job.label }}*</label>
+                    {{ form.job }}
+                    {% if form.job.errors %}
+                        {% for error in form.job.errors %}
+                            <p class="text-red-500 text-sm">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <!-- Experience exigée -->
+                <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
+                    <label class="text-xl font-medium charbon">{{ form.experience.label }}</label>
+                    {{ form.experience }}
+                    {% if form.experience.errors %}
+                        {% for error in form.experience.errors %}
+                            <p class="text-red-500 text-sm">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>          
+            </div>
+
+            <!-- TYPE & DUREE DU CONTRAT -->
+            <div class="flex flex-wrap gap-5">
+                <!-- Type -->
+                <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
+                    <label class="text-xl font-medium charbon">{{ form.contract_type.label }}*</label>
+                    {{ form.contract_type }}
+                    {% if form.contract_type.errors %}
+                        {% for error in form.contract_type.errors %}
+                            <p class="text-red-500 text-sm">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <!-- Duree -->
+                <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
+                    <label class="text-xl font-medium charbon">{{ form.contract_length.label }}</label>
+                    {{ form.contract_length }}
+                    {% if form.contract_length.errors %}
+                        {% for error in form.contract_length.errors %}
+                            <p class="text-red-500 text-sm">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>          
+            </div>
+
+            <!-- TEMPS DE TRAVAIL & REMUNERATION -->
+            <div class="flex flex-wrap gap-5">
+                <!-- Temps -->
+                <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
+                    <label class="text-xl font-medium charbon">Temps de travail (en h/semaine)</label>
+                    {{ form.hebdo }}
+                    {% if form.hebdo.errors %}
+                        {% for error in form.hebdo.errors %}
+                            <p class="text-red-500 text-sm">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <!-- Salaire -->
+                <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
+                    <label class="text-xl font-medium charbon">{{ form.salaire.label }}</label>
+                    {{ form.salaire }}
+                    {% if form.salaire.errors %}
+                        {% for error in form.salaire.errors %}
+                            <p class="text-red-500 text-sm">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>          
+            </div>        
+
+            <!-- Contenu -->
+            <div class="flex flex-col gap-1">
+                <label class="text-xl font-medium charbon">Contenu de l'annonce</label>
+                {{ form.content }}
+                {% if form.content.errors %}
+                    {% for error in form.content.errors %}
                         <p class="text-red-500 text-sm">{{ error }}</p>
                     {% endfor %}
                 {% endif %}
             </div>
-            <!-- Duree -->
-            <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
-                <label class="text-xl font-medium charbon">{{ form.contract_length.label }}</label>
-                {{ form.contract_length }}
-                {% if form.contract_length.errors %}
-                    {% for error in form.contract_length.errors %}
-                        <p class="text-red-500 text-sm">{{ error }}</p>
-                    {% endfor %}
-                {% endif %}
-            </div>          
-        </div>
 
-        <!-- TEMPS DE TRAVAIL & REMUNERATION -->
-        <div class="flex flex-wrap gap-5">
-            <!-- Temps -->
-            <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
-                <label class="text-xl font-medium charbon">Temps de travail (en h/semaine)</label>
-                {{ form.hebdo }}
-                {% if form.hebdo.errors %}
-                    {% for error in form.hebdo.errors %}
-                        <p class="text-red-500 text-sm">{{ error }}</p>
-                    {% endfor %}
+            <!-- Boutons -->
+            <div class="flex justify-end mt-6 space-x-4">
+                {% if is_edit %}
+                    <a href="{% url 'admin_recrutement' %}" 
+                    class="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600">
+                        Annuler
+                    </a>
                 {% endif %}
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">
+                    {{ is_edit|yesno:"Enregistrer les modifications,Créer la réalisation" }}
+                </button>
             </div>
-            <!-- Salaire -->
-            <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
-                <label class="text-xl font-medium charbon">{{ form.salaire.label }}</label>
-                {{ form.salaire }}
-                {% if form.salaire.errors %}
-                    {% for error in form.salaire.errors %}
-                        <p class="text-red-500 text-sm">{{ error }}</p>
-                    {% endfor %}
-                {% endif %}
-            </div>          
-        </div>        
+        </form>
+    </div>
 
-        <!-- Contenu -->
-        <div class="flex flex-col gap-1">
-            <label class="text-xl font-medium charbon">Contenu de l'annonce</label>
-            {{ form.content }}
-            {% if form.content.errors %}
-                {% for error in form.content.errors %}
-                    <p class="text-red-500 text-sm">{{ error }}</p>
-                {% endfor %}
-            {% endif %}
-        </div>
-
-        <!-- Boutons -->
-        <div class="flex justify-end mt-6 space-x-4">
-            {% if is_edit %}
-                <a href="{% url 'admin_index' %}" 
-                   class="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600">
-                    Annuler
-                </a>
-            {% endif %}
-            <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">
-                {{ is_edit|yesno:"Enregistrer les modifications,Créer la réalisation" }}
-            </button>
-        </div>
-    </form>
-</div>
+</section>
 {% endblock %}
 
 {% block extra_script %}

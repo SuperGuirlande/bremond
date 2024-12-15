@@ -5,265 +5,291 @@
 
 {% block content %}
 <!-- HERO SECTION -->
-<section class="min-h-screen bg-cover bg-center bg-fixed bg-no-repeat relative flex overflow-hidden" style="background-image: url({% static 'images/services/services-hero.jpg' %});">
-    <div class="absolute w-full h-full bg-stone-800 bg-opacity-75 z-10"></div>
+<section class="min-h-[80vh] lg:min-h-screen bg-cover bg-center bg-fixed bg-no-repeat relative flex overflow-hidden" 
+         style="background-image: url({% static 'images/services/services-hero.jpg' %});">
+    <div class="absolute inset-0 bg-stone-800/75 z-10"></div>
 
-    <div class="my-auto mx-auto relative z-20 flex flex-col">
-        <img src="{% static 'images/logos/logo_pierre_clair.png' %}" alt="" class="h-40 mx-auto nav-logo"
-        data-aos="fade-in" data-aos-duration="2500" data-aos-delay="1200">
-        <h1 class="gilda text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl pierre my-5 text-center"
-        data-aos="fade-in" data-aos-duration="2500">Bremond Rénovation</h1>
-        <h3 class="pierre petit text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
-        data-aos="fade-in" data-aos-duration="2500" data-aos-delay="1000">Découvrez nos Services</h3>
+    <div class="container mx-auto px-4 my-auto relative z-20">
+        <div class="flex flex-col items-center max-w-4xl mx-auto">
+            <img src="{% static 'images/logos/logo_pierre_clair.png' %}" 
+                 alt="Logo Bremond Rénovation" 
+                 class="w-auto h-20 sm:h-24 md:h-28 lg:h-32 mx-auto nav-logo"
+                 data-aos="fade-in" 
+                 data-aos-duration="2500" 
+                 data-aos-delay="1200">
+            
+            <h1 class="gilda text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl pierre mt-8 mb-4 text-center"
+                data-aos="fade-in" 
+                data-aos-duration="2500">
+                Bremond Rénovation
+            </h1>
+            
+            <h3 class="pierre petit text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl"
+                data-aos="fade-in" 
+                data-aos-duration="2500" 
+                data-aos-delay="1000">
+                Découvrez nos Services
+            </h3>
 
-        <a href="#maconnerie" class="text-center mt-10 text-2xl text-white hover:text-[var(--pierre)] tracking-wider hover:tracking-widest transition-all duration-300 group"
-        data-aos="fade-in" data-aos-duration="2000" data-aos-delay="1500">
-            <p class="gilda font-light">Tout Savoir</p>
-            <p class="rotate-90 scale-y-150 group-hover:translate-y-1 group-hover:scale-y-[160%] duration-300 transition-all">&gt;</p>
-        </a>
+            <a href="#maconnerie" 
+               class="group mt-12 inline-flex flex-col items-center text-white hover:text-[var(--pierre)] transition-all duration-300"
+               data-aos="fade-in" 
+               data-aos-duration="2000" 
+               data-aos-delay="1500">
+                <span class="gilda text-xl sm:text-2xl font-light">Tout Savoir</span>
+                <span class="transform rotate-90 text-2xl transition-transform duration-300 group-hover:translate-y-1">&gt;</span>
+            </a>
+        </div>
     </div>
 </section>
+
 <!-- MACONNERIE -->
-<section class="relative z-10 flex flex-col bg-pierre py-20 shadow-md">
+<section class="relative z-10 bg-pierre py-16 md:py-20 shadow-md">
     <span class="-translate-y-16 absolute left-0 top-0" id="maconnerie"></span>
-    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center justify-center">
-        <div class="basis-[450px] h-[500px] overflow-hidden rounded-md shadow-lg">
-            <div class="carousel-container flex transition-transform duration-500 h-full w-full">
-                <img src="{% static 'images/services/maconnerie-1.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/maconnerie-2.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/maconnerie-3.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+            <div class="w-full lg:w-5/12 h-[400px] md:h-[500px] overflow-hidden rounded-lg shadow-lg">
+                <div class="carousel-container flex transition-transform duration-500 h-full w-full">
+                    <img src="{% static 'images/services/maconnerie-1.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                    <img src="{% static 'images/services/maconnerie-2.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                    <img src="{% static 'images/services/maconnerie-3.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                </div>
             </div>
-        </div>
-        <div class="basis-[650px] grow shrink flex flex-col gap-6">
-            <h2 class="playfair text-6xl uppercase granit">Maçonnerie</h2>
-            <p class="raleway text-xl font-light charbon">
-                Spécialistes du bâti ancien, nous réalisons tous travaux de maçonnerie traditionnelle. 
-                <br><br>
-                Experts en murs de moellons, nous préservons l'authenticité de votre patrimoine en utilisant des techniques ancestrales et des matériaux naturels.
-            </p>
-            <div class="flex gap-6 mt-5">
-                <a href="{% url 'realisations' %}">
-                    <button class="py-2 px-7 bg-terre text-white playfair text-2xl hover:bg-amber-800 transition-all
-                            duration-300 ease-in-out shadow-md hover:shadow-xl">
-                        Nos Réalisations
-                    </button>
-                </a>
-                <a href="#contact">
-                    <button class="py-2 px-7 bg-ocre text-white playfair text-2xl hover:bg-amber-800 transition-all
-                            duration-300 ease-in-out shadow-md hover:shadow-xl">
-                        Nous Contacter
-                    </button>
-                </a>
+            <div class="w-full lg:w-7/12">
+                <h2 class="playfair text-4xl md:text-5xl lg:text-6xl uppercase granit mb-6">Maçonnerie</h2>
+                <div class="raleway text-lg md:text-xl font-light charbon space-y-6">
+                    <p>
+                        Spécialistes du bâti ancien, nous réalisons tous travaux de maçonnerie traditionnelle.
+                    </p>
+                    <p>
+                        Experts en murs de moellons, nous préservons l'authenticité de votre patrimoine en utilisant des techniques ancestrales et des matériaux naturels.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-4 mt-8">
+                    <a href="{% url 'realisations' %}" class="w-full sm:w-auto">
+                        <button class="w-full sm:w-auto py-2 px-6 bg-terre text-white playfair text-xl md:text-2xl hover:bg-amber-800 transition-all duration-300 shadow-md hover:shadow-xl">
+                            Nos Réalisations
+                        </button>
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto">
+                        <button class="w-full sm:w-auto py-2 px-6 bg-ocre text-white playfair text-xl md:text-2xl hover:bg-amber-800 transition-all duration-300 shadow-md hover:shadow-xl">
+                            Nous Contacter
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- PIERRES DE TAILLE -->
-<section class="relative z-[9] flex flex-col bg-blanc py-20">
+<section class="relative z-9 bg-blanc py-16 md:py-20">
     <span class="-translate-y-16 absolute left-0 top-0" id="pierres-de-taille"></span>
-    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center justify-center">
-        <div class="basis-[650px] grow shrink flex flex-col gap-6">
-            <h2 class="playfair text-6xl uppercase granit">Pierres de Taille</h2>
-            <p class="raleway text-xl font-light charbon">
-                Nous collaborons avec des tailleurs de pierre locaux pour la restauration et la réparation de vos éléments en pierre.
-                <br><br>
-                Spécialistes des façades anciennes, nous intervenons sur le placage comme sur les pierres massives pour redonner leur éclat à vos corniches, encadrements et autres éléments architecturaux.            </p>
-            <div class="flex gap-6 mt-5">
-                <a href="{% url 'realisations' %}">
-                    <button class="py-2 px-7 bg-terre text-white playfair text-2xl hover:bg-amber-800 transition-all
-                            duration-300 ease-in-out shadow-md hover:shadow-xl">
-                        Nos Réalisations
-                    </button>
-                </a>
-                <a href="#contact">
-                    <button class="py-2 px-7 bg-ocre text-white playfair text-2xl hover:bg-amber-800 transition-all
-                            duration-300 ease-in-out shadow-md hover:shadow-xl">
-                        Nous Contacter
-                    </button>
-                </a>
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row-reverse gap-8 lg:gap-12 items-center">
+            <div class="w-full lg:w-5/12 h-[400px] md:h-[500px] overflow-hidden rounded-lg shadow-lg">
+                <div class="carousel-container flex transition-transform duration-500 h-full w-full">
+                    <img src="{% static 'images/services/pierres-1.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                    <img src="{% static 'images/services/pierres-2.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                    <img src="{% static 'images/services/pierres-3.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                </div>
             </div>
-        </div>
-        <div class="basis-[450px] h-[500px] overflow-hidden rounded-md shadow-lg">
-            <div class="carousel-container flex transition-transform duration-500 h-full w-full">
-                <img src="{% static 'images/services/pierres-1.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/pierres-2.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/pierres-3.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+            <div class="w-full lg:w-7/12">
+                <h2 class="playfair text-4xl md:text-5xl lg:text-6xl uppercase granit mb-6">Pierres de Taille</h2>
+                <div class="raleway text-lg md:text-xl font-light charbon space-y-6">
+                    <p>
+                        Nous collaborons avec des tailleurs de pierre locaux pour la restauration et la réparation de vos éléments en pierre.
+                    </p>
+                    <p>
+                        Spécialistes des façades anciennes, nous intervenons sur le placage comme sur les pierres massives pour redonner leur éclat à vos corniches, encadrements et autres éléments architecturaux.
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-4 mt-8">
+                    <a href="{% url 'realisations' %}" class="w-full sm:w-auto">
+                        <button class="w-full sm:w-auto py-2 px-6 bg-terre text-white playfair text-xl md:text-2xl hover:bg-amber-800 transition-all duration-300 shadow-md hover:shadow-xl">
+                            Nos Réalisations
+                        </button>
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto">
+                        <button class="w-full sm:w-auto py-2 px-6 bg-ocre text-white playfair text-xl md:text-2xl hover:bg-amber-800 transition-all duration-300 shadow-md hover:shadow-xl">
+                            Nous Contacter
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Enduits à la chaux -->
-<section class="relative z-[8] flex flex-col bg-pierre py-20 shadow-md">
+<!-- ENDUITS A LA CHAUX -->
+<section class="relative z-8 bg-pierre py-16 md:py-20 shadow-md">
     <span class="-translate-y-16 absolute left-0 top-0" id="enduits"></span>
-    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center justify-center">
-        <div class="basis-[450px] h-[500px] overflow-hidden rounded-md shadow-lg">
-            <div class="carousel-container flex transition-transform duration-500 h-full w-full">
-                <img src="{% static 'images/services/enduits-1.webp' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/enduits-2.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/enduits-3.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+            <div class="w-full lg:w-5/12 h-[400px] md:h-[500px] overflow-hidden rounded-lg shadow-lg">
+                <div class="carousel-container flex transition-transform duration-500 h-full w-full">
+                    <img src="{% static 'images/services/enduits-1.webp' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                    <img src="{% static 'images/services/enduits-2.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                    <img src="{% static 'images/services/enduits-3.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                </div>
             </div>
-        </div>
-        <div class="basis-[650px] grow shrink flex flex-col gap-6">
-            <h2 class="playfair text-6xl uppercase granit">Enduits à la chaux</h2>
-            <p class="raleway text-xl font-light charbon">
-                Nous utilisons exclusivement la chaux naturelle Saint Astier, garantissant une parfaite respiration de vos murs anciens. 
-                <br>
-                Notre savoir-faire traditionnel s'applique aux :
-                <br>
-                <ul class="space-y-2 list-disc pl-6 charbon text-xl raleway font-light">
-                    <li class="">Enduits à la chaux colorée</li>
-                    <li class="">Mortiers traditionnels</li>
-                    <li class="">Jointoiements</li>
-                    <li class="">Ravalements de façades</li>
-                </ul>
-            </p>
-            <div class="flex flex-wrap gap-6 mt-5">
-                <a href="{% url 'realisations' %}">
-                    <button class="py-2 px-7 bg-terre text-white playfair text-2xl hover:bg-amber-800 transition-all
-                            duration-300 ease-in-out shadow-md hover:shadow-xl">
-                        Nos Réalisations
-                    </button>
-                </a>
-                <a href="#contact">
-                    <button class="py-2 px-7 bg-ocre text-white playfair text-2xl hover:bg-amber-800 transition-all
-                            duration-300 ease-in-out shadow-md hover:shadow-xl">
-                        Nous Contacter
-                    </button>
-                </a>
+            <div class="w-full lg:w-7/12">
+                <h2 class="playfair text-4xl md:text-5xl lg:text-6xl uppercase granit mb-6">Enduits à la chaux</h2>
+                <div class="raleway text-lg md:text-xl font-light charbon space-y-6">
+                    <p>
+                        Nous utilisons exclusivement la chaux naturelle Saint Astier, garantissant une parfaite respiration de vos murs anciens.
+                    </p>
+                    <p>Notre savoir-faire traditionnel s'applique aux :</p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Enduits à la chaux colorée</li>
+                        <li>Mortiers traditionnels</li>
+                        <li>Jointoiements</li>
+                        <li>Ravalements de façades</li>
+                    </ul>
+                </div>
+                <div class="flex flex-wrap gap-4 mt-8">
+                    <a href="{% url 'realisations' %}" class="w-full sm:w-auto">
+                        <button class="w-full sm:w-auto py-2 px-6 bg-terre text-white playfair text-xl md:text-2xl hover:bg-amber-800 transition-all duration-300 shadow-md hover:shadow-xl">
+                            Nos Réalisations
+                        </button>
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto">
+                        <button class="w-full sm:w-auto py-2 px-6 bg-ocre text-white playfair text-xl md:text-2xl hover:bg-amber-800 transition-all duration-300 shadow-md hover:shadow-xl">
+                            Nous Contacter
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Couverture -->
-<section class="relative z-[7] flex flex-col bg-blanc py-20">
+<!-- COUVERTURE -->
+<section class="relative z-7 bg-blanc py-16 md:py-20">
     <span class="-translate-y-16 absolute left-0 top-0" id="couverture"></span>
-    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center justify-center">
-        <div class="basis-[650px] grow-0 shrink-0 flex flex-col gap-6">
-            <h2 class="playfair text-6xl uppercase granit">Couverture</h2>
-            <p class="raleway text-xl font-light charbon">
-                Notre expertise en couverture s'étend à tous types de tuiles terre cuite françaises :                
-                <br>
-                <ul class="space-y-2 list-disc pl-6 charbon text-xl raleway font-light">
-                    <li>Réfection complète de toiture</li>
-                    <li>Remaniement avec réemploi</li>
-                    <li>Détection et réparation de fuites</li>
-                    <li>Zinguerie sur mesure</li>
-                    <li>Intervention sur toitures amiantées</li>
-                </ul>
-            <div class="flex gap-6 mt-5">
-                <a href="{% url 'realisations' %}">
-                    <button class="py-2 px-7 bg-terre text-white playfair text-2xl hover:bg-amber-800 transition-all
-                            duration-300 ease-in-out shadow-md hover:shadow-xl">
-                        Nos Réalisations
-                    </button>
-                </a>
-                <a href="#contact">
-                    <button class="py-2 px-7 bg-ocre text-white playfair text-2xl hover:bg-amber-800 transition-all
-                            duration-300 ease-in-out shadow-md hover:shadow-xl">
-                        Nous Contacter
-                    </button>
-                </a>
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row-reverse gap-8 lg:gap-12 items-center">
+            <div class="w-full lg:w-5/12 h-[400px] md:h-[500px] overflow-hidden rounded-lg shadow-lg">
+                <div class="carousel-container flex transition-transform duration-500 h-full w-full">
+                    <img src="{% static 'images/services/couverture-1.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                    <img src="{% static 'images/services/couverture-2.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                    <img src="{% static 'images/services/couverture-4.jpeg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                </div>
             </div>
-        </div>
-        <div class="basis-[450px] h-[500px] overflow-hidden rounded-md shadow-lg">
-            <div class="carousel-container flex transition-transform duration-500 h-full w-full">
-                <img src="{% static 'images/services/couverture-1.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/couverture-2.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/couverture-4.jpeg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Rénovation Extérieure -->
-<section class="relative z-[6] flex flex-col bg-pierre py-20 shadow-md">
-    <span class="-translate-y-16 absolute left-0 top-0" id="renovation-interieure"></span>
-    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-12 items-center justify-center">
-        <div class="basis-[450px] h-[500px] overflow-hidden rounded-md shadow-lg">
-            <div class="carousel-container flex transition-transform duration-500 h-full w-full">
-                <img src="{% static 'images/services/interieur-1.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/interieur-2.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/interieur-3.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/interieur-4.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-            </div>
-        </div>
-        <div class="basis-[650px] grow shrink flex flex-col gap-6">
-            <h2 class="playfair text-6xl uppercase granit">Rénovation Extérieure</h2>
-            <p class="raleway text-xl font-light charbon">
-                Sublimez vos façades avec nos interventions de :                
-                <br>
-                <ul class="space-y-2 list-disc pl-6 charbon text-xl raleway font-light">
-                    <li>Ravalement traditionnel</li>
-                    <li>Restauration de façades en pierre</li>
-                    <li>Reprise de joints à la chaux</li>
-                    <li>Traitement des remontées capillaires</li>
-                </ul>
-            </p>
-            <div class="flex gap-6 mt-5">
-                <a href="{% url 'realisations' %}">
-                    <button class="py-2 px-7 bg-terre text-white playfair text-2xl hover:bg-amber-800 transition-all
-                            duration-300 ease-in-out shadow-md hover:shadow-xl">
-                        Nos Réalisations
-                    </button>
-                </a>
-                <a href="#contact">
-                    <button class="py-2 px-7 bg-ocre text-white playfair text-2xl hover:bg-amber-800 transition-all
-                            duration-300 ease-in-out shadow-md hover:shadow-xl">
-                        Nous Contacter
-                    </button>
-                </a>
+            <div class="w-full lg:w-7/12">
+                <h2 class="playfair text-4xl md:text-5xl lg:text-6xl uppercase granit mb-6">Couverture</h2>
+                <div class="raleway text-lg md:text-xl font-light charbon space-y-6">
+                    <p>
+                        Notre expertise en couverture s'étend à tous types de tuiles terre cuite françaises :
+                    </p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Réfection complète de toiture</li>
+                        <li>Remaniement avec réemploi</li>
+                        <li>Détection et réparation de fuites</li>
+                        <li>Zinguerie sur mesure</li>
+                        <li>Intervention sur toitures amiantées</li>
+                    </ul>
+                </div>
+                <div class="flex flex-wrap gap-4 mt-8">
+                    <a href="{% url 'realisations' %}" class="w-full sm:w-auto">
+                        <button class="w-full sm:w-auto py-2 px-6 bg-terre text-white playfair text-xl md:text-2xl hover:bg-amber-800 transition-all duration-300 shadow-md hover:shadow-xl">
+                            Nos Réalisations
+                        </button>
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto">
+                        <button class="w-full sm:w-auto py-2 px-6 bg-ocre text-white playfair text-xl md:text-2xl hover:bg-amber-800 transition-all duration-300 shadow-md hover:shadow-xl">
+                            Nous Contacter
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Création d'ouvertures -->
-<section class="relative z-[5] flex flex-col bg-blanc py-20">
+<!-- RENOVATION EXTERIEURE -->
+<section class="relative z-6 bg-pierre py-16 md:py-20 shadow-md">
     <span class="-translate-y-16 absolute left-0 top-0" id="renovation-exterieure"></span>
-    <div class="mx-auto w-full px-5 max-w-[1280px] flex flex-wrap gap-10 items-center justify-center">
-        <div class="basis-[650px] grow shrink flex flex-col gap-6">
-            <h2 class="playfair text-6xl uppercase granit">Création d'ouvertures</h2>
-            <p class="raleway text-xl font-light charbon">
-                Experts dans la modification d'ouvertures sur bâti ancien, nous réalisons :
-                <br>
-                <ul class="space-y-2 list-disc pl-6 charbon text-xl raleway font-light">
-                    <li>Création de nouvelles fenêtres et portes</li>
-                    <li>Agrandissement d'ouvertures existantes</li>
-                    <li>Pose de linteaux en pierre</li>
-                    <li>Reprise des encadrements</li>
-                </ul>
-            <div class="flex gap-6 mt-5">
-                <a href="{% url 'realisations' %}">
-                    <button class="py-2 px-7 bg-terre text-white playfair text-2xl hover:bg-amber-800 transition-all
-                            duration-300 ease-in-out shadow-md hover:shadow-xl">
-                        Nos Réalisations
-                    </button>
-                </a>
-                <a href="#contact">
-                    <button class="py-2 px-7 bg-ocre text-white playfair text-2xl hover:bg-amber-800 transition-all
-                            duration-300 ease-in-out shadow-md hover:shadow-xl">
-                        Nous Contacter
-                    </button>
-                </a>
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center">
+            <div class="w-full lg:w-5/12 h-[400px] md:h-[500px] overflow-hidden rounded-lg shadow-lg">
+                <div class="carousel-container flex transition-transform duration-500 h-full w-full">
+                    <img src="{% static 'images/services/interieur-1.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                    <img src="{% static 'images/services/interieur-2.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                    <img src="{% static 'images/services/interieur-3.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                    <img src="{% static 'images/services/interieur-4.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                </div>
             </div>
-        </div>
-        <div class="basis-[450px] h-[500px] overflow-hidden rounded-md shadow-lg">
-            <div class="carousel-container flex transition-transform duration-500 h-full w-full">
-                <img src="{% static 'images/services/renovation-1.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/renovation-2.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
-                <img src="{% static 'images/services/renovation-3.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+            <div class="w-full lg:w-7/12">
+                <h2 class="playfair text-4xl md:text-5xl lg:text-6xl uppercase granit mb-6">Rénovation Extérieure</h2>
+                <div class="raleway text-lg md:text-xl font-light charbon space-y-6">
+                    <p>Sublimez vos façades avec nos interventions de :</p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Ravalement traditionnel</li>
+                        <li>Restauration de façades en pierre</li>
+                        <li>Reprise de joints à la chaux</li>
+                        <li>Traitement des remontées capillaires</li>
+                    </ul>
+                </div>
+                <div class="flex flex-wrap gap-4 mt-8">
+                    <a href="{% url 'realisations' %}" class="w-full sm:w-auto">
+                        <button class="w-full sm:w-auto py-2 px-6 bg-terre text-white playfair text-xl md:text-2xl hover:bg-amber-800 transition-all duration-300 shadow-md hover:shadow-xl">
+                            Nos Réalisations
+                        </button>
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto">
+                        <button class="w-full sm:w-auto py-2 px-6 bg-ocre text-white playfair text-xl md:text-2xl hover:bg-amber-800 transition-all duration-300 shadow-md hover:shadow-xl">
+                            Nous Contacter
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- CREATION D'OUVERTURES -->
+<section class="relative z-5 bg-blanc py-16 md:py-20">
+    <span class="-translate-y-16 absolute left-0 top-0" id="creation-ouvertures"></span>
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row-reverse gap-8 lg:gap-12 items-center">
+            <div class="w-full lg:w-5/12 h-[400px] md:h-[500px] overflow-hidden rounded-lg shadow-lg">
+                <div class="carousel-container flex transition-transform duration-500 h-full w-full">
+                    <img src="{% static 'images/services/renovation-1.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                    <img src="{% static 'images/services/renovation-2.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                    <img src="{% static 'images/services/renovation-3.jpg' %}" alt="" class="h-full w-full object-cover object-center flex-shrink-0">
+                </div>
+            </div>
+            <div class="w-full lg:w-7/12">
+                <h2 class="playfair text-4xl md:text-5xl lg:text-6xl uppercase granit mb-6">Création d'ouvertures</h2>
+                <div class="raleway text-lg md:text-xl font-light charbon space-y-6">
+                    <p>Experts dans la modification d'ouvertures sur bâti ancien, nous réalisons :</p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li>Création de nouvelles fenêtres et portes</li>
+                        <li>Agrandissement d'ouvertures existantes</li>
+                        <li>Pose de linteaux en pierre</li>
+                        <li>Reprise des encadrements</li>
+                    </ul>
+                </div>
+                <div class="flex flex-wrap gap-4 mt-8">
+                    <a href="{% url 'realisations' %}" class="w-full sm:w-auto">
+                        <button class="w-full sm:w-auto py-2 px-6 bg-terre text-white playfair text-xl md:text-2xl hover:bg-amber-800 transition-all duration-300 shadow-md hover:shadow-xl">
+                            Nos Réalisations
+                        </button>
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto">
+                        <button class="w-full sm:w-auto py-2 px-6 bg-ocre text-white playfair text-xl md:text-2xl hover:bg-amber-800 transition-all duration-300 shadow-md hover:shadow-xl">
+                            Nous Contacter
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% include 'main/contact-section.html' %}
 {% endblock %}
-
 
 {% block extra_script %}
 <script>

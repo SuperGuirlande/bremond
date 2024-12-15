@@ -14,7 +14,7 @@ def recrutement_form(request, id=None):
         
         if form.is_valid():
             annonce = form.save()
-            message = "L'annonce' a été modifiée avec succès!" if id else "L'annonce a été créée avec succès!"
+            message = f"L'annonce '{annonce.title}' a été modifiée avec succès!" if id else "L'annonce a été créée avec succès!"
             request.session['success'] = message
             
             return redirect('admin_recrutement')

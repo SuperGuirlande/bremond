@@ -33,6 +33,9 @@ def realisations(request, category_slug=None):
         form = ContactForm()
 
     context = {
+        'total_projects' : 67,
+        'years_experience' : 37,
+        'satisfied_clients' : 65,
         'categories': categories_with_reals,
         'realisations': realisations,
         'selected_category': selected_category,

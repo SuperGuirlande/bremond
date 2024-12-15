@@ -72,7 +72,7 @@
 
 <!-- CONTACT SECTION -->
 <section class="min-h-screen bg-blanc pt-8 pb-16">
-    <div class="container mx-auto">
+    <div class="container mx-auto max-w-[1280px]">
         <div class="flex justify-evenly gap-8 flex-wrap"
         data-aos="fade-in" data-aos-duration="2000">
             <!-- GAUCHE INFOS -->
@@ -120,12 +120,13 @@
             </div>
 
             <!-- DROITE FORM -->
-            <div class="basis-[350px] shrink grow mx-4 sm:mx-0 sm:grow-0 xl:grow sm:shrink-0 sm:basis-[500px] bg-pierre p-8 shadow-xl rounded-lg">
+            <div class="basis-[350px] shrink grow mx-4 sm:mx-0 sm:grow-0 xl:grow sm:shrink-0 sm:basis-[500px] bg-pierre p-8 shadow-xl rounded-lg relative">
+                <div class="absolute -translate-y-32" id="formulaire"></div>
                 <h2 class="granit text-center playfair text-4xl mb-4">Votre Projet</h2>
                 <p class="text-center text-terre mb-8">Décrivez-nous votre projet ou vos questions, nous vous répondrons dans les plus brefs délais</p>
                 
                 <!-- FORMULAIRE -->
-                <form method="post" class="flex flex-col gap-6">
+                <form method="post" class="flex flex-col gap-6" action="#formulaire">
                     {% csrf_token %}
 
                     <!-- ALERTS -->
