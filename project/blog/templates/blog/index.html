@@ -40,7 +40,7 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="mt-32 w-full py-20 bg-blanc flex flex-col z-[2] shadow-lg">
+<section class="mt-16 lg:mt-28 w-full py-20 lg:py-28 bg-blanc flex flex-col z-[2] shadow-lg">
     <div class="w-full max-w-[1080px] mx-auto px-4 sm:px-6">
         <!-- Title -->
         <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-center playfair terre drop-shadow-lg">
@@ -79,7 +79,7 @@
     <div class="absolute left-0 top-0 -translate-y-20" id="articles"></div>
     <div class="w-full max-w-[1080px] mx-auto px-4 sm:px-6">
         <!-- Section Title -->
-        <h2 class="text-2xl sm:text-3xl lg:text-4xl xl:text-6xl text-center playfair terre drop-shadow-md mb-12">
+        <h2 class="text-3xl lg:text-4xl xl:text-6xl text-center playfair terre drop-shadow-md mb-12">
             {% if category_selected %}
                 Les Articles de la catégorie : {{category.title}}
             {% else %}
