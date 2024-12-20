@@ -13,13 +13,13 @@ def blog_index(request, slug=None):
     categories = BlogCategory.objects.all()
 
     if not slug:
-        articles = BlogArticle.objects.all()
+        articles = BlogArticle.objects.all().order_by('-id')[:10]
         category_selected = False
         category = None
     else:
         category_selected = True
         category = get_object_or_404(BlogCategory, slug=slug)
-        articles = BlogArticle.objects.filter(categories=category)
+        articles = BlogArticle.objects.filter(categories=category).order_by('-id')
 
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -29,7 +29,6 @@ def blog_index(request, slug=None):
     else:
         form = ContactForm()
 
-    articles.order_by('-id')
 
     return render(request, 'blog/index.html', context={
         'categories': categories,    
@@ -96,6 +95,10 @@ def create_blog_category(request):
 def article_detail(request, slug):
     article = get_object_or_404(BlogArticle, slug=slug)
     next_articles = BlogArticle.objects.all().exclude(slug=slug).order_by('-id')[:3]
+
+    # Incrémenter le nombre de vues
+    article.views = article.views + 1
+    article.save()
 
     context = {
         'article': article,

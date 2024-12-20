@@ -68,6 +68,8 @@ class BlogArticle(models.Model):
     created_on = models.DateField(auto_now_add=True, verbose_name="Date de création", blank=True)
     last_updated = models.DateField(auto_now_add=True, verbose_name="Date de dernière modification", blank=True)
 
+    views = models.IntegerField(verbose_name="Nombre de vues", blank=True, default=0)
+
     def save(self, *args, **kwargs):
         if not self.slug:
             test = slugify(self.title)
