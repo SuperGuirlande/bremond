@@ -21,7 +21,7 @@ class JobAnnonce(models.Model):
     contract_length = models.IntegerField(verbose_name="Durée du contrat (en mois)", blank=True, null=True)
 
     hebdo = models.IntegerField(verbose_name="Temps de travail", blank=True, null=True)
-    salaire = models.DecimalField(max_digits=6, decimal_places=2, verbose_name="Rémunération nette", blank=True, null=True)
+    salaire = models.DecimalField(max_digits=6, decimal_places=2, verbose_name="Rémunération brute", blank=True, null=True)
 
     created_on = models.DateField(auto_now_add=True, verbose_name="Date de création", blank=True)
     last_updated = models.DateField(auto_now=True, verbose_name="Dernière modifications", blank=True)
@@ -51,7 +51,7 @@ class JobMessage(models.Model):
         verbose_name="Formulaire de recrutement"
         verbose_name_plural="Formulaires de recrutement"
 
-    annonce = models.ForeignKey(JobAnnonce, verbose_name="Annonce associée", on_delete=models.CASCADE, related_name="messages", blank=True)
+    annonce = models.ForeignKey(JobAnnonce, verbose_name="Annonce associée", on_delete=models.SET_NULL, related_name="messages", blank=True, null=True)
 
     first_name = models.CharField(verbose_name="Prenom", max_length=255)
     last_name = models.CharField(verbose_name="Nom", max_length=255)

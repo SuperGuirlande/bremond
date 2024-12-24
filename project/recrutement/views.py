@@ -76,15 +76,19 @@ def index(request):
     return render(request, "recrutement/recrutement_index.html", context)
 
 
-def job_form(request, slug):
-    annonce = get_object_or_404(JobAnnonce, slug=slug)
+def job_form(request, slug=None):
+    if slug:
+        annonce = get_object_or_404(JobAnnonce, slug=slug)
+    else:
+        annonce = None
 
     if request.method == 'POST':
         form = RecrutementMessageForm(request.POST, request.FILES)
 
         if form.is_valid():
             message = form.save(commit=False)
-            message.annonce = annonce
+            if slug:
+                message.annonce = annonce
             message.save()
             request.session['success'] = "Votre message nous a bien été transmis. Nous vous enverrons une réponse dans les plus brefs délais"
             return redirect(f'{reverse("recrutement_index")}#success')

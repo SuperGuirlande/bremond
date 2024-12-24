@@ -6,8 +6,23 @@
 
 {% block extra_head %}
 <style>
-    textarea, input {
-        width: 100%;
+    input, textarea {
+        width: 100% !important;
+        padding: 0.75rem 1rem !important;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 0.375rem !important;
+        transition: all 0.2s !important;
+    }
+
+    input:focus, textarea:focus {
+        outline: none !important;
+        border-color: var(--ocre) !important;
+        box-shadow: 0 0 0 3px rgba(200, 169, 119, 0.2) !important;
+    }
+
+    textarea {
+        min-height: 150px;
+        resize: vertical;
     }
 </style>
 {% include 'main/base_meta.html' %}

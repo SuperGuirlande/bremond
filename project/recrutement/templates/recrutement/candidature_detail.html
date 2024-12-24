@@ -8,12 +8,15 @@
 {% block content %}
 <div class="w-full max-w-[1080px] mx-auto px-4 py-8 mt-40 flex flex-col raleway">
     <h1 class="text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl granit gilda font-bold mb-6">
-        Candidature pour le poste de {{ message.annonce.job }}
+        Candidature 
+        {% if message.annonce %}pour le poste de {{ message.annonce.job }}{% else %}
+        Spontanée{% endif %}
     </h1>
 
     <!-- Informations sur l'annonce -->
     <div class="bg-gray-50 p-6 rounded-lg shadow-sm mb-8">
         <h2 class="text-xl font-semibold mb-4">Détails de l'offre</h2>
+        {% if message.annonce %}
         <p class="text-lg">{{ message.annonce.title }}</p>
         <div class="mt-2 flex flex-wrap gap-4 text-gray-600">
             {% if message.annonce.contract_type %}
@@ -26,6 +29,9 @@
                 <span>{{ message.annonce.hebdo }}h/semaine</span>
             {% endif %}
         </div>
+        {% else %}
+        <p class="text-lg">Candidature Spontanée</p>
+        {% endif %}
     </div>
 
     <!-- Informations du candidat -->
