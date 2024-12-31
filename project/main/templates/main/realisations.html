@@ -4,6 +4,7 @@
 
 {% block extra_head %}
 <style>
+    /* Cards */
     .realisation-card {
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -16,66 +17,149 @@
     .realisation-card .content-overlay {
         transition: all 0.4s ease;
         opacity: 0;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
     }
 
     .realisation-card:hover .content-overlay {
         opacity: 1;
     }
 
+    /* Filtres */
     .category-button {
         transition: all 0.3s ease;
         position: relative;
     }
 
-    .category-button.active {
+    .category-button::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 1px;
         background-color: var(--terre);
-        color: white;
-        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
     }
 
-    .category-button:not(.active):hover {
-        background-color: var(--terre);
-        color: white;
-        border-radius: 0.5rem;
+    .category-button:hover::after {
+        width: 80%;
+    }
+
+    .category-button.active {
+        color: var(--terre);
+        font-weight: 500;
+    }
+
+    .category-button.active::after {
+        width: 80%;
+    }
+
+    /* Hero animations */
+    .hero-content {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1.2s ease forwards 0.3s;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Bouton hero élégant */
+    .hero-button {
+        position: relative;
+        transition: all 0.3s ease;
+        background: transparent;
+        overflow: hidden;
+    }
+
+    .hero-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--blanc);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: -1;
+    }
+
+    .hero-button:hover::before {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    /* CTA section */
+    .cta-content {
+        position: relative;
+    }
+
+    .cta-content::before {
+        content: '';
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 60px;
+        height: 60px;
+        border-top: 2px solid var(--terre);
+        border-left: 2px solid var(--terre);
+    }
+
+    .cta-content::after {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        right: -20px;
+        width: 60px;
+        height: 60px;
+        border-bottom: 2px solid var(--terre);
+        border-right: 2px solid var(--terre);
     }
 </style>
-{% include 'main/base_meta.html' %}
 {% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
-<section class="relative min-h-[60vh] bg-cover bg-center bg-fixed mt-16 sm:mt-20"
+<section class="relative min-h-[80vh] bg-cover bg-center mt-16 sm:mt-20"
     style="background-image: url({% static 'images/services/services-hero.jpg' %});">
-    <div class="absolute inset-0 bg-black/50"></div>
-    <div class="absolute inset-0 flex items-center justify-center">
-        <div class="text-center text-white">
-            <h1 class="text-5xl md:text-7xl gilda mb-6">
+    <div class="absolute inset-0 bg-[var(--charbon)] opacity-70"></div>
+    <div class="absolute inset-0 flex items-center justify-center px-4">
+        <div class="text-center blanc hero-content max-w-4xl">
+            <h1 class="text-5xl md:text-7xl gilda mb-8">
                 Nos Réalisations
             </h1>
-            <p class="text-xl md:text-2xl max-w-2xl mx-auto font-light">
+            <p class="text-xl md:text-2xl font-light leading-relaxed mb-12 pierre">
                 Découvrez nos projets de rénovation et restauration du patrimoine
             </p>
+            <a href="#realisations" 
+               class="hero-button inline-block px-8 py-3 blanc border border-[var(--blanc)] border-opacity-60 relative hover:text-[var(--charbon)] transition-colors duration-500">
+                <span class="relative z-10">Découvrir nos projets</span>
+            </a>
         </div>
     </div>
 </section>
 
-<!-- Filtres Section -->
-<section class="py-16 bg-white relative">
-    <!-- Ancre -->
+<!-- Filtres -->
+<section class="py-16 bg-blanc relative">
     <div class="absolute -translate-y-32" id="realisations"></div>
-    <!-- Filtres -->
     <div class="max-w-7xl mx-auto px-4">
-        <div class="flex flex-wrap items-center justify-center gap-4">
+        <div class="flex flex-wrap items-center justify-center gap-6">
             <a href="{% url 'realisations' %}#realisations"
-                class="category-button px-4 md:px-6 py-2 md:py-3 text-xs sm:text-sm md:text-lg transition-all {% if not selected_category %}active{% endif %}">
+                class="category-button px-6 py-2 text-charbon hover:text-terre transition-all {% if not selected_category %}active{% endif %}">
                 Tous les Projets
             </a>
             {% for category in categories %}
             <a href="{% url 'realisations_by_category' category.slug %}#realisations"
-                class="category-button px-6 py-3 text-xs sm:text-sm md:text-lg transition-all {% if selected_category.slug == category.slug %}active{% endif %}">
+                class="category-button px-6 py-2 text-charbon hover:text-terre transition-all {% if selected_category.slug == category.slug %}active{% endif %}">
                 {{ category.title }}
-                <span class="ml-2 text-xs sm:text-sm opacity-80">({{ category.real_count }})</span>
+                <span class="ml-2 text-sm text-granit">({{ category.real_count }})</span>
             </a>
             {% endfor %}
         </div>
@@ -83,7 +167,7 @@
 </section>
 
 <!-- Grille de Réalisations -->
-<section class="pb-24 bg-white">
+<section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for realisation in realisations %}
@@ -155,15 +239,30 @@
 
 <!-- Section CTA -->
 <section class="bg-pierre py-24">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl gilda mb-6">Vous avez un projet de rénovation ?</h2>
-        <p class="text-xl text-gray-600 mb-10">
-            Contactez-nous pour discuter de votre projet et obtenir un devis personnalisé
-        </p>
-        <a href="#contact"
-            class="inline-block bg-terre hover:bg-amber-800 text-white px-8 py-4 rounded-lg text-xl transition-colors">
-            Parlons de votre projet
-        </a>
+    <div class="max-w-5xl mx-auto px-4">
+        <div class="cta-content bg-[var(--blanc)] p-16 rounded-lg shadow-sm">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl gilda mb-8 charbon">Vous avez un projet de rénovation ?</h2>
+                <p class="text-xl text-granit mb-12 leading-relaxed">
+                    Notre expertise est à votre service pour transformer vos idées en réalité. 
+                    Contactez-nous pour un accompagnement personnalisé.
+                </p>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="#contact"
+                        class="inline-block bg-terre hover:bg-[var(--granit)] text-[var(--blanc)] px-8 py-3 transition-colors">
+                        Parlons de votre projet
+                    </a>
+                    <a href="tel:0643414587" 
+                        class="inline-flex items-center gap-3 px-8 py-3 border border-[var(--terre)] text-[var(--terre)] hover:bg-[var(--terre)] hover:text-[var(--blanc)] transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
+                                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                        </svg>
+                        Nous Appeler
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -188,40 +287,126 @@ document.addEventListener('DOMContentLoaded', function() {
         window.requestAnimationFrame(step);
     }
 
-    // Observer pour déclencher les animations
+    // Observer pour l'animation des cards et des nombres
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
                 
-                // Animation du nombre
-                const numberElement = entry.target;
-                const finalValue = parseInt(numberElement.textContent);
-                animateValue(numberElement, 0, finalValue, 2000);
+                // Si c'est un nombre, on l'anime
+                if (entry.target.classList.contains('stats-number')) {
+                    const finalValue = parseInt(entry.target.textContent);
+                    animateValue(entry.target, 0, finalValue, 2000);
+                }
                 
-                // Ne déclencher qu'une fois
-                observer.unobserve(numberElement);
+                observer.unobserve(entry.target);
             }
         });
     }, {
         threshold: 0.1
     });
 
-    // Observer tous les nombres
-    document.querySelectorAll('.stats-number').forEach(number => {
-        observer.observe(number);
+    // Observer les cards et les nombres
+    document.querySelectorAll('.realisation-card, .stats-number').forEach(element => {
+        observer.observe(element);
     });
 
-    // Animation au survol des cartes stats
+    // Parallax effect pour le hero
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * 0.5;
+            heroSection.style.backgroundPositionY = `${rate}px`;
+        });
+    }
+
+    // Smooth scroll pour les ancres
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Animation au hover des cartes stats
     document.querySelectorAll('.stat-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
-            card.querySelector('.stat-icon').classList.add('scale-110');
+            const icon = card.querySelector('.stat-icon');
+            if (icon) {
+                icon.classList.add('scale-110', 'rotate-3');
+            }
         });
         
         card.addEventListener('mouseleave', () => {
-            card.querySelector('.stat-icon').classList.remove('scale-110');
+            const icon = card.querySelector('.stat-icon');
+            if (icon) {
+                icon.classList.remove('scale-110', 'rotate-3');
+            }
         });
     });
+
+    // Lazy loading des images
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    if ('loading' in HTMLImageElement.prototype) {
+        lazyImages.forEach(img => {
+            img.src = img.dataset.src;
+        });
+    } else {
+        // Fallback pour les navigateurs qui ne supportent pas le lazy loading natif
+        const lazyImageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        lazyImages.forEach(img => {
+            lazyImageObserver.observe(img);
+        });
+    }
+
+    // Animation du scroll des filtres
+    const filterContainer = document.querySelector('.filters-container');
+    if (filterContainer) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        filterContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            filterContainer.classList.add('active');
+            startX = e.pageX - filterContainer.offsetLeft;
+            scrollLeft = filterContainer.scrollLeft;
+        });
+
+        filterContainer.addEventListener('mouseleave', () => {
+            isDown = false;
+            filterContainer.classList.remove('active');
+        });
+
+        filterContainer.addEventListener('mouseup', () => {
+            isDown = false;
+            filterContainer.classList.remove('active');
+        });
+
+        filterContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - filterContainer.offsetLeft;
+            const walk = (x - startX) * 2;
+            filterContainer.scrollLeft = scrollLeft - walk;
+        });
+    }
 });
 </script>
 {% endblock %}

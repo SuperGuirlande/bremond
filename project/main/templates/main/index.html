@@ -17,7 +17,7 @@
 
     <div class="my-auto mx-auto relative z-20 flex flex-col">
         <!-- Logo -->
-        <img src="{% static 'images/logos/logo_pierre_clair.png' %}" alt="" class="h-24 sm:h-28 md:h-32 lg:h-40 mx-auto nav-logo mt-16"
+        <img src="{% static 'images/logos/logo_final_light.png' %}" alt="" class="h-24 sm:h-28 md:h-32 lg:h-40 mx-auto nav-logo mt-16"
         data-aos="fade-in" data-aos-duration="2500" data-aos-delay="1200">
         <!-- Name -->
         <h1 class="gilda text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl pierre my-5 text-center"
@@ -118,7 +118,7 @@
                     </p>
                     <div class="mt-auto pt-8">
                         <a href="{% url 'services' %}#maconnerie" class="mx-auto block text-center">
-                            <button class="py-3 px-6 bg-ocre text-white text-xl playfair tracking-wider hover:bg-amber-900 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out">
+                            <button class="py-3 px-6 bg-terre text-white text-xl playfair tracking-wider hover:bg-amber-900 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out">
                                 En Savoir Plus
                             </button>
                         </a>
@@ -140,7 +140,7 @@
                     </p>
                     <div class="mt-auto pt-8">
                         <a href="{% url 'services' %}#pierres-de-taille" class="mx-auto block text-center">
-                            <button class="py-3 px-6 bg-ocre text-white text-xl playfair tracking-wider hover:bg-amber-900 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out">
+                            <button class="py-3 px-6 bg-terre text-white text-xl playfair tracking-wider hover:bg-amber-900 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out">
                                 En Savoir Plus
                             </button>
                         </a>
@@ -162,7 +162,7 @@
                     </p>
                     <div class="mt-auto pt-8">
                         <a href="{% url 'services' %}#enduits" class="mx-auto block text-center">
-                            <button class="py-3 px-6 bg-ocre text-white text-xl playfair tracking-wider hover:bg-amber-900 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out">
+                            <button class="py-3 px-6 bg-terre text-white text-xl playfair tracking-wider hover:bg-amber-900 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out">
                                 En Savoir Plus
                             </button>
                         </a>
@@ -184,7 +184,7 @@
                     </p>
                     <div class="mt-auto pt-8">
                         <a href="{% url 'services' %}#couverture" class="mx-auto block text-center">
-                            <button class="py-3 px-6 bg-ocre text-white text-xl playfair tracking-wider hover:bg-amber-900 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out">
+                            <button class="py-3 px-6 bg-terre text-white text-xl playfair tracking-wider hover:bg-amber-900 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out">
                                 En Savoir Plus
                             </button>
                         </a>
@@ -206,7 +206,7 @@
                     </p>
                     <div class="mt-auto pt-8">
                         <a href="{% url 'services' %}#renovation-interieure" class="mx-auto block text-center">
-                            <button class="py-3 px-6 bg-ocre text-white text-xl playfair tracking-wider hover:bg-amber-900 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out">
+                            <button class="py-3 px-6 bg-terre text-white text-xl playfair tracking-wider hover:bg-amber-900 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out">
                                 En Savoir Plus
                             </button>
                         </a>
@@ -228,7 +228,7 @@
                     </p>
                     <div class="mt-auto pt-8">
                         <a href="{% url 'services' %}#creation-d-ouvertures" class="mx-auto block text-center">
-                            <button class="py-3 px-6 bg-ocre text-white text-xl playfair tracking-wider hover:bg-amber-900 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out">
+                            <button class="py-3 px-6 bg-terre text-white text-xl playfair tracking-wider hover:bg-amber-900 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out">
                                 En Savoir Plus
                             </button>
                         </a>
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const logo = navbar.getElementsByTagName('img')[0];
     
     const lightLogo = logo.src;
-    const darkLogo = lightLogo.replace('logo_pierre_clair.png', 'logo_pierre_dark.png');
+    const darkLogo = lightLogo.replace('logo_final_light.png', 'logo_final_dark.png');
     
     function initializeNavbar() {
         const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
