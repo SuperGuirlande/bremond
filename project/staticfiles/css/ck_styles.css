@@ -1,23 +1,23 @@
 .ck-content {
-    font-family: "Raleway", sans-serif;
-    color: var(--charbon);
+    font-family: "Raleway", sans-serif!important;
+    color: var(--charbon)!important;
 }    
 .ck-content h1 {
-    font-size: 3rem;
-    color: var(--charbon);
+    font-size: 3rem!important;
+    color: var(--charbon)!important;
 }
 .ck-content h2 {
-    font-size: 2.5rem;
+    font-size: 2.5rem!important;
     color: var(--granit)!important;
 }
 
 .ck-content h3 {
-    color: var(--granit);
-    font-size: 2rem;
+    color: var(--granit)!important;
+    font-size: 2rem!important;
 }
 
 .ck-content h1, .ck-content h2, .ck-content h3 {
-    font-family: "Playfair Display", serif;
+    font-family: "Playfair Display", serif!important;
 }
 
 .ck-editor__editable {
@@ -40,50 +40,50 @@
 
 @media screen and (maw-width: 720px) {
     .ck-content h1 {
-        font-size: 2rem;
-        color: var(--charbon);
+        font-size: 2rem!important;
+        color: var(--charbon)!important;
     }
     .ck-content h2 {
-        font-size: 1.7rem;
+        font-size: 1.7rem!important;
         color: var(--granit)!important;
     }
     
     .ck-content h3 {
-        color: var(--granit);
-        font-size: 1.4rem;
+        color: var(--granit)!important;
+        font-size: 1.4rem!important;
     }
 }
 
 @media screen and (maw-width: 720px) {
     .ck-content h1 {
-        font-size: 2.2rem;
-        color: var(--charbon);
+        font-size: 2.2rem!important;
+        color: var(--charbon)!important;
     }
     .ck-content h2 {
-        font-size: 1.8rem;
+        font-size: 1.8rem!important;
         color: var(--granit)!important;
     }
 
     .ck-content h3 {
-        color: var(--granit);
-        font-size: 1.6rem;
+        color: var(--granit)!important;
+        font-size: 1.6rem!important;
     }
 }
 
 .ck-content ol {
-    list-style-type: decimal;
-    margin-left: 1.5em;
-    padding-left: 1em;
+    list-style-type: decimal!important;
+    margin-left: 1.5em!important;
+    padding-left: 1em!important;
 }
 
 .ck-content ul {
     list-style-type: disc !important; /* On force avec !important pour contrer Tailwind */
-    margin-left: 1.5rem; /* Ajoute une marge à gauche */
+    margin-left: 1.5rem!important; /* Ajoute une marge à gauche */
 }
 
 /* Style pour les éléments de liste */
 .ck-content li {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.5em!important;
 }
 
 /* Style pour les listes imbriquées */
@@ -91,6 +91,6 @@
 .ck-content ol ol,
 .ck-content ul ol,
 .ck-content ol ul {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.5em!important;
+    margin-bottom: 0.5em!important;
 }
