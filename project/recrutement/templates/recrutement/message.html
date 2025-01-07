@@ -4,19 +4,19 @@
 {% block extra_head %}
 {{ form.media.css }}
 <link rel="stylesheet" href="{% static 'css/ck_styles.css' %}">
-
 {% endblock %}
 
 {% block content %}
-<section class="bg-blanc">
+<section class="bg-blanc" role="main" aria-labelledby="page-title">
     <div class="w-full bg-white max-w-[1080px] mx-auto px-4 py-12 sm:py-16 md:py-24 mt-20 md:mt-32 lg:mt-40 mb-20 flex flex-col raleway rounded-xl shadow-lg">
-        <h1 class=" text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl granit gilda font-bold mb-6">
+        <h1 id="page-title" class="text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl granit gilda font-bold mb-6">
             {% if annonce %}
             Postuler à une offre d'emploi
             {% else %}
             Candidature Spontanée
             {% endif %}
         </h1>
+        
         <p class="text-lg md:text-xl lg:text-2xl text-center my-5 playfair">
             {% if annonce %}
                 {{annonce.job}}
@@ -27,63 +27,100 @@
             {% endif %}
         </p>
 
-        <form method="POST" class="space-y-6 flex flex-col w-full max-w-[720px] mx-auto gap-3"
-            enctype="multipart/form-data">
+        <form method="POST" 
+              class="space-y-6 flex flex-col w-full max-w-[720px] mx-auto gap-3"
+              enctype="multipart/form-data"
+              novalidate>
             {% csrf_token %}
+            
             <!-- NOM & PRENOM -->
             <div class="flex flex-wrap gap-5">
                 <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
-                    <label class="text-lg md:text-xl font-medium charbon">{{ form.first_name.label }}*</label>
+                    <label for="{{ form.first_name.id_for_label }}" 
+                           class="text-lg md:text-xl font-medium charbon">
+                        {{ form.first_name.label }}*
+                    </label>
                     {{ form.first_name }}
                     {% if form.first_name.errors %}
-                    {% for error in form.first_name.errors %}
-                    <p class="text-red-500 text-sm">{{ error }}</p>
-                    {% endfor %}
+                    <div class="bg-red-50 border-l-4 border-red-500 p-2" role="alert">
+                        {% for error in form.first_name.errors %}
+                        <p class="text-red-700 text-sm">{{ error }}</p>
+                        {% endfor %}
+                    </div>
                     {% endif %}
                 </div>
+                
                 <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
-                    <label class="text-lg md:text-xl font-medium charbon">{{ form.last_name.label }}</label>
+                    <label for="{{ form.last_name.id_for_label }}" 
+                           class="text-lg md:text-xl font-medium charbon">
+                        {{ form.last_name.label }}*
+                    </label>
                     {{ form.last_name }}
                     {% if form.last_name.errors %}
-                    {% for error in form.last_name.errors %}
-                    <p class="text-red-500 text-sm">{{ error }}</p>
-                    {% endfor %}
+                    <div class="bg-red-50 border-l-4 border-red-500 p-2" role="alert">
+                        {% for error in form.last_name.errors %}
+                        <p class="text-red-700 text-sm">{{ error }}</p>
+                        {% endfor %}
+                    </div>
                     {% endif %}
                 </div>
             </div>
+
             <!-- EMAIL & TELEPHONE -->
             <div class="flex flex-wrap gap-5">
                 <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
-                    <label class="text-lg md:text-xl font-medium charbon">{{ form.email.label }}*</label>
+                    <label for="{{ form.email.id_for_label }}" 
+                           class="text-lg md:text-xl font-medium charbon">
+                        {{ form.email.label }}*
+                    </label>
                     {{ form.email }}
                     {% if form.email.errors %}
-                    {% for error in form.email.errors %}
-                    <p class="text-red-500 text-sm">{{ error }}</p>
-                    {% endfor %}
+                    <div class="bg-red-50 border-l-4 border-red-500 p-2" role="alert">
+                        {% for error in form.email.errors %}
+                        <p class="text-red-700 text-sm">{{ error }}</p>
+                        {% endfor %}
+                    </div>
                     {% endif %}
                 </div>
+
                 <div class="basis-[200px] grow shrink-0 flex flex-col gap-1">
-                    <label class="text-lg md:text-xl font-medium charbon">{{ form.phone.label }}</label>
+                    <label for="{{ form.phone.id_for_label }}" 
+                           class="text-lg md:text-xl font-medium charbon">
+                        {{ form.phone.label }}*
+                    </label>
                     {{ form.phone }}
                     {% if form.phone.errors %}
-                    {% for error in form.phone.errors %}
-                    <p class="text-red-500 text-sm">{{ error }}</p>
-                    {% endfor %}
+                    <div class="bg-red-50 border-l-4 border-red-500 p-2" role="alert">
+                        {% for error in form.phone.errors %}
+                        <p class="text-red-700 text-sm">{{ error }}</p>
+                        {% endfor %}
+                    </div>
                     {% endif %}
                 </div>
             </div>
 
             <!-- CV -->
             <div class="flex flex-col gap-1 mt-8">
-                <label class="text-lg md:text-xl font-medium charbon">{{ form.cv.label }}*</label>
+                <label for="{{ form.cv.id_for_label }}" 
+                       class="text-lg md:text-xl font-medium charbon">
+                    {{ form.cv.label }}*
+                </label>
                 <div class="relative">
-                    <input type="file" name="{{ form.cv.name }}"
-                        class="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none p-2"
-                        accept=".pdf">
-                    <p class="mt-1 text-sm text-gray-500">{{ form.cv.help_text }}</p>
+                    <input type="file" 
+                           id="{{ form.cv.id_for_label }}"
+                           name="{{ form.cv.name }}"
+                           class="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2"
+                           accept="application/pdf"
+                           aria-required="true"
+                           aria-describedby="cv-help-text">
+                    <p id="cv-help-text" 
+                       class="mt-1 text-sm text-gray-500 help-text" 
+                       role="note">
+                        {{ form.cv.help_text }}
+                    </p>
                 </div>
                 {% if form.cv.errors %}
-                <div class="bg-red-50 border-l-4 border-red-500 p-4 mt-2">
+                <div class="bg-red-50 border-l-4 border-red-500 p-2" role="alert">
                     {% for error in form.cv.errors %}
                     <p class="text-red-700">{{ error }}</p>
                     {% endfor %}
@@ -93,15 +130,26 @@
 
             <!-- Lettre de motivation -->
             <div class="flex flex-col gap-1 mt-8">
-                <label class="text-lg md:text-xl font-medium charbon">{{ form.lm.label }}*</label>
+                <label for="{{ form.lm.id_for_label }}" 
+                       class="text-lg md:text-xl font-medium charbon">
+                    {{ form.lm.label }}*
+                </label>
                 <div class="relative">
-                    <input type="file" name="{{ form.lm.name }}"
-                        class="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none p-2"
-                        accept=".pdf">
-                    <p class="mt-1 text-sm text-gray-500">{{ form.lm.help_text }}</p>
+                    <input type="file" 
+                           id="{{ form.lm.id_for_label }}"
+                           name="{{ form.lm.name }}"
+                           class="block w-full text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2"
+                           accept="application/pdf"
+                           aria-required="true"
+                           aria-describedby="lm-help-text">
+                    <p id="lm-help-text" 
+                       class="mt-1 text-sm text-gray-500 help-text" 
+                       role="note">
+                        {{ form.lm.help_text }}
+                    </p>
                 </div>
                 {% if form.lm.errors %}
-                <div class="bg-red-50 border-l-4 border-red-500 p-4 mt-2">
+                <div class="bg-red-50 border-l-4 border-red-500 p-2" role="alert">
                     {% for error in form.lm.errors %}
                     <p class="text-red-700">{{ error }}</p>
                     {% endfor %}
@@ -109,34 +157,60 @@
                 {% endif %}
             </div>
 
-            <!-- Contenu -->
+            <!-- Message -->
             <div class="flex flex-col gap-1">
-                <label class="text-lg md:text-xl font-medium charbon">Votre message* :</label>
+                <label for="{{ form.message.id_for_label }}" 
+                       class="text-lg md:text-xl font-medium charbon">
+                    Votre message*
+                </label>
                 {{ form.message }}
                 {% if form.message.errors %}
-                {% for error in form.message.errors %}
-                <p class="text-red-500 text-sm">{{ error }}</p>
-                {% endfor %}
+                <div class="bg-red-50 border-l-4 border-red-500 p-2" role="alert">
+                    {% for error in form.message.errors %}
+                    <p class="text-red-700 text-sm">{{ error }}</p>
+                    {% endfor %}
+                </div>
                 {% endif %}
             </div>
 
             <!-- Boutons -->
             <div class="flex justify-end mt-6 space-x-4">
                 {% if is_edit %}
-                <a href="{% url 'admin_index' %}" class="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600">
+                <a href="{% url 'admin_index' %}" 
+                   class="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors"
+                   role="button">
                     Annuler
                 </a>
                 {% endif %}
-                <button type="submit" class="bg-blue-600 text-white text-xl px-6 py-2 rounded-md hover:bg-blue-700">
+                
+                <button type="submit" 
+                        class="bg-blue-600 text-white text-xl px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+                    {% if annonce %}
                     Postuler à l'offre
+                    {% else %}
+                    Envoyer ma candidature
+                    {% endif %}
                 </button>
             </div>
         </form>
     </div>
 </section>
-
 {% endblock %}
 
 {% block extra_script %}
 {{ form.media.js }}
+<script>
+    // Amélioration de l'expérience utilisateur pour les uploads de fichiers
+    document.querySelectorAll('input[type="file"]').forEach(input => {
+        input.addEventListener('change', function() {
+            const fileSize = this.files[0]?.size || 0;
+            const maxSize = 5 * 1024 * 1024; // 5MB
+            
+            if (fileSize > maxSize) {
+                alert('Le fichier est trop volumineux. La taille maximale autorisée est de 5MB.');
+                this.value = '';
+            }
+        });
+    });
+</script>
 {% endblock %}
