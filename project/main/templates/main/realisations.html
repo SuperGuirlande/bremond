@@ -127,7 +127,7 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="relative min-h-[80vh] bg-cover bg-center mt-16 sm:mt-20"
+<section class="relative min-h-screen bg-cover bg-center mt-16 sm:mt-20"
     style="background-image: url({% static 'images/services/services-hero.jpg' %});">
     <div class="absolute inset-0 bg-[var(--charbon)] opacity-70"></div>
     <div class="absolute inset-0 flex items-center justify-center px-4">
@@ -146,28 +146,9 @@
     </div>
 </section>
 
-<!-- Filtres -->
-<section class="py-16 bg-blanc relative">
-    <div class="absolute -translate-y-32" id="realisations"></div>
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="flex flex-wrap items-center justify-center gap-6">
-            <a href="{% url 'realisations' %}#realisations"
-                class="category-button px-6 py-2 text-charbon hover:text-terre transition-all {% if not selected_category %}active{% endif %}">
-                Tous les Projets
-            </a>
-            {% for category in categories %}
-            <a href="{% url 'realisations_by_category' category.slug %}#realisations"
-                class="category-button px-6 py-2 text-charbon hover:text-terre transition-all {% if selected_category.slug == category.slug %}active{% endif %}">
-                {{ category.title }}
-                <span class="ml-2 text-sm text-granit">({{ category.real_count }})</span>
-            </a>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
 <!-- Grille de Réalisations -->
-<section class="py-16 bg-white">
+<section class="py-16 bg-white relative">
+    <div class="absolute top-0 left-0 -translate-y-32" id="realisations"></div>
     <div class="max-w-7xl mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for realisation in realisations %}
