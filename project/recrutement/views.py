@@ -1,9 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.core.mail import send_mail
+from django.conf import settings
+from django.utils.html import strip_tags
+from django.core.mail import EmailMultiAlternatives
 from .models import JobAnnonce, JobMessage
 from .forms import RecrutementForm, RecrutementMessageForm
-
+from django.utils.safestring import mark_safe
 
 @login_required
 def recrutement_form(request, id=None):
@@ -90,6 +94,44 @@ def job_form(request, slug=None):
             if slug:
                 message.annonce = annonce
             message.save()
+            
+            # Préparation du contenu HTML
+            subject = f"Nouvelle candidature{' pour ' + annonce.title if annonce else ''}"
+            html_content = f"""
+<html>
+<body>
+<h2>Une nouvelle candidature a été reçue{' pour le poste : ' + annonce.title if annonce else ''}</h2>
+
+<h3>Informations du candidat :</h3>
+<ul>
+    <li><strong>Nom :</strong> {message.first_name} {message.last_name}</li>
+    <li><strong>Email :</strong> {message.email}</li>
+    <li><strong>Téléphone :</strong> {message.phone}</li>
+</ul>
+
+<h3>Message :</h3>
+{message.message}
+
+<p>
+<a href="{request.build_absolute_uri(reverse('candidature_detail', args=[message.id]))}">
+    Cliquez ici pour consulter la candidature complète
+</a>
+</p>
+</body>
+</html>
+            """
+            
+            # Création de l'email avec version texte et HTML
+            text_content = strip_tags(html_content)
+            email = EmailMultiAlternatives(
+                subject=subject,
+                body=text_content,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=['bremondrenovation@gmail.com']
+            )
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+            
             request.session['success'] = "Votre message nous a bien été transmis. Nous vous enverrons une réponse dans les plus brefs délais"
             return redirect(f'{reverse("recrutement_index")}#success')
     else:
