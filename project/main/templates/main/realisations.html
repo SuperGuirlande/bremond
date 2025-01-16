@@ -157,8 +157,8 @@
                     <article class="realisation-card relative rounded-xl overflow-hidden bg-white shadow-lg h-[450px]">
                         {% if realisation.photos.first %}
                         <div class="absolute inset-0">
-                            <img src="{{ realisation.photos.first.file.url }}" 
-                                 alt="{{ realisation.photos.first.title }}"
+                            <img src="{{ realisation.thumbnail.file.url }}" 
+                                 alt="{{ realisation.thumbnails.title }}"
                                  class="object-cover w-full h-full transform hover:scale-105 transition-transform duration-700">
                         </div>
                         {% endif %}

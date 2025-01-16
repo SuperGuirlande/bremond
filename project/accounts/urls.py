@@ -1,6 +1,12 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from realisations.views import realisation_form, photo_form, delete_real, confirm_delete_real, photo_detail, confirm_delete_photo, delete_photo
+from realisations.views import (
+    realisation_form, 
+    photo_form, delete_real, 
+    confirm_delete_real, photo_detail, 
+    confirm_delete_photo, delete_photo, 
+    set_thumbnail, change_photo_order
+)
 from .views import admin_blog, change_password,  user_login, user_logout, admin_index, admin_realisations, admin_recrutement
 from recrutement.views import confirm_delete_annonce, delete_annonce, confirm_delete_candidature, delete_candidature
 from blog.views import blog_article_form
@@ -45,4 +51,6 @@ urlpatterns = [
     path('realisation/photo/<int:photo_id>/details/', photo_detail, name='photo_detail'),
     path('realisation/photo/<int:id>/confirmer-la-suppression/', confirm_delete_photo, name='confirm_delete_photo'),
     path('realisation/photo/<int:id>/supprimer/', delete_photo, name='delete_photo'),
-]
+    path('realisation/photo/<int:id>/definir-couverture/', set_thumbnail, name='set_thumbnail'),
+    path('realisation/photo/<int:photo_id>/changer-ordre/<str:direction>/', change_photo_order, name='change_photo_order'),
+] 

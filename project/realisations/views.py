@@ -1,13 +1,14 @@
 import json
 from django.http import HttpResponseRedirect, JsonResponse
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.db.models import Count
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_http_methods, require_POST
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Realisation, Category, Photo
 from .forms import RealisationForm, PhotoForm
 from message_form.forms import ContactForm
+from django.contrib.auth.decorators import login_required
 
 
 def realisations(request, category_slug=None):
@@ -16,6 +17,14 @@ def realisations(request, category_slug=None):
     ).filter(real_count__gt=0)
     
     realisations = Realisation.objects.all().order_by('-created_on')
+
+    for realisation in realisations:
+        realisation.thumbnail = None
+        if realisation.photos.filter(is_thumbnail=True).exists():
+            realisation.thumbnail = realisation.photos.filter(is_thumbnail=True).first()
+        else:
+            realisation.thumbnail = realisation.photos.first()  
+
     
     selected_category = None
     if category_slug:
@@ -122,7 +131,7 @@ def photo_form(request, realisation_id):
             new_photo = form.save(commit=False)
             new_photo.realisation = realisation
             new_photo.save()
-            base_url = reverse_lazy('admin_index')
+            base_url = reverse_lazy('admin_realisations')
             return HttpResponseRedirect(f'{base_url}#realisation_{realisation.id}')
         else:
             print(form.errors)
@@ -145,6 +154,22 @@ def photo_detail(request, photo_id):
     }
 
     return render(request, 'realisations/photo_detail.html', context)
+
+
+def set_thumbnail(request, id):
+    photo = get_object_or_404(Photo, id=id)
+    realisation = photo.realisation
+
+    actual_thumbnail = Photo.objects.filter(is_thumbnail=True, realisation=realisation).first()
+    if actual_thumbnail:
+        actual_thumbnail.is_thumbnail = False
+        actual_thumbnail.save()
+
+    photo.is_thumbnail = True
+
+    photo.save()
+    base_url = reverse('admin_realisations')
+    return redirect(f'{base_url}#realisation_{realisation.id}')
 
 
 
@@ -185,3 +210,21 @@ def delete_photo(request, id):
 
     request.session['success'] = f"La photo {title} à bien été supprimée"
     return redirect('admin_index')
+
+
+@login_required
+@require_POST
+def change_photo_order(request, photo_id, direction):
+    try:
+        photo = get_object_or_404(Photo, id=photo_id)
+        
+        if direction == 'up':
+            photo.move_up()
+        elif direction == 'down':
+            photo.move_down()
+        
+        return JsonResponse({'success': True})
+    except Photo.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Photo non trouvée'}, status=404)
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)

@@ -12,6 +12,7 @@ Espace Administrateur - Les Réalisations
 {% block content %}
 <!-- REALISATIONS -->
 <section class="flex-1 w-full flex flex-col items-center justify-center py-8 md:py-20 bg-blanc relative z-[4] mt-16 md:mt-20 lg:mt-24 px-4">
+    {% csrf_token %}
     <div class="w-full max-w-[1280px] flex flex-col">
         <!-- Bouton retour -->
         <a href="{% url 'admin_index' %}" class="text-gray-500 underline hover:text-gray-600 text-base md:text-lg mt-3 mb-6">
@@ -87,12 +88,32 @@ Espace Administrateur - Les Réalisations
 
                     <!-- RIGHT PHOTOS -->
                     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-5">
-                        {% for photo in real.photos.all %}
-                        <a href="{% url 'photo_detail' photo_id=photo.id %}" class="block">
-                            <div class="h-[120px] md:h-[150px] lg:h-[180px] w-full overflow-hidden rounded-xl md:rounded-2xl">
-                                <img src="{{photo.file.url}}" alt="" class="h-full w-full object-cover object-center hover:scale-110 transition-all duration-200">
+                        {% for photo in real.photos.all|dictsort:'order' %}
+                        <div class="relative group">
+                            <!-- Flèches de réorganisation -->
+                            <div class="absolute left-2 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                <button onclick="changeOrder({{photo.id}}, 'up')" class="bg-white/90 hover:bg-white p-1.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 {% if forloop.first %}invisible{% endif %}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7" />
+                                    </svg>
+                                </button>
+                                <button onclick="changeOrder({{photo.id}}, 'down')" class="bg-white/90 hover:bg-white p-1.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 {% if forloop.last %}invisible{% endif %}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
                             </div>
-                        </a>
+                            <a href="{% url 'photo_detail' photo_id=photo.id %}" class="block">
+                                <div class="h-[120px] md:h-[150px] lg:h-[180px] w-full overflow-hidden rounded-xl md:rounded-2xl relative z-40">
+                                    <img src="{{photo.file.url}}" alt="" class="h-full w-full object-cover object-center hover:scale-110 transition-all duration-200">
+                                    {% if photo.is_thumbnail %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500 absolute top-2 right-2 z-50" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    {% endif %}
+                                </div>
+                            </a>
+                        </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -132,4 +153,46 @@ Espace Administrateur - Les Réalisations
         </a>
     </div>
 </section>
+
+<!-- Script pour la réorganisation AJAX -->
+{% block extra_scripts %}
+<script>
+function changeOrder(photoId, direction) {
+    const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]');
+    if (!csrfToken) {
+        console.error('Token CSRF non trouvé');
+        alert('Erreur de sécurité : Token CSRF manquant');
+        return;
+    }
+
+    const baseUrl = "{% url 'change_photo_order' photo_id=0 direction='up' %}";
+    const url = baseUrl.replace('/0/', `/${photoId}/`).replace('/up/', `/${direction}/`);
+    
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrfToken.value,
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur réseau');
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            window.location.reload();
+        } else {
+            alert('Erreur lors du changement d\'ordre : ' + (data.error || 'Erreur inconnue'));
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        alert('Erreur lors du changement d\'ordre. Veuillez réessayer.');
+    });
+}
+</script>
+{% endblock %}
 {% endblock %}
