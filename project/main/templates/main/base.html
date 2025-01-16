@@ -3,6 +3,33 @@
 <!DOCTYPE html>
 <html lang='fr' class="overflow-x-hidden">
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','G-WFSJVNH7MN');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '443343545201172');
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=443343545201172&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Meta Pixel Code -->
+
     <meta charset='utf-8'>
     <meta name='viewport' content = "width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,6 +47,13 @@
 </head>
 
 <body class="overflow-x-hidden min-h-screen flex flex-col">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=G-WFSJVNH7MN"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <header>
         <!-- NAVBAR -->
         {% include 'main/navbar.html' %}
@@ -117,6 +151,129 @@
     </script>
     {% block extra_script %}
     {% endblock %}
+
+    <!-- TRACKING EVENTS -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. Suivi du temps passé sur la page
+        let startTime = new Date();
+        window.addEventListener('beforeunload', function() {
+            let endTime = new Date();
+            let timeSpent = Math.round((endTime - startTime) / 1000);
+            gtag('event', 'time_spent', {
+                'value': timeSpent,
+                'page': window.location.pathname
+            });
+        });
+
+        // 2. Suivi du défilement de la page
+        let maxScroll = 0;
+        window.addEventListener('scroll', function() {
+            let scrollPercent = Math.round((window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100);
+            if (scrollPercent > maxScroll) {
+                maxScroll = scrollPercent;
+                if (maxScroll >= 25 && maxScroll < 50) {
+                    gtag('event', 'scroll_depth', { 'depth': '25%' });
+                    fbq('trackCustom', 'ScrollDepth', { 'depth': '25%' });
+                } else if (maxScroll >= 50 && maxScroll < 75) {
+                    gtag('event', 'scroll_depth', { 'depth': '50%' });
+                    fbq('trackCustom', 'ScrollDepth', { 'depth': '50%' });
+                } else if (maxScroll >= 75 && maxScroll < 90) {
+                    gtag('event', 'scroll_depth', { 'depth': '75%' });
+                    fbq('trackCustom', 'ScrollDepth', { 'depth': '75%' });
+                } else if (maxScroll >= 90) {
+                    gtag('event', 'scroll_depth', { 'depth': '90%' });
+                    fbq('trackCustom', 'ScrollDepth', { 'depth': '90%' });
+                }
+            }
+        });
+
+        // 3. Suivi des formulaires avec plus de détails
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function() {
+                let formType = '';
+                if (window.location.pathname.includes('contact')) {
+                    formType = 'contact';
+                } else if (window.location.pathname.includes('recrutement')) {
+                    formType = 'recrutement';
+                } else {
+                    formType = 'autre';
+                }
+
+                // Google Analytics
+                gtag('event', 'form_submission', {
+                    'form_id': form.id || 'unknown',
+                    'form_type': formType,
+                    'page_path': window.location.pathname,
+                    'page_title': document.title
+                });
+                
+                // Facebook Pixel
+                fbq('track', 'Lead', {
+                    'form_id': form.id || 'unknown',
+                    'form_type': formType,
+                    'page_path': window.location.pathname
+                });
+            });
+        });
+
+        // 4. Suivi des clics sur les liens de contact
+        document.querySelectorAll('a[href^="tel:"], a[href^="mailto:"]').forEach(link => {
+            link.addEventListener('click', function() {
+                let method = link.href.startsWith('tel:') ? 'phone' : 'email';
+                let value = link.href.replace('tel:', '').replace('mailto:', '');
+                
+                // Google Analytics
+                gtag('event', 'contact', {
+                    'method': method,
+                    'value': value,
+                    'page_path': window.location.pathname,
+                    'page_title': document.title
+                });
+                
+                // Facebook Pixel
+                fbq('track', 'Contact', {
+                    'method': method,
+                    'value': value
+                });
+            });
+        });
+
+        // 5. Suivi des clics sur les réseaux sociaux
+        document.querySelectorAll('a[href*="facebook.com"], a[href*="instagram.com"], a[href*="linkedin.com"]').forEach(link => {
+            link.addEventListener('click', function() {
+                let network = '';
+                if (link.href.includes('facebook.com')) network = 'Facebook';
+                else if (link.href.includes('instagram.com')) network = 'Instagram';
+                else if (link.href.includes('linkedin.com')) network = 'LinkedIn';
+
+                gtag('event', 'social_click', {
+                    'network': network,
+                    'page_path': window.location.pathname
+                });
+                
+                fbq('trackCustom', 'SocialClick', {
+                    'network': network
+                });
+            });
+        });
+
+        // 6. Suivi des clics sur les images de réalisation
+        document.querySelectorAll('.realisation-image, .swiper-slide img').forEach(img => {
+            img.addEventListener('click', function() {
+                gtag('event', 'image_view', {
+                    'image_url': img.src,
+                    'page_path': window.location.pathname
+                });
+                
+                fbq('trackCustom', 'ImageView', {
+                    'image_url': img.src
+                });
+            });
+        });
+    });
+    </script>
+
 </body>
 
 </html>
