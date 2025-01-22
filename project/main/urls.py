@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, services, histoire, contact, mentions, confident
+from .views import index, services, histoire, contact, mentions, confident, google_verification
 from realisations.views import realisations, realisation_detail
 
 
@@ -13,4 +13,5 @@ urlpatterns = [
     path('realisations/<slug:slug>/', realisation_detail, name='realisation_detail'),
     path('mentions-legales/', mentions, name='mentions'),
     path('politique-de-confidentialite/', confident, name='confident'),
+    path('google2ef000b1d95879d3.html', google_verification, name='google-verification'),
 ]

@@ -3,6 +3,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.utils.timezone import localtime
 from message_form.forms import ContactForm
+from django.http import HttpResponse
 
 
 def send_contact_email(message, request=None):
@@ -130,4 +131,9 @@ def mentions(request):
 
 def confident(request):
     return render(request, 'main/confident.html')
+
+
+def google_verification(request):
+    verification_content = "google-site-verification: google2ef000b1d95879d3.html"
+    return HttpResponse(verification_content, content_type="text/plain")
 
